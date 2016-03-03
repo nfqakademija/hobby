@@ -1,0 +1,23 @@
+{
+  "name": "nfqakademija",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "NFQ"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.nfq.lt/apie-akademija/",
+  "moduleType": [
+    "globals"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}

@@ -1,0 +1,15 @@
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/vendor/
+/bin/
+/node_modules/
+/bower_components/
+/web/css/
+/web/js/
+/web/images/
+/web/fonts/
