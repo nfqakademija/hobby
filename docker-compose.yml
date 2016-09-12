@@ -1,0 +1,33 @@
+version: '2'
+services:
+  nginx:
+    image: nfqakademija/nginx
+    links:
+      - fpm
+    ports:
+      - "8000:80"
+    volumes:
+      - "~/.composer:/root/.composer"
+      - "~/.ssh:/root/.ssh"
+      - "./:/var/www"
+  fpm:
+    image: nfqakademija/fpm
+    links:
+      - mariadb
+    volumes:
+      - "./:/var/www"
+  npm:
+    image: nfqakademija/node
+    volumes:
+      - "./:/home/app"
+      - "/usr/local/lib/node_modules"
+  mariadb-data:
+    image: tianon/true
+    volumes:
+      - /var/lib/mysql
+  mariadb:
+    image: mariadb:10.1.10
+    volumes_from:
+      - "mariadb-data"
+    environment:
+        MYSQL_ROOT_PASSWORD: rootpaz
