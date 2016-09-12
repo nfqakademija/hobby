@@ -6,10 +6,9 @@ var concat  = require('gulp-concat');
 var uglify  = require('gulp-uglify');
 
 var dir = {
-    assets: './app/Resources/',
+    assets: './src/AppBundle/Resources/',
     dist: './web/',
-    bower: './bower_components/',
-    bootstrapJS: './bower_components/bootstrap-sass/assets/javascripts/bootstrap/'
+    npm: './node_modules/',
 };
 
 gulp.task('sass', function() {
@@ -21,10 +20,10 @@ gulp.task('sass', function() {
 
 gulp.task('scripts', function() {
     gulp.src([
-            dir.bower + 'jquery/dist/jquery.min.js',
-            // Bootstrap JS modules
-            //dir.bootstrapJS + 'transition.js',
-            //...
+            //Third party assets
+            dir.npm + 'jquery/dist/jquery.min.js',
+            dir.npm + 'bootstrap-sass/assets/javascripts/bootstrap.min.js',
+
             // Main JS file
             dir.assets + 'scripts/main.js'
         ])
@@ -42,7 +41,7 @@ gulp.task('images', function() {
 
 gulp.task('fonts', function() {
     gulp.src([
-        dir.bower + 'bootstrap-sass/assets/fonts/**'
+        dir.npm + 'bootstrap-sass/assets/fonts/**'
         ])
         .pipe(gulp.dest(dir.dist + 'fonts'));
 });
