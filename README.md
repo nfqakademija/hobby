@@ -10,39 +10,39 @@ Sveiki! Tai yra Jūsų startinis projekto "template".
 visais reikalingais failais ir įrankiais darbui:
  
 - Lokalaus development'o aplinka (docker) (PHP 7, Maria DB, Nginx)
-- Pradini bundle (AppBundle), kartu su stiliaus failu ir kitais.
-- Idiegta bootstrap
-- Asset'u buildinima (npm. gulp, sass)
+- Pradinis bundle (AppBundle), kartu su stiliaus failais ir kitais dalykėliais.
+- Idiegtas bootstrap
+- Asset'ų buildinimas (npm. gulp, sass)
 - Travis CI template
 
 
 # Paleidimo instrukcija
 
-Metai iš metų buvo maldaujama jog studentai galėtų dirbti su Windowsais. 
+Metai iš metų studentai maldavo jog galėtų dirbti su Windowsais akademijos metu. 
 Tad skubu pranešti gerą žinią, Dievai išklausė Jūsų maldas ir nuo šiol galėsite teoriškai naudoti Windowsus!
 
 > Perspejimas: Itin kieti profesionalai nenaudoja niekam tikusių operacinių sistemų. 
 
 ### Reikės dokerio
 
-Nauosime naujausia dokerio versija, kuri įgalina virtualizaciją be Virtualbox ar Vmware. 
-Tam reikės kad jūsų kompiuterio procesorius palaikytu Hyper-V.
+Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualbox ar Vmware. 
+Tam reikės, kad jūsų kompiuterio procesorius palaikytų Hyper-V.
 
 Parsisiunčiame įranki iš [čia](https://www.docker.com/products/overview#/install_the_platform) pagal savo platformą.
-Įsidiegiam.
+Instaliuojate.
 
-Toliau jums reikės git'o. Jei neturite normalaus terminalo, kuriame jau "by default" `git`komandą jau būtų, atsisiunčiame iš [čia](https://git-scm.com/downloads) .
-Įsidiegiame.
+Toliau jums reikės git'o. Jei neturite normalaus terminalo, kuriame jau "by default" `git`komanda būtų, atsisiunčiame iš [čia](https://git-scm.com/downloads) .
+Instaliuojate.
 
 
 ### Projekto paleidimas
 
-Downloadinat šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "download". 
+Downloadinat šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "download", tada pasirenkate zip failo parsisiuntimą. 
 Extractinat turinį į savo megstamą projektų direktoriją.
 
 Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 
-Toliau leidžiame šias komandas:
+Toliau leidžiame komandas esančias žemiau:
 
 ```bash
 
