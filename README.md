@@ -46,11 +46,10 @@ Toliau leidžiame komandas esančias žemiau:
 
 ```bash
 
-docker-compose build
 docker-compose up -d
-docker-compose run fpm composer install --prefer-dist
+docker-compose exec fpm composer install --prefer-dist -n
 docker-compose run npm npm install
-docker-compose run npm npm gulp
+docker-compose run npm gulp
 
 ```
 
@@ -60,6 +59,19 @@ Atsidarote naršyklę ir einate į http://127.0.0.1:8000 ,
 jei nematote užrašo NFQ Akademija, reiškia kažkur susimovėte, 
 tokiu atveju viską ištrinat ir kartojate iš naujo kol gausis. 
 
+### Troubleshooting'as
+
+Jeigu kažkas nutiko netaip, na atsirado raudona eilutė, ar tiesiog nutruko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
+
+```
+docker-compose-logs
+```
+
+Nepamirškite kad galima nurodyti norima procesa. Taip pat ir 'grepinti'.
+
+```
+docker-compose logs mariadb
+```
 
 ### Feedbackas
 

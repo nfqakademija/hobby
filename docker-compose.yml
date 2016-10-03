@@ -17,7 +17,7 @@ services:
     volumes:
       - "./:/var/www"
   npm:
-    image: nfqakademija/node
+    image: nfqakademija/node:6.4.0.1
     volumes:
       - "./:/home/app"
       - "/usr/local/lib/node_modules"
@@ -30,4 +30,4 @@ services:
     volumes_from:
       - "mariadb-data"
     environment:
-        MYSQL_ROOT_PASSWORD: rootpaz
+        MYSQL_ROOT_PASSWORD: root
