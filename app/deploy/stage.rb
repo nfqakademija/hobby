@@ -1,0 +1,1 @@
+server 'deploy.projektai.nfqakademija.lt', user: 'kickstart', roles: %w{web}
