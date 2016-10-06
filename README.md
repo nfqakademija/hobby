@@ -64,7 +64,7 @@ tokiu atveju viską ištrinat ir kartojate iš naujo kol gausis.
 Jeigu kažkas nutiko netaip, na atsirado raudona eilutė, ar tiesiog nutruko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
 
 ```
-docker-compose-logs
+docker-compose logs
 ```
 
 Nepamirškite kad galima nurodyti norima procesa. Taip pat ir 'grepinti'.
