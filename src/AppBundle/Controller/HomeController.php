@@ -13,9 +13,7 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:Home:index.html.twig', array(
-            // ...
-        ));
+        return $this->render('AppBundle:Home:index.html.twig', []);
     }
 
     /**
@@ -27,8 +25,8 @@ class HomeController extends Controller
 
         $posts = $exampleService->getPosts();
 
-        return $this->render('AppBundle:Home:index.html.twig', array(
-            // ...
-        ));
+        return $this->render('AppBundle:Home:list.html.twig', [
+            'posts' => $posts,
+        ]);
     }
 }
