@@ -18,4 +18,17 @@ class HomeController extends Controller
         ));
     }
 
+    /**
+     * @Route("/list", name="posts_list")
+     */
+    public function listAction()
+    {
+        $exampleService = $this->get('app.example');
+
+        $posts = $exampleService->getPosts();
+
+        return $this->render('AppBundle:Home:index.html.twig', array(
+            // ...
+        ));
+    }
 }

@@ -6,3 +6,4 @@ parameters:
 services:
     app.example:
         class: AppBundle\Service\ExampleService
+        arguments: ["@doctrine.orm.entity_manager"]
