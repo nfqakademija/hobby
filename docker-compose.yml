@@ -7,18 +7,22 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - "~/.composer:/root/.composer"
-      - "~/.ssh:/root/.ssh"
       - "./:/var/www"
   fpm:
     image: nfqakademija/fpm
+    user: "1000:1000"
     links:
       - mariadb
     volumes:
+      # Uncomment if you want cache composer stuff
+      #- ".docker/.composer:/.composer"
+      - ".docker:/home"
       - "./:/var/www"
   npm:
     image: nfqakademija/node:6.4.0.1
+    user: "1000:1000"
     volumes:
+      - ".docker/.npm:/home/.npm"
       - "./:/home/app"
       - "/usr/local/lib/node_modules"
   mariadb-data:
