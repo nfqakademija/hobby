@@ -31,6 +31,8 @@ services:
       - /var/lib/mysql
   mariadb:
     image: mariadb:10.1.10
+    ports:
+      - "3000:3306"
     volumes_from:
       - "mariadb-data"
     environment:
