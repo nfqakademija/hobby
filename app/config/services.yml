@@ -4,6 +4,6 @@ parameters:
 #    parameter_name: value
 
 services:
-    app.example:
-        class: AppBundle\Service\ExampleService
-        arguments: ["@doctrine.orm.entity_manager"]
+#    app.example:
+#        class: AppBundle\Service\ExampleService
+#        arguments: ["@doctrine.orm.entity_manager"]

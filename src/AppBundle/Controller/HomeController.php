@@ -15,18 +15,4 @@ class HomeController extends Controller
     {
         return $this->render('AppBundle:Home:index.html.twig', []);
     }
-
-    /**
-     * @Route("/list", name="posts_list")
-     */
-    public function listAction()
-    {
-        $exampleService = $this->get('app.example');
-
-        $posts = $exampleService->getPosts();
-
-        return $this->render('AppBundle:Home:list.html.twig', [
-            'posts' => $posts,
-        ]);
-    }
 }
