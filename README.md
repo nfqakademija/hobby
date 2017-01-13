@@ -6,13 +6,13 @@ NFQ Akademija
 # Intro
 
 Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony 3.1 startinį prjekto paketa su jau paruoštais 
+Šioje repositorijoje rasite Symfony 3.1 startinį projekto paketa su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
 - Lokalaus development'o aplinka (docker) (PHP 7, Maria DB, Nginx)
 - Pradinis bundle (AppBundle), kartu su stiliaus failais ir kitais dalykėliais.
-- Idiegtas bootstrap
-- Asset'ų buildinimas (npm. gulp, sass)
+- Įdiegtas bootstrap
+- Asset'ų buildinimas (npm, gulp, sass)
 - Travis CI template
 
 
@@ -21,24 +21,24 @@ visais reikalingais failais ir įrankiais darbui:
 Metai iš metų studentai maldavo jog galėtų dirbti su Windowsais akademijos metu. 
 Tad skubu pranešti gerą žinią, Dievai išklausė Jūsų maldas ir nuo šiol galėsite teoriškai naudoti Windowsus!
 
-> Perspejimas: Itin kieti profesionalai nenaudoja niekam tikusių operacinių sistemų. 
+> Perspėjimas: Itin kieti profesionalai nenaudoja niekam tikusių operacinių sistemų. 
 
 ### Reikės dokerio
 
 Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualbox ar Vmware. 
 Tam reikės, kad jūsų kompiuterio procesorius palaikytų Hyper-V.
 
-Parsisiunčiame įranki iš [čia](https://www.docker.com/products/overview#/install_the_platform) pagal savo platformą.
+Parsisiunčiame įrankį iš [čia](https://www.docker.com/products/overview#/install_the_platform) pagal savo platformą.
 Instaliuojate.
 
-Toliau jums reikės git'o. Jei neturite normalaus terminalo, kuriame jau "by default" `git`komanda būtų, atsisiunčiame iš [čia](https://git-scm.com/downloads) .
+Toliau jums reikės git'o. Jei neturite normalaus terminalo, kuriame jau "by default" `git` komanda būtų, atsisiunčiame iš [čia](https://git-scm.com/downloads) .
 Instaliuojate.
 
 
 ### Projekto paleidimas
 
 Downloadinat šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "download", tada pasirenkate zip failo parsisiuntimą. 
-Extractinat turinį į savo megstamą projektų direktoriją.
+Extractinat turinį į savo mėgstamą projektų direktoriją.
 
 Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 
@@ -61,13 +61,13 @@ tokiu atveju viską ištrinat ir kartojate iš naujo kol gausis.
 
 ### Troubleshooting'as
 
-Jeigu kažkas nutiko netaip, na atsirado raudona eilutė, ar tiesiog nutruko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
+Jeigu kažkas nutiko ne taip, na atsirado raudona eilutė, ar tiesiog nutruko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
 
 ```
 docker-compose logs
 ```
 
-Nepamirškite kad galima nurodyti norima procesa. Taip pat ir 'grepinti'.
+Nepamirškite, kad galima nurodyti norimą procesą. Taip pat ir 'grepinti'.
 
 ```
 docker-compose logs mariadb
