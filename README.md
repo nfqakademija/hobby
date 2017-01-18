@@ -6,7 +6,7 @@ NFQ Akademija
 # Intro
 
 Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony 3.1 startinį projekto paketa su jau paruoštais 
+Šioje repositorijoje rasite Symfony 3.1 startinį projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
 - Lokalaus development'o aplinka (docker) (PHP 7, Maria DB, Nginx)
@@ -61,7 +61,7 @@ tokiu atveju viską ištrinat ir kartojate iš naujo kol gausis.
 
 ### Troubleshooting'as
 
-Jeigu kažkas nutiko ne taip, na atsirado raudona eilutė, ar tiesiog nutruko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
+Jeigu kažkas nutiko ne taip, na atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
 
 ```
 docker-compose logs
