@@ -6,11 +6,11 @@ NFQ Akademija
 # Intro
 
 Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony 3.1 startinį projekto paketą su jau paruoštais 
+Šioje repositorijoje rasite Symfony `~3.2` startinį projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
-- Lokalaus development'o aplinka (docker) (PHP 7, Maria DB, Nginx)
-- Pradinis bundle (AppBundle), kartu su stiliaus failais ir kitais dalykėliais.
+- Lokalaus development'o aplinka (docker) (PHP 7.0, Maria DB, Nginx)
+- Pradinis bundle (AppBundle) kartu su stiliaus failais.
 - Įdiegtas bootstrap
 - Asset'ų buildinimas (npm, gulp, sass)
 - Travis CI template
@@ -18,29 +18,37 @@ visais reikalingais failais ir įrankiais darbui:
 
 # Paleidimo instrukcija
 
-Metai iš metų studentai maldavo jog galėtų dirbti su Windowsais akademijos metu. 
-Tad skubu pranešti gerą žinią, Dievai išklausė Jūsų maldas ir nuo šiol galėsite teoriškai naudoti Windowsus!
+Metai iš metų studentai maldavo jog galėtų dirbti su Windows'ais akademijos metu.
+ Bet nepaisant nieko, tolerancijos ir palaikymo Windows operacinei niekada nebuvo ir nebus.  
 
 > Perspėjimas: Itin kieti profesionalai nenaudoja niekam tikusių operacinių sistemų. 
 
 ### Reikės dokerio
 
-Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualbox ar Vmware. 
-Tam reikės, kad jūsų kompiuterio procesorius palaikytų Hyper-V.
+Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualbox ar Vmware.
+ Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
+ Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
 
-Parsisiunčiame įrankį iš [čia](https://www.docker.com/products/overview#/install_the_platform) pagal savo platformą.
-Instaliuojate.
+Parsisiunčiame ir įsidiegiate įrankį iš [čia](https://docs.docker.com/engine/installation/linux/ubuntu/).
 
-Toliau jums reikės git'o. Jei neturite normalaus terminalo, kuriame jau "by default" `git` komanda būtų, atsisiunčiame iš [čia](https://git-scm.com/downloads) .
-Instaliuojate.
-
+Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
+ Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 ### Projekto paleidimas
 
-Downloadinat šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "download", tada pasirenkate zip failo parsisiuntimą. 
+Parsisiunčiate šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "Download", tada pasirenkate zip failo parsisiuntimą.
+ 
+> Akademijos projektui, nereikia forkinti, klonuoti ar dar išrasti kokių nors kitų veiksmų, tik parsisiųsti.
+ 
 Extractinat turinį į savo mėgstamą projektų direktoriją.
 
 Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
+
+**SVARBU:**
+
+Susikuriate projekto viduje `.env` failą. Faila užpildote turiniu pateiktu iš `env.dist`.
+
+Atkreipkite dėmęsį į `LOCAL_USER_ID` ir `LOCAL_GROUP_ID` įvygdžius nuroytas komandas ar sutampa `id`su jūsų nurodytais.
 
 Toliau leidžiame komandas esančias žemiau:
 
@@ -53,11 +61,25 @@ docker-compose run npm gulp
 
 ```
 
+### Kaip teisingai išjungti docker konteinerius?
+
+Išjungiama su komanda:
+```
+docker-composer kill
+```
+
+Galima išjungti ir po vieną:
+```
+docker-composer kill <container name>
+```
+
+
 ### Kaip pamatyti kas atsitiko?
 
-Atsidarote naršyklę ir einate į http://127.0.0.1:8000 , 
-jei nematote užrašo NFQ Akademija, reiškia kažkur susimovėte, 
-tokiu atveju viską ištrinat ir kartojate iš naujo kol gausis. 
+Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
+ jei nematote užrašo "NFQ Akademija", reiškia kažkur susimovėte,
+ tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
+ Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+now+working), o po to į mentorių.  
 
 ### Troubleshooting'as
 
