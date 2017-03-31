@@ -30,7 +30,7 @@ services:
     environment:
       XDEBUG_CONFIG: remote_host=172.27.0.1
   npm:
-    image: ongr/nodejs:6.10.0
+    image: ongr/nodejs:6.4.0
     user: "$LOCAL_USER_ID:$LOCAL_GROUP_ID"
     volumes:
       - ".docker/.npm:/home/.npm"
