@@ -86,7 +86,7 @@ docker-compose kill <container name>
 Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
  jei nematote užrašo "NFQ Akademija", reiškia kažkur susimovėte,
  tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
- Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+now+working), o po to į mentorių.  
+ Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
 
 ### Troubleshooting'as
 
