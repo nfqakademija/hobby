@@ -29,9 +29,9 @@ Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualb
  Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
  Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
 
-Parsisiunčiame ir įsidiegiate įrankį iš [čia](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04).
+Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04).
 
-Parsisiunčiame ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
+Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
 Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
@@ -45,7 +45,7 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
 
 Parsisiunčiate šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "Download", tada pasirenkate zip failo parsisiuntimą.
  
-> Akademijos projektui, nereikia forkinti, klonuoti ar dar išrasti kokių nors kitų veiksmų, tik parsisiųsti.
+> Akademijos projektui nereikia forkinti, klonuoti ar dar išrasti kokių nors kitų veiksmų, tik parsisiųsti.
  
 Extractinat turinį į savo mėgstamą projektų direktoriją.
 
@@ -53,9 +53,9 @@ Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 
 **SVARBU:**
 
-Susikuriate projekto viduje `.env` failą. Faila užpildote turiniu pateiktu iš `env.dist`.
+Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
 
-Atkreipkite dėmęsį į `LOCAL_USER_ID` ir `LOCAL_GROUP_ID` įvygdžius nuroytas komandas ar sutampa `id`su jūsų nurodytais.
+Atkreipkite dėmęsį į `LOCAL_USER_ID` ir `LOCAL_GROUP_ID`, įvykdžius nurodytas komandas, ar sutampa `id`su jūsų nurodytais.
 
 Toliau leidžiame komandas esančias žemiau:
 
@@ -84,13 +84,13 @@ docker-compose kill <container name>
 ### Kaip pamatyti kas atsitiko?
 
 Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
- jei nematote užrašo "NFQ Akademija", reiškia kažkur susimovėte,
+ jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
  tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
- Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+now+working), o po to į mentorių.  
+ Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
 
 ### Troubleshooting'as
 
-Jeigu kažkas nutiko ne taip, na atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
+Jeigu kažkas nutiko ne taip, na, atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
 
 ```
 docker-compose logs
@@ -104,5 +104,5 @@ docker-compose logs mariadb
 
 ### Feedbackas
 
-Jeigu taip nutiktų kad repositorijoje, projekto template ar instrukcijoje rastumėte klaidą, tai nesišnibždėkite vieni tarp kitų, o sukurkite "issue". 
+Jeigu taip nutiktų, kad repositorijoje, projekto template ar instrukcijoje rastumėte klaidą, tai nesišnibždėkite vieni tarp kitų, o sukurkite "issue". 
 O jei atidarysite "pull requestą" su fixu, gausite iškart 1000 karmos taškų.
