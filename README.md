@@ -53,9 +53,9 @@ Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 
 **SVARBU:**
 
-Susikuriate projekto viduje `.env` failą. Faila užpildote turiniu pateiktu iš `env.dist`.
+Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
 
-Atkreipkite dėmęsį į `LOCAL_USER_ID` ir `LOCAL_GROUP_ID` įvygdžius nuroytas komandas ar sutampa `id`su jūsų nurodytais.
+Atkreipkite dėmęsį į `LOCAL_USER_ID` ir `LOCAL_GROUP_ID`, įvykdžius nurodytas komandas, ar sutampa `id`su jūsų nurodytais.
 
 Toliau leidžiame komandas esančias žemiau:
 
