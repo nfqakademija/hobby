@@ -31,6 +31,7 @@ Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualb
 
 Parsisiunčiame ir įsidiegiate įrankį iš [čia](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04).
 
+Parsisiunčiame ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
 Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
