@@ -29,10 +29,16 @@ Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualb
  Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
  Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
 
-Parsisiunčiame ir įsidiegiate įrankį iš [čia](https://docs.docker.com/engine/installation/linux/ubuntu/).
+Parsisiunčiame ir įsidiegiate įrankį iš [čia](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04).
+
 
 Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
+
+#### Versiju reikalavimai
+* docker: `>=17.x-ce`
+* docker-compose: `>=1.8.1`
+
 
 ### Projekto paleidimas
 
@@ -65,12 +71,12 @@ docker-compose run npm gulp
 
 Išjungiama su komanda:
 ```
-docker-composer kill
+docker-compose kill
 ```
 
 Galima išjungti ir po vieną:
 ```
-docker-composer kill <container name>
+docker-compose kill <container name>
 ```
 
 
