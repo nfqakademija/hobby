@@ -36,7 +36,7 @@ Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/d
 Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
-#### Versiju reikalavimai
+#### Versijų reikalavimai
 * docker: `>=17.x-ce`
 * docker-compose: `>=1.8.1`
 
