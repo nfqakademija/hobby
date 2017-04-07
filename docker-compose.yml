@@ -38,18 +38,18 @@ services:
       - "/usr/local/lib/node_modules"
     networks:
       - frontend
-  mysql-data:
+  mariadb-data:
     image: tianon/true
     volumes:
       - /var/lib/mysql
     networks:
       - backend
-  mysql:
+  mariadb:
     image: mariadb:10.1.10
     ports:
       - "$LOCAL_MYSQL_PORT:3306"
     volumes_from:
-      - "mysql-data"
+      - "mariadb-data"
     environment:
       MYSQL_DATABASE: "$MYSQL_DATABASE"
       MYSQL_ROOT_PASSWORD: root
