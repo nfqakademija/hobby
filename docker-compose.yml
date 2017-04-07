@@ -19,7 +19,7 @@ services:
         LOCAL_GROUP_ID: $LOCAL_GROUP_ID
     user: "$LOCAL_USER_ID:$LOCAL_GROUP_ID"
     links:
-      - mysql
+      - mariadb
     volumes:
       - ".docker/.composer:/.composer"
       - "./:/var/www"
