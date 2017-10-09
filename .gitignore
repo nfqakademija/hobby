@@ -1,7 +1,4 @@
 /.docker/*
-!/.docker/.npm
-/.docker/.npm/*
-!/.docker/.npm/.gitkeep
 !/.docker/build
 !/.docker/config
 /app/config/parameters.yml
