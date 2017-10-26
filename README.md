@@ -9,7 +9,7 @@ Sveiki! Tai yra Jūsų startinis projekto "template".
 Šioje repositorijoje rasite Symfony `~3.2` startinį projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
-- Lokalaus development'o aplinka (docker) (PHP 7.0, Maria DB, Nginx)
+- Lokalaus development'o aplinka (docker) (PHP 7.1, Maria DB, Nginx)
 - Pradinis bundle (AppBundle) kartu su stiliaus failais.
 - Įdiegtas bootstrap
 - Asset'ų buildinimas (npm, gulp, sass)
