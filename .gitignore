@@ -1,4 +1,6 @@
-/.docker
+/.docker/*
+!/.docker/build
+!/.docker/config
 /app/config/parameters.yml
 /var/*
 !/var/cache
