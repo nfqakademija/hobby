@@ -14,9 +14,7 @@ yarn-error.log
 ###< symfony/webpack-encore-pack ###
 
 ###> Old symfony and common infrastructure ###
-/.docker/*
-!/.docker/build
-!/.docker/config
+/.docker/mysql-data
 /app/config/parameters.yml
 /var/*
 !/var/cache
