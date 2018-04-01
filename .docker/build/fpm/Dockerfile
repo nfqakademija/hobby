@@ -1,4 +1,4 @@
-FROM ongr/php-fpm:7.1
+FROM ongr/php-fpm:7.2
 
 ARG LOCAL_USER_ID=1000
 ARG LOCAL_GROUP_ID=1000
