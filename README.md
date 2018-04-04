@@ -53,14 +53,15 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
   ```
+  (jei infrastruktūra nekeičiama, antrą kartą užteks tik `docker-compose -f .docker/docker-compose.yml up -d`)
 
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
-docker-compose run frontend.symfony
+docker-compose -f .docker/docker-compose.yml run frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
-  npm install
+  npm install --no-save
   ```
   * Jei pakeitimai neatsinaujina:
   ```
@@ -98,18 +99,19 @@ Atsidarome naršyklėje [symfony.local](http://symfony.local)
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
   ```
+  (jei infrastruktūra nekeičiama, antrą kartą užteks tik `docker-compose -f .docker/docker-compose.yml up -d`)
 
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
-docker-compose run frontend.symfony
+docker-compose -f .docker/docker-compose.yml run frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
-  npm install
+  npm install --no-save
   ```
   * Jei pakeitimai neatsinaujina:
   ```
-  yarn run encore encore production
+  yarn run encore production
   ```
 
 * PHP įrankiams (atsidaryti atskirame lange)
@@ -148,23 +150,35 @@ docker-compose kill <container name>
 
 ### Kaip pamatyti kas atsitiko?
 
-Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
+Atsidarote naršyklę ir einate į `http://127.0.0.1`,
  jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
  tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
  Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
+
+ Dažnos klaidos:
+ 
+  * `80` arba `3306` port'ai kompiuteryje jau ir taip naudojami vietinio `apache`, `nginx`, `mysql` ar `skype`.
+
+### Kaip prisijungti prie MySql duomenų bazės?
+
+```
+mysql -uroot -h127.0.0.1 --port=3306 -p
+```
+Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7` (toks pats, kaip ir [.docker/docker-compose.yml] `MYSQL_ROOT_PASSWORD=`)
+
 
 ### Troubleshooting'as
 
 Jeigu kažkas nutiko ne taip, na, atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
 
 ```
-docker-compose logs
+docker-compose -f .docker/docker-compose.yml logs 
 ```
 
 Nepamirškite, kad galima nurodyti norimą procesą. Taip pat ir 'grepinti'.
 
 ```
-docker-compose logs mariadb
+docker-compose -f .docker/docker-compose.yml logs mysql.symfony
 ```
 
 ### Feedbackas
