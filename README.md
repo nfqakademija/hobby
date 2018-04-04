@@ -53,10 +53,11 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
   ```
+  (jei infrastruktūra nekeičiama, antrą kartą užteks tik `docker-compose -f .docker/docker-compose.yml up -d`)
 
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
-docker-compose run frontend.symfony
+docker-compose -f .docker/docker-compose.yml run frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
@@ -98,10 +99,11 @@ Atsidarome naršyklėje [symfony.local](http://symfony.local)
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
   ```
+  (jei infrastruktūra nekeičiama, antrą kartą užteks tik `docker-compose -f .docker/docker-compose.yml up -d`)
 
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
-docker-compose run frontend.symfony
+docker-compose -f .docker/docker-compose.yml run frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
@@ -109,7 +111,7 @@ docker-compose run frontend.symfony
   ```
   * Jei pakeitimai neatsinaujina:
   ```
-  yarn run encore encore production
+  yarn run encore production
   ```
 
 * PHP įrankiams (atsidaryti atskirame lange)
