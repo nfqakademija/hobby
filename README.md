@@ -6,13 +6,13 @@ NFQ Akademija
 # Intro
 
 Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony `~3.2` startinį projekto paketą su jau paruoštais 
+Šioje repositorijoje rasite Symfony `4.0.6` minimalų projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
-- Lokalaus development'o aplinka (docker) (PHP 7.1, Maria DB, Nginx)
+- Lokalaus development'o aplinka (docker) (PHP 7.2, MySql DB, Nginx)
 - Pradinis bundle (AppBundle) kartu su stiliaus failais.
 - Įdiegtas bootstrap
-- Asset'ų buildinimas (npm, gulp, sass)
+- Asset'ų buildinimas (npm, yarn, sass)
 - Travis CI template
 
 
@@ -37,36 +37,101 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 #### Versijų reikalavimai
-* docker: `>=17.x-ce`
-* docker-compose: `>=1.8.1`
+* docker: `1.13.1`
+* docker-compose: `1.7.1`
 
 
-### Projekto paleidimas
+### Projekto paleidimas (projekto kūrimui lokaliai)
 
-Parsisiunčiate šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "Download", tada pasirenkate zip failo parsisiuntimą.
- 
-> Akademijos projektui nereikia forkinti, klonuoti ar dar išrasti kokių nors kitų veiksmų, tik parsisiųsti.
- 
-Extractinat turinį į savo mėgstamą projektų direktoriją.
+* Pasiruoškite infrastruktūrą:
+  * Pasikeičiame slaptažodžius:
+    `.docker` kataloge žr. failų su `APP_SECRET` ir `DATABASE_URL` reikšmėmis
+  * Pasileidžiame:
+  ```
+  sudo su -c 'echo "127.0.0.1 symfony.local" >> /etc/hosts'
+  docker build .docker/php -t php.symfony 
+  docker build .docker/frontend/ -t frontend.symfony
+  docker-compose -f .docker/docker-compose.yml up -d
+  ```
 
-Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
-
-**SVARBU:**
-
-Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
-
-Atkreipkite dėmęsį į `LOCAL_USER_ID` ir `LOCAL_GROUP_ID`, įvykdžius nurodytas komandas, ar sutampa `id`su jūsų nurodytais.
-
-Toliau leidžiame komandas esančias žemiau:
-
-```bash
-
-docker-compose up -d
-docker-compose exec fpm composer install --prefer-dist -n
-docker-compose run npm npm install
-docker-compose run npm gulp
-
+* JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
+docker-compose run frontend.symfony
+```
+  * Pirmą kartą (įsirašome JavaScript bilbiotekas)
+  ```
+  npm install
+  ```
+  * Jei pakeitimai neatsinaujina:
+  ```
+  yarn run encore dev --watch
+  ```
+
+* PHP įrankiams (atsidaryti atskirame lange)
+```
+docker exec -it php.symfony bash
+```
+  * Pirmą kartą paleidus (įsirašome PHP biliotekas):
+  ```
+  composer install
+  ```
+  * Jei pakeitimai neatsinaujina:
+  ```
+  ./bin/console --env=dev cache:clear
+  ./bin/console --env=dev cache:warmup
+  ./bin/console --env=dev assets:install
+  ```
+
+* Pasižiūrime rezultatą.
+Atsidarome naršyklėje [symfony.local](http://symfony.local)
+
+
+### Projekto paleidimas (palyginimui kaip atrodytų produkcinėje)
+
+* Pasiruoškite infrastruktūrą:
+  * Pasikeičiame slaptažodžius:
+    `.docker` kataloge žr. failų su `APP_SECRET` ir `DATABASE_URL` reikšmėmis
+  * Pasileidžiame:
+  ```
+  sudo su -c 'echo "127.0.0.1 symfony.prod" >> /etc/hosts'
+  docker build .docker/php -t php.symfony 
+  docker build .docker/frontend/ -t frontend.symfony
+  docker-compose -f .docker/docker-compose.yml up -d
+  ```
+
+* JavaScript/CSS įrankiams (atsidaryti atskirame lange)
+```
+docker-compose run frontend.symfony
+```
+  * Pirmą kartą (įsirašome JavaScript bilbiotekas)
+  ```
+  npm install
+  ```
+  * Jei pakeitimai neatsinaujina:
+  ```
+  yarn run encore encore production
+  ```
+
+* PHP įrankiams (atsidaryti atskirame lange)
+```
+docker exec -it php.symfony bash
+```
+  * Pirmą kartą paleidus (įsirašome PHP biliotekas):
+  ```
+  composer install
+  ```
+  * Jei pakeitimai neatsinaujina:
+  ```
+  ./bin/console --env=prod cache:clear
+  ./bin/console --env=prod cache:warmup
+  ./bin/console --env=prod assets:install
+  ```
+
+* Pasižiūrime rezultatą.
+Atsidarome naršyklėje [symfony.prod](http://symfony.prod)
+
+P.S. šalia galima atsidaryti ir palyginti su `symfony.local`
+
 
 ### Kaip teisingai išjungti docker konteinerius?
 
