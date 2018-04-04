@@ -1,6 +1,20 @@
-/.docker/*
-!/.docker/build
-!/.docker/config
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-pack ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-pack ###
+
+###> Old symfony and common infrastructure ###
+/.docker/mysql-data
 /app/config/parameters.yml
 /var/*
 !/var/cache
@@ -21,3 +35,5 @@
 /node_modules
 .env
 npm-debug.log
+.idea/
+###< Old symfony and common infrastructure ###
