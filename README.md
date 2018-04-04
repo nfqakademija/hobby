@@ -155,6 +155,15 @@ Atsidarote naršyklę ir einate į `http://127.0.0.1`,
  tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
  Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
 
+
+### Kaip prisijungti prie MySql duomenų bazės?
+
+```
+mysql -uroot -h127.0.0.1 --port=3306 -p
+```
+Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7` (toks pats, kaip ir [.docker/docker-compose.yml] `MYSQL_ROOT_PASSWORD=`)
+
+
 ### Troubleshooting'as
 
 Jeigu kažkas nutiko ne taip, na, atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:

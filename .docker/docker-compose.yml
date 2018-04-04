@@ -27,6 +27,8 @@ services:
       - MYSQL_ROOT_PASSWORD=p9iijKcfgENjBWDYgSH7
     volumes:
       - ./mysql-data/:/var/lib/mysql
+    ports:
+      - 127.0.0.1:3306:3306
 
   frontend.symfony:
     container_name: frontend.symfony
