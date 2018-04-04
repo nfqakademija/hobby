@@ -150,7 +150,7 @@ docker-compose kill <container name>
 
 ### Kaip pamatyti kas atsitiko?
 
-Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
+Atsidarote naršyklę ir einate į `http://127.0.0.1`,
  jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
  tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
  Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
@@ -160,13 +160,13 @@ Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
 Jeigu kažkas nutiko ne taip, na, atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
 
 ```
-docker-compose logs
+docker-compose -f .docker/docker-compose.yml logs 
 ```
 
 Nepamirškite, kad galima nurodyti norimą procesą. Taip pat ir 'grepinti'.
 
 ```
-docker-compose logs mariadb
+docker-compose -f .docker/docker-compose.yml logs mysql.symfony
 ```
 
 ### Feedbackas
