@@ -155,6 +155,9 @@ Atsidarote naršyklę ir einate į `http://127.0.0.1`,
  tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
  Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
 
+ Dažnos klaidos:
+ 
+  * `80` arba `3306` port'ai kompiuteryje jau ir taip naudojami vietinio `apache`, `nginx`, `mysql` ar `skype`.
 
 ### Kaip prisijungti prie MySql duomenų bazės?
 
