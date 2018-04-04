@@ -61,7 +61,7 @@ docker-compose -f .docker/docker-compose.yml run frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
-  npm install
+  npm install --no-save
   ```
   * Jei pakeitimai neatsinaujina:
   ```
@@ -107,7 +107,7 @@ docker-compose -f .docker/docker-compose.yml run frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
-  npm install
+  npm install --no-save
   ```
   * Jei pakeitimai neatsinaujina:
   ```
