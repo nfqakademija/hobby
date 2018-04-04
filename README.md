@@ -164,7 +164,7 @@ Atsidarote naršyklę ir einate į `http://127.0.0.1`,
 ```
 mysql -uroot -h127.0.0.1 --port=3306 -p
 ```
-Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7` (toks pats, kaip ir [.docker/docker-compose.yml] `MYSQL_ROOT_PASSWORD=`)
+Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7` (toks pats, kaip ir [.docker/docker-compose.yml](.docker/docker-compose.yml) `MYSQL_ROOT_PASSWORD=`)
 
 
 ### Troubleshooting'as
