@@ -56,6 +56,7 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
   ```
   (jei infrastruktūra nekeičiama, antrą kartą užteks tik `docker-compose -f .docker/docker-compose.yml up -d`)
 
+#### Pasruošiame frontend aplinką
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
 docker-compose -f .docker/docker-compose.yml run frontend.symfony
@@ -69,6 +70,7 @@ docker-compose -f .docker/docker-compose.yml run frontend.symfony
   yarn run encore dev --watch
   ```
 
+#### Pasruošiame backend aplinką
 * PHP įrankiams (atsidaryti atskirame lange)
 ```
 docker exec -it php.symfony bash
