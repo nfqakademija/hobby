@@ -65,7 +65,7 @@ Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu i�
 
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
-docker-compose -f .docker/docker-compose.yml run frontend.symfony
+docker-compose -f .docker/docker-compose.yml run --rm frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
@@ -77,6 +77,11 @@ docker-compose -f .docker/docker-compose.yml run frontend.symfony
   ```
 
 #### Pasruošiame backend aplinką
+
+* Jei pasiruošinėjote Frontend aplinką, atsidarykite naują `terminal`/`bash` langą (nebe docker konteineryje)
+```
+exit
+```
 
 * PHP įrankiams (atsidaryti atskirame lange)
 ```
