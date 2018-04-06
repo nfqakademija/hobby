@@ -123,7 +123,7 @@ docker-compose run --rm frontend.symfony
   
 #### Pasruošiame backend aplinką
 
-* PHP įrankiams (atsidaryti atskirame lange)
+* PHP įrankiams (**atsidaryti atskirame lange, skiriasi nuo dev aplinkos**)
 ```
 docker exec -it prod.php.symfony bash
 ```
@@ -131,7 +131,7 @@ docker exec -it prod.php.symfony bash
   ```
   composer install
   ```
-  * Jei pakeitimai neatsinaujina (**skiriasi nuop dev aplinkos**):
+  * Jei pakeitimai neatsinaujina (**skiriasi nuo dev aplinkos**):
   ```
   bin/console cache:clear
   bin/console assets:install
