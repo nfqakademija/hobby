@@ -95,7 +95,7 @@ Atsidarome naršyklėje [symfony.local](http://symfony.local)
     `.docker` kataloge žr. failų su `APP_SECRET` ir `DATABASE_URL` reikšmėmis
   * Pasileidžiame:
   ```
-  sudo su -c 'echo "127.0.0.1 symfony.prod" >> /etc/hosts'
+  sudo bash -c 'echo "127.0.0.1 symfony.prod" >> /etc/hosts'
   docker build .docker/php -t php.symfony 
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
