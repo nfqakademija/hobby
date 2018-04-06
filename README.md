@@ -38,10 +38,11 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
 
 #### Versijų reikalavimai
 * docker: `1.13.1`
-* docker-compose: `1.7.1`
+* docker-compose: `1.20.1`
 
 
 ### Projekto paleidimas (projekto kūrimui lokaliai)
+* Parsisiunčiame zip failą, ne forkinam ir ne klonuojam repozitorijos! 
 
 * Pasiruoškite infrastruktūrą:
   * Pasikeičiame slaptažodžius:
