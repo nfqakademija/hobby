@@ -1,0 +1,46 @@
+version: "2"
+
+services:
+  nginx.symfony:
+    container_name: nginx.symfony
+    image: nginx:1.13.10
+    volumes:
+      - .:/code # Mount your code, so nginx/phpcould see it
+      - .docker/nginx/site.conf:/etc/nginx/conf.d/site.conf # Use custom virtual hosts
+    ports:
+      - 127.0.0.1:8000:8000 # For development. Open in browser 127.0.0.1:8000
+      - 127.0.0.1:8888:80 # To simulate production. Open in browser 127.0.0.1:8888
+
+  php.symfony:
+    container_name: php.symfony
+    build: .docker/php/
+    environment: # Passing to environment same configuration as in .env file
+      - APP_ENV=$APP_ENV
+      - APP_SECRET=$APP_SECRET
+      - DATABASE_URL=$DATABASE_URL
+    volumes:
+      - .:/code # Mount your code, so nginx/phpcould see it
+
+  prod.php.symfony:
+    container_name: prod.php.symfony
+    build: .docker/php/
+    environment: # Production environment should not use parameters from .env, but get them via nginx/apache
+      - APP_ENV=prod # bin/console use APP_ENV value from environment
+    volumes:
+      - .:/code # Mount your code, so nginx/phpcould see it
+
+  mysql.symfony:
+    container_name: mysql.symfony
+    image: mysql:5.7.21
+    environment: # During first run root user with is generated with this password
+      - MYSQL_ROOT_PASSWORD=p9iijKcfgENjBWDYgSH7
+    volumes:
+      - .docker/mysql-data/:/var/lib/mysql
+    ports:
+      - 127.0.0.1:3307:3306 # Connect to it via -h127.0.0.1 --port=3307
+
+  frontend.symfony:
+    build: .docker/frontend/
+    container_name: frontend.symfony
+    volumes:
+      - .:/code # Mount your code, so javaScript tools could see it

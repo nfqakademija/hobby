@@ -53,37 +53,29 @@ Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
 
 * Pasiruoškite infrastruktūrą:
-  * Pasileidžiame:
   ```
-  docker build .docker/php -t php.symfony 
-  docker build .docker/frontend/ -t frontend.symfony
-  docker-compose -f .docker/docker-compose.yml up -d
+  docker-compose up -d
   ```
-  (jei infrastruktūra nekeičiama, antrą kartą užteks tik `docker-compose -f .docker/docker-compose.yml up -d`)
-
+  
 #### Pasruošiame frontend aplinką
 
-* JavaScript/CSS įrankiams (atsidaryti atskirame lange)
+* JavaScript/CSS įrankiams (**atsidaryti atskirame lange**)
 ```
-docker-compose -f .docker/docker-compose.yml run --rm frontend.symfony
+docker-compose run --rm frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
   npm install --no-save
   ```
-  * Jei pakeitimai neatsinaujina:
+  * Jei pakeitimai neatsinaujina (arba klaidos dėl `build/css` ar `build/js`):
   ```
   yarn run encore dev --watch
   ```
 
 #### Pasruošiame backend aplinką
 
-* Jei pasiruošinėjote Frontend aplinką, atsidarykite naują `terminal`/`bash` langą (nebe docker konteineryje)
-```
-exit
-```
 
-* PHP įrankiams (atsidaryti atskirame lange)
+* PHP įrankiams (**atsidaryti atskirame lange**)
 ```
 docker exec -it php.symfony bash
 ```
@@ -93,37 +85,38 @@ docker exec -it php.symfony bash
   ```
   * Jei pakeitimai neatsinaujina:
   ```
-  bin/console --env=dev cache:clear
-  bin/console --env=dev cache:warmup
-  bin/console --env=dev assets:install
+  bin/console cache:clear
+  bin/console assets:install
   ```
 
-* Pasižiūrime rezultatą.
-Atsidarome naršyklėje [symfony.local](http://symfony.local)
+#### Pasižiūrime rezultatą
+
+Atsidarome naršyklėje [127.0.0.1:8000](http://127.0.0.1:8000)
+
+Jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
+ tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
+ Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.
+
 
 
 ### Projekto paleidimas (palyginimui kaip atrodytų produkcinėje)
 
 * Pasiruoškite infrastruktūrą:
-  * Pasileidžiame:
   ```
-  docker build .docker/php -t php.symfony 
-  docker build .docker/frontend/ -t frontend.symfony
-  docker-compose -f .docker/docker-compose.yml up -d
+  docker-compose up -d
   ```
-  (jei infrastruktūra nekeičiama, antrą kartą užteks tik `docker-compose -f .docker/docker-compose.yml up -d`)
 
 #### Pasruošiame frontend aplinką
 
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
-docker-compose -f .docker/docker-compose.yml run frontend.symfony
+docker-compose run --rm frontend.symfony
 ```
   * Pirmą kartą (įsirašome JavaScript bilbiotekas)
   ```
   npm install --no-save
   ```
-  * Jei pakeitimai neatsinaujina:
+  * Jei pakeitimai neatsinaujina (**skirasi nuo dev aplinkos**):
   ```
   yarn run encore production
   ```
@@ -132,70 +125,65 @@ docker-compose -f .docker/docker-compose.yml run frontend.symfony
 
 * PHP įrankiams (atsidaryti atskirame lange)
 ```
-docker exec -it php.symfony bash
+docker exec -it prod.php.symfony bash
 ```
   * Pirmą kartą paleidus (įsirašome PHP biliotekas):
   ```
   composer install
   ```
-  * Jei pakeitimai neatsinaujina:
+  * Jei pakeitimai neatsinaujina (**skiriasi nuop dev aplinkos**):
   ```
-  bin/console --env=prod cache:clear
-  bin/console --env=prod cache:warmup
-  bin/console --env=prod assets:install
+  bin/console cache:clear
+  bin/console assets:install
   ```
 
-* Pasižiūrime rezultatą.
-Atsidarome naršyklėje [symfony.prod](http://symfony.prod)
+#### Pasižiūrime rezultatą
 
-P.S. šalia galima atsidaryti ir palyginti su `symfony.local`
+Atsidarome naršyklėje [127.0.0.1:8888](http://127.0.0.1:8888)
+
+P.S. šalia galima atsidaryti ir palyginti su `127.0.0.1:8000`
 
 
 ### Kaip teisingai išjungti docker konteinerius?
 
 Išjungiama su komanda:
 ```
-docker-compose -f .docker/docker-compose.yml kill
+docker-compose kill
 ```
 
 Galima išjungti ir po vieną:
 ```
-docker-compose -f .docker/docker-compose.yml kill <container name>
+docker-compose kill <container name>
 ```
-
-
-### Kaip pamatyti kas atsitiko?
-
-Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
- jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
- tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
- Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
 
 ### Kaip prisijungti prie MySql duomenų bazės?
 
 ```
-mysql -uroot -h<MYSQL_IP_ADRESAS> --port=3307 -p
+mysql -uroot -h127.0.0.1 --port=3307 -p
 ```
-Kur vietoj `MYSQL_IP_ADRESAS` rasite per `docker inspect mysql.symfony | grep IPAddress`
+Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7`
 
-Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7` (toks pats, kaip ir [.docker/docker-compose.yml](.docker/docker-compose.yml) `MYSQL_ROOT_PASSWORD=`)
 
 ### Kaip pasiruošti produkcinei aplinkai?
 
 * Pasikeiskite slaptažodžius: ieškokite failuose reikšmių prie `DATABASE_URL=` ir `APP_SECRET=` 
+* Pakeiskite parametrus `nginx`/`apache` serveryje. Žr. pavyzdį [site.conf](.docker/nginx/site.conf)
+* Įsitikinkite, kad reikalingos bibliotekos įrašytos į operacinę sistemą. Žr. pavyzdį [php/Dockerfile](.docker/.php/Dockerfile)
+* Įsitikinkite, kad `APP_ENV` yra `prod` (tiek naudojant `bin/console`, tiek ateinantis per `nginx` į `index.php`) 
+
 
 ### Troubleshooting'as
 
 Jeigu kažkas nutiko ne taip, na, atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
 
 ```
-docker-compose -f .docker/docker-compose.yml logs 
+docker-compose logs 
 ```
 
-Nepamirškite, kad galima nurodyti norimą procesą. Taip pat ir 'grepinti'.
+Nepamirškite, kad galima nurodyti norimą procesą ar filtruoti eilutes:
 
 ```
-docker-compose -f .docker/docker-compose.yml logs mysql.symfony
+docker-compose logs mysql.symfony | grep Warning
 ```
 
 ### Feedbackas
