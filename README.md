@@ -53,11 +53,8 @@ Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
 
 * Pasiruoškite infrastruktūrą:
-  * Pasikeičiame slaptažodžius:
-    `.docker` kataloge žr. failų su `APP_SECRET` ir `DATABASE_URL` reikšmėmis
   * Pasileidžiame:
   ```
-  sudo bash -c 'echo "127.0.0.1 symfony.local" >> /etc/hosts'
   docker build .docker/php -t php.symfony 
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
@@ -103,11 +100,8 @@ Atsidarome naršyklėje [symfony.local](http://symfony.local)
 ### Projekto paleidimas (palyginimui kaip atrodytų produkcinėje)
 
 * Pasiruoškite infrastruktūrą:
-  * Pasikeičiame slaptažodžius:
-    `.docker` kataloge žr. failų su `APP_SECRET` ir `DATABASE_URL` reikšmėmis
   * Pasileidžiame:
   ```
-  sudo bash -c 'echo "127.0.0.1 symfony.prod" >> /etc/hosts'
   docker build .docker/php -t php.symfony 
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
@@ -167,22 +161,23 @@ docker-compose -f .docker/docker-compose.yml kill <container name>
 
 ### Kaip pamatyti kas atsitiko?
 
-Atsidarote naršyklę ir einate į `http://127.0.0.1`,
+Atsidarote naršyklę ir einate į `http://127.0.0.1:8000`,
  jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
  tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
  Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.  
 
- Dažnos klaidos:
- 
-  * `80` arba `3306` port'ai kompiuteryje jau ir taip naudojami vietinio `apache`, `nginx`, `mysql` ar `skype`.
-
 ### Kaip prisijungti prie MySql duomenų bazės?
 
 ```
-mysql -uroot -h127.0.0.1 --port=3306 -p
+mysql -uroot -h<MYSQL_IP_ADRESAS> --port=3307 -p
 ```
+Kur vietoj `MYSQL_IP_ADRESAS` rasite per `docker inspect mysql.symfony | grep IPAddress`
+
 Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7` (toks pats, kaip ir [.docker/docker-compose.yml](.docker/docker-compose.yml) `MYSQL_ROOT_PASSWORD=`)
 
+### Kaip pasiruošti produkcinei aplinkai?
+
+* Pasikeiskite slaptažodžius: ieškokite failuose reikšmių prie `DATABASE_URL=` ir `APP_SECRET=` 
 
 ### Troubleshooting'as
 

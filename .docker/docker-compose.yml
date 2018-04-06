@@ -8,7 +8,7 @@ services:
       - ../:/code
       - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
     ports:
-      - 127.0.0.1:80:80
+      - 127.0.0.1:8000:80
 
   php.symfony:
     container_name: php.symfony
@@ -28,7 +28,7 @@ services:
     volumes:
       - ./mysql-data/:/var/lib/mysql
     ports:
-      - 127.0.0.1:3306:3306
+      - 127.0.0.1:3307:3306
 
   frontend.symfony:
     container_name: frontend.symfony
