@@ -29,7 +29,7 @@ Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualb
  Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
  Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
 
-Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/engine/installation/linux/ubuntu/). Iškart įdiegus reikia pasidaryti, kad `docker` būtų galima naudoti be root teisių, kaip tai padaryti rasite [čia](https://docs.docker.com/engine/installation/linux/linux-postinstall/).
+Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/install/linux/docker-ce/ubuntu/). Iškart įdiegus reikia pasidaryti, kad `docker` būtų galima naudoti be root teisių, kaip tai padaryti rasite [čia](https://docs.docker.com/compose/install/).
 
 Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
@@ -37,7 +37,7 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 #### Versijų reikalavimai
-* docker: `1.13.1`
+* docker: `18.03.0-ce`
 * docker-compose: `1.20.1`
 
 
@@ -49,7 +49,7 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
     `.docker` kataloge žr. failų su `APP_SECRET` ir `DATABASE_URL` reikšmėmis
   * Pasileidžiame:
   ```
-  sudo su -c 'echo "127.0.0.1 symfony.local" >> /etc/hosts'
+  sudo bash -c 'echo "127.0.0.1 symfony.local" >> /etc/hosts'
   docker build .docker/php -t php.symfony 
   docker build .docker/frontend/ -t frontend.symfony
   docker-compose -f .docker/docker-compose.yml up -d
