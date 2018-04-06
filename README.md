@@ -50,7 +50,7 @@ Extractinat turinį į savo mėgstamą projektų direktoriją.
 
 Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 
-Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
+* Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
 
 * Pasiruoškite infrastruktūrą:
   ```
@@ -168,7 +168,7 @@ Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7`
 
 * Pasikeiskite slaptažodžius: ieškokite failuose reikšmių prie `DATABASE_URL=` ir `APP_SECRET=` 
 * Pakeiskite parametrus `nginx`/`apache` serveryje. Žr. pavyzdį [site.conf](.docker/nginx/site.conf)
-* Įsitikinkite, kad reikalingos bibliotekos įrašytos į operacinę sistemą. Žr. pavyzdį [php/Dockerfile](.docker/.php/Dockerfile)
+* Įsitikinkite, kad reikalingos bibliotekos įrašytos į operacinę sistemą. Žr. pavyzdį [php/Dockerfile](.docker/php/Dockerfile)
 * Įsitikinkite, kad `APP_ENV` yra `prod` (tiek naudojant `bin/console`, tiek ateinantis per `nginx` į `index.php`) 
 
 
