@@ -101,7 +101,7 @@ Jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
 
 ### Projekto paleidimas (palyginimui kaip atrodytų produkcinėje)
 
-* Pasiruoškite infrastruktūrą:
+* Pasiruoškite infrastruktūrą (jei prieš tai leidote šią komandą, jos kartoti nereikia):
   ```
   docker-compose up -d
   ```
