@@ -140,12 +140,12 @@ P.S. šalia galima atsidaryti ir palyginti su `symfony.local`
 
 Išjungiama su komanda:
 ```
-docker-compose kill
+docker-compose -f .docker/docker-compose.yml kill
 ```
 
 Galima išjungti ir po vieną:
 ```
-docker-compose kill <container name>
+docker-compose -f .docker/docker-compose.yml kill <container name>
 ```
 
 
