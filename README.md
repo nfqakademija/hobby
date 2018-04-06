@@ -37,12 +37,20 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 #### Versijų reikalavimai
-* docker: `18.03.0-ce`
+* docker: `18.x-ce`
 * docker-compose: `1.20.1`
 
 
 ### Projekto paleidimas (projekto kūrimui lokaliai)
-* Parsisiunčiame zip failą, ne forkinam ir ne klonuojam repozitorijos! 
+Parsisiunčiate šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "Download", tada pasirenkate zip failo parsisiuntimą.
+ 
+> Akademijos projektui nereikia forkinti, klonuoti ar dar išrasti kokių nors kitų veiksmų, tik parsisiųsti.
+ 
+Extractinat turinį į savo mėgstamą projektų direktoriją.
+
+Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
+
+Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
 
 * Pasiruoškite infrastruktūrą:
   * Pasikeičiame slaptažodžius:
@@ -83,9 +91,9 @@ docker exec -it php.symfony bash
   ```
   * Jei pakeitimai neatsinaujina:
   ```
-  ./bin/console --env=dev cache:clear
-  ./bin/console --env=dev cache:warmup
-  ./bin/console --env=dev assets:install
+  bin/console --env=dev cache:clear
+  bin/console --env=dev cache:warmup
+  bin/console --env=dev assets:install
   ```
 
 * Pasižiūrime rezultatą.
@@ -133,9 +141,9 @@ docker exec -it php.symfony bash
   ```
   * Jei pakeitimai neatsinaujina:
   ```
-  ./bin/console --env=prod cache:clear
-  ./bin/console --env=prod cache:warmup
-  ./bin/console --env=prod assets:install
+  bin/console --env=prod cache:clear
+  bin/console --env=prod cache:warmup
+  bin/console --env=prod assets:install
   ```
 
 * Pasižiūrime rezultatą.
