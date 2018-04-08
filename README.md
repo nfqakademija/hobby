@@ -50,7 +50,10 @@ Extractinat turinį į savo mėgstamą projektų direktoriją.
 
 Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
 
-* Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`.
+* Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`:
+  ```
+  cp .env.dist .env
+  ```
 
 * Pasiruoškite infrastruktūrą:
   ```
@@ -184,6 +187,14 @@ Nepamirškite, kad galima nurodyti norimą procesą ar filtruoti eilutes:
 
 ```
 docker-compose logs mysql.symfony | grep Warning
+```
+
+Jei kažką su infrastrutkūrą žiauriai sugadinote, perkurti nuo nulio galima:
+```
+docker rm -f $(docker ps -aq)
+docker rmi -f kickstartmaster_frontend.symfony
+docker rmi -f kickstartmaster_prod.php.symfony
+docker rmi -f kickstartmaster_php.symfony
 ```
 
 ### Feedbackas
