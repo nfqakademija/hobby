@@ -35,5 +35,4 @@ yarn-error.log
 /node_modules
 .env
 npm-debug.log
-.idea/
 ###< Old symfony and common infrastructure ###
