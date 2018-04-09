@@ -1,0 +1,2 @@
+[app]
+nfqakademija.lt ansible_host=deploy.nfqakademija.lt ansible_port=2222 ansible_user=kickstart

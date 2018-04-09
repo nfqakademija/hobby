@@ -1,1 +1,0 @@
-server 'deploy.nfqakademija.lt', user: 'kickstart', roles: %w{web}

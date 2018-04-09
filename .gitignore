@@ -35,4 +35,6 @@ yarn-error.log
 /node_modules
 .env
 npm-debug.log
+/project.tar.gz
+/.deploy/*.retry
 ###< Old symfony and common infrastructure ###

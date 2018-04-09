@@ -1,0 +1,67 @@
+---
+
+- hosts: all
+  vars:
+      deployment:
+          deploy_path: /home/kickstart
+          archive_path: ../project.tar.gz
+          linked_files:
+              - .env
+          linked_directories:
+              - var/log
+
+  tasks:
+      - name: Initialize the deploy root and gather facts
+        deploy_helper:
+            path: "{{ deployment.deploy_path }}"
+
+      - name: Create new release directory
+        file:
+            path: "{{ deploy_helper.new_release_path }}"
+            state: directory
+
+      - name: Add an unfinished file, to allow cleanup on successful finalize
+        file:
+            path: "{{ deploy_helper.new_release_path }}/{{ deploy_helper.unfinished_filename }}"
+            state: touch
+
+      - name: Unarchive the project to the new release directory
+        unarchive:
+            src: "{{ deployment.archive_path }}"
+            dest: "{{ deploy_helper.new_release_path }}"
+
+      - name: Create directories in shared directory
+        file:
+            path: "{{ deploy_helper.shared_path }}/{{ item }}"
+            state: directory
+        with_items: "{{ deployment.linked_directories }}"
+
+      - name: Remove files from release directory which have to be shared
+        file:
+            path: "{{ deploy_helper.new_release_path }}/{{ item }}"
+            state: absent
+        with_items: "{{ deployment.linked_directories + deployment.linked_files }}"
+
+      - name: Create directories in release directory for linked files
+        file:
+            path: "{{ deploy_helper.new_release_path }}/{{ item|dirname }}"
+            state: directory
+        with_items: "{{ deployment.linked_directories + deployment.linked_files }}"
+
+      - name: Add symlinks from the new release to the shared directory
+        file:
+            path: "{{ deploy_helper.new_release_path }}/{{ item }}"
+            src: "{{ deploy_helper.shared_path }}/{{ item }}"
+            state: link
+        with_items: "{{ deployment.linked_directories + deployment.linked_files }}"
+
+      - name: Warm up application cache
+        shell: bin/console cache:warmup --env=prod --no-debug
+        args:
+            chdir: "{{ deploy_helper.new_release_path }}"
+
+      - name: Finalize the deploy, removing the unfinished file and switching the symlink
+        deploy_helper:
+            path: "{{ deployment.deploy_path }}"
+            release: "{{ deploy_helper.new_release }}"
+            state: finalize
