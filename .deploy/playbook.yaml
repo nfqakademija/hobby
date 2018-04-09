@@ -3,7 +3,7 @@
 - hosts: all
   vars:
       deployment:
-          deploy_path: /home/kickstart
+          deploy_path: "/home/{{ ansible_user_id }}"
           archive_path: ../project.tar.gz
           linked_files:
               - .env
