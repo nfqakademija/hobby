@@ -1,4 +1,4 @@
-![](https://avatars0.githubusercontent.com/u/4995607?v=3&s=100)
+﻿![](https://avatars0.githubusercontent.com/u/4995607?v=3&s=100)
 
 NFQ Akademija
 ============
@@ -29,7 +29,7 @@ Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualb
  Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
  Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
 
-Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/install/linux/docker-ce/ubuntu/). Iškart įdiegus reikia pasidaryti, kad `docker` būtų galima naudoti be root teisių, kaip tai padaryti rasite [čia](https://docs.docker.com/compose/install/).
+Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/install/linux/docker-ce/ubuntu/). Iškart įdiegus reikia pasidaryti, kad `docker` būtų galima naudoti be root teisių, kaip tai padaryti rasite [čia]( https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
 Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
@@ -60,13 +60,13 @@ Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
   docker-compose up -d
   ```
   
-#### Pasruošiame frontend aplinką
+#### Pasiruošiame frontend aplinką
 
 * JavaScript/CSS įrankiams (**atsidaryti atskirame lange**)
 ```
 docker-compose run --rm frontend.symfony
 ```
-  * Pirmą kartą (įsirašome JavaScript bilbiotekas)
+  * Pirmą kartą (įsirašome JavaScript bibliotekas)
   ```
   npm install --no-save
   ```
@@ -75,14 +75,14 @@ docker-compose run --rm frontend.symfony
   yarn run encore dev --watch
   ```
 
-#### Pasruošiame backend aplinką
+#### Pasiruošiame backend aplinką
 
 
 * PHP įrankiams (**atsidaryti atskirame lange**)
 ```
 docker exec -it php.symfony bash
 ```
-  * Pirmą kartą paleidus (įsirašome PHP biliotekas):
+  * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
   ```
   composer install
   ```
@@ -102,35 +102,35 @@ Jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
 
 
 
-### Projekto paleidimas (palyginimui kaip atrodytų produkcinėje)
+### Projekto paleidimas (palyginimui kaip atrodytų produkcijoje)
 
 * Pasiruoškite infrastruktūrą (jei prieš tai leidote šią komandą, jos kartoti nereikia):
   ```
   docker-compose up -d
   ```
 
-#### Pasruošiame frontend aplinką
+#### Pasiruošiame frontend aplinką
 
 * JavaScript/CSS įrankiams (atsidaryti atskirame lange)
 ```
 docker-compose run --rm frontend.symfony
 ```
-  * Pirmą kartą (įsirašome JavaScript bilbiotekas)
+  * Pirmą kartą (įsirašome JavaScript bibliotekas)
   ```
   npm install --no-save
   ```
-  * Jei pakeitimai neatsinaujina (**skirasi nuo dev aplinkos**):
+  * Jei pakeitimai neatsinaujina (**skiriasi nuo dev aplinkos**):
   ```
   yarn run encore production
   ```
   
-#### Pasruošiame backend aplinką
+#### Pasiruošiame backend aplinką
 
 * PHP įrankiams (**atsidaryti atskirame lange, skiriasi nuo dev aplinkos**)
 ```
 docker exec -it prod.php.symfony bash
 ```
-  * Pirmą kartą paleidus (įsirašome PHP biliotekas):
+  * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
   ```
   composer install
   ```
