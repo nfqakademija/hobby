@@ -1,0 +1,23 @@
+
+version: "2"
+
+services:
+  frontend.symfony:
+    image: aurelijusb/docker:frontend-latest
+    container_name: frontend.symfony
+    volumes:
+      - ../:/code # Mount your code, so JavaScript tools could see it
+
+  ide.symfony:
+    image: aurelijusb/docker:ide-latest
+    container_name: ide.symfony
+    environment:
+      DISPLAY: $DISPLAY
+      SSH_AUTH_SOCK: $SSH_AUTH_SOCK
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ../:/code
+      - ../.docker/ide-home:/home/developer # Ensure directory is writable, otherwise there will be code.path errors from PHPStorm
+    ports:
+      - 127.0.0.1:9000:9000
+    entrypoint: "/ide/bin/phpstorm.sh"
