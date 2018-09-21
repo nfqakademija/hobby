@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# To pass parameers into container
+ARGS=$@
+
 # Prerequisits
 docker --version > /dev/null 2>&1 || { echo >&2 "Docker not found. Please install it via https://docs.docker.com/install/"; exit 1; }
 docker-compose --version > /dev/null 2>&1 || { echo >&2 "Docker-compose not found. Please install it via https://docs.docker.com/compose/install/"; exit 1; }
@@ -9,7 +12,12 @@ if [ `docker ps | grep php.symfony | wc -l` != "1" ]; then
 fi
 
 # Entering into PHP container (simulating SSH/terminal)
-echo "Dependencies can be installed via: composer install"
-echo "Many Symfony tools can be access via: bin/console"
-echo 'Type "exit" to get out of terminal'
-docker exec -it php.symfony bash
+if [ "$ARGS" != "" ]; then
+    echo "Executing in PHP container: $ARGS"
+    docker exec -it php.symfony bash -c "$ARGS"
+else
+    echo "Dependencies can be installed via: composer install"
+    echo "Many Symfony tools can be access via: bin/console"
+    echo 'Type "exit" to get out of terminal'
+    docker exec -it php.symfony bash
+fi
