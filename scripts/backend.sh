@@ -9,6 +9,7 @@ docker-compose --version > /dev/null 2>&1 || { echo >&2 "Docker-compose not foun
 
 if [ `docker ps | grep php.symfony | wc -l` != "1" ]; then
     echo >&2 "Docker containers not started. Execute scripts/start.sh first"
+    exit 1
 fi
 
 # Entering into PHP container (simulating SSH/terminal)
@@ -17,7 +18,7 @@ if [ "$ARGS" != "" ]; then
     docker exec -it php.symfony bash -c "$ARGS"
 else
     echo "Dependencies can be installed via: composer install"
-    echo "Many Symfony tools can be access via: bin/console"
+    echo "Many Symfony tools can be accessed via: bin/console"
     echo 'Type "exit" to get out of terminal'
     docker exec -it php.symfony bash
 fi

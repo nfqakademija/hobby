@@ -56,7 +56,7 @@ scripts/install-prod.sh
 ```
 
 * Pasižiūrime, ar veikia.
-  Naršyklėje atidarius [http://127.0.0.1:8000/] turėtų rašyti `NFQ Akademija
+  Naršyklėje atidarius [`http://127.0.0.1:8000/`](http://127.0.0.1:8000/) turėtų rašyti `NFQ Akademija
 
 * Pabaigus, gražiai išjungiame:
 ```bash
@@ -70,7 +70,7 @@ scripts/stop.sh
 scripts/install-dev.sh
 ```
 
-* Jei norite pridėti PHP biblioteką arba dirbti su Symfony karkasu per komadninę eilutę:
+* Jei norite pridėti PHP biblioteką arba dirbti su Symfony karkasu per komandinę eilutę:
 ```bash
 scripts/backend.sh
 ```

@@ -13,6 +13,8 @@ if [ `grep "APP_ENV=dev" "$SCRIPT_DIR/../.env" | wc -l` != "1" ]; then
     exit 1
 fi
 
+set -e
+
 # Installing dependencies
 echo "Preparing PHP dependencies..."
 $SCRIPT_DIR/backend.sh composer install
