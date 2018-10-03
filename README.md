@@ -6,7 +6,7 @@ NFQ Akademija
 # Intro
 
 Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony `4.0.6` minimalų projekto paketą su jau paruoštais 
+Šioje repositorijoje rasite Symfony `4.1.6` minimalų projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
 - Lokalaus development'o aplinka (docker) (PHP 7.2, MySql DB, Nginx)
