@@ -41,160 +41,59 @@ Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/relea
 * docker-compose: `1.20.1`
 
 
-### Projekto paleidimas (projekto kūrimui lokaliai)
-Parsisiunčiate šią repositoriją. Taip taip, viršuje kairėje rasite žalią mygtuką ant kurio parašyta "Download", tada pasirenkate zip failo parsisiuntimą.
- 
-> Akademijos projektui nereikia forkinti, klonuoti ar dar išrasti kokių nors kitų veiksmų, tik parsisiųsti.
- 
-Extractinat turinį į savo mėgstamą projektų direktoriją.
+### Projekto paleidimas
 
-Einate į šią direktoriją su terminalu. Paprastai bus komanda `cd <path>`.
+Pasileidžiant pirmą kartą būdavo įveliama daug klaidų, todėl padaryti _script'ai_ dažniausiems atvejams.
 
-* Susikuriate projekto viduje `.env` failą. Failą užpildote turiniu pateiktu iš `env.dist`:
-  ```
-  cp .env.dist .env
-  ```
-
-* Pasiruoškite infrastruktūrą:
-  ```
-  docker-compose up -d
-  ```
-  
-#### Pasiruošiame frontend aplinką
-
-* JavaScript/CSS įrankiams (**atsidaryti atskirame lange**)
-```
-docker-compose run --rm frontend.symfony
-```
-  * Pirmą kartą (įsirašome JavaScript bibliotekas)
-  ```
-  npm install --no-save
-  ```
-  * Jei pakeitimai neatsinaujina (arba klaidos dėl `build/css` ar `build/js`):
-  ```
-  yarn run encore dev --watch
-  ```
-
-#### Pasiruošiame backend aplinką
-
-
-* PHP įrankiams (**atsidaryti atskirame lange**)
-```
-docker exec -it php.symfony bash
-```
-  * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
-  ```
-  composer install
-  ```
-  * Jei pakeitimai neatsinaujina:
-  ```
-  bin/console cache:clear
-  bin/console assets:install
-  ```
-
-#### Pasižiūrime rezultatą
-
-Atsidarome naršyklėje [127.0.0.1:8000](http://127.0.0.1:8000)
-
-Jei nematote užrašo "NFQ Akademija", reiškia, kažkur susimovėte,
- tokiu atveju viską ištrinat ir kartojate iš naujo tol kol gausis.
- Kai prarasite visiškai viltį, kreipkitės į [Google](http://lmgtfy.com/?q=docker+is+not+working), o po to į mentorių.
-
-
-
-### Projekto paleidimas (palyginimui kaip atrodytų produkcijoje)
-
-* Pasiruoškite infrastruktūrą (jei prieš tai leidote šią komandą, jos kartoti nereikia):
-  ```
-  docker-compose up -d
-  ```
-
-#### Pasiruošiame frontend aplinką
-
-* JavaScript/CSS įrankiams (atsidaryti atskirame lange)
-```
-docker-compose run --rm frontend.symfony
-```
-  * Pirmą kartą (įsirašome JavaScript bibliotekas)
-  ```
-  npm install --no-save
-  ```
-  * Jei pakeitimai neatsinaujina (**skiriasi nuo dev aplinkos**):
-  ```
-  yarn run encore production
-  ```
-  
-#### Pasiruošiame backend aplinką
-
-* PHP įrankiams (**atsidaryti atskirame lange, skiriasi nuo dev aplinkos**)
-```
-docker exec -it prod.php.symfony bash
-```
-  * Pirmą kartą paleidus (įsirašome PHP bibliotekas):
-  ```
-  composer install
-  ```
-  * Jei pakeitimai neatsinaujina (**skiriasi nuo dev aplinkos**):
-  ```
-  bin/console cache:clear
-  bin/console assets:install
-  ```
-
-#### Pasižiūrime rezultatą
-
-Atsidarome naršyklėje [127.0.0.1:8888](http://127.0.0.1:8888)
-
-P.S. šalia galima atsidaryti ir palyginti su `127.0.0.1:8000`
-
-
-### Kaip teisingai išjungti docker konteinerius?
-
-Išjungiama su komanda:
-```
-docker-compose kill
+* Pasileidžiama infrastruktūrą per `docker`į:
+```bash
+scripts/start.sh
 ```
 
-Galima išjungti ir po vieną:
-```
-docker-compose kill <container name>
-```
-
-### Kaip prisijungti prie MySql duomenų bazės?
-
-```
-mysql -uroot -h127.0.0.1 --port=3307 -p
-```
-Slaptažodžiui naudoti `p9iijKcfgENjBWDYgSH7`
-
-
-### Kaip pasiruošti produkcinei aplinkai?
-
-* Pasikeiskite slaptažodžius: ieškokite failuose reikšmių prie `DATABASE_URL=` ir `APP_SECRET=` 
-* Pakeiskite parametrus `nginx`/`apache` serveryje. Žr. pavyzdį [site.conf](.docker/nginx/site.conf)
-* Įsitikinkite, kad reikalingos bibliotekos įrašytos į operacinę sistemą. Žr. pavyzdį [php/Dockerfile](.docker/php/Dockerfile)
-* Įsitikinkite, kad `APP_ENV` yra `prod` (tiek naudojant `bin/console`, tiek ateinantis per `nginx` į `index.php`) 
-
-
-### Troubleshooting'as
-
-Jeigu kažkas nutiko ne taip, na, atsirado raudona eilutė, ar tiesiog nutrūko ir nieko nerodo, neatsidaro naršyklėje svetainė, tai pirmas žingsnis būtų paleisti komandą:
-
-```
-docker-compose logs 
+* Įsidiegiame PHP ir JavaScript bibliotekas:
+```bash
+scripts/install-prod.sh
 ```
 
-Nepamirškite, kad galima nurodyti norimą procesą ar filtruoti eilutes:
+* Pasižiūrime, ar veikia.
+  Naršyklėje atidarius [`http://127.0.0.1:8000/`](http://127.0.0.1:8000/) turėtų rašyti `NFQ Akademija
 
-```
-docker-compose logs mysql.symfony | grep Warning
+* Pabaigus, gražiai išjungiame:
+```bash
+scripts/stop.sh
 ```
 
-Jei kažką su infrastrutkūrą žiauriai sugadinote, perkurti nuo nulio galima:
+### Patogiai darbo aplinkai
+
+* _Development_ režimas (detalesnė informacija apie klaidas, automatiškai generuojami JavaScript/CSS):
+```bash
+scripts/install-dev.sh
 ```
-docker rm -f $(docker ps -aq)
-docker rmi -f kickstartmaster_frontend.symfony
-docker rmi -f kickstartmaster_prod.php.symfony
-docker rmi -f kickstartmaster_php.symfony
+
+* Jei norite pridėti PHP biblioteką arba dirbti su Symfony karkasu per komandinę eilutę:
+```bash
+scripts/backend.sh
+```
+
+* Jei norite pridėti JavaScript/CSS biblioteką arba dirbti su Symfony Encore komponentu per komandine eilutę:
+```bash
+scripts/frontend.sh
+```
+
+* Jei norite dirbti su MySql duomenų baze:
+```bash
+scripts/mysql.sh
+```
+
+* Jei nesuprantate, kas vyksta su infrastruktūra, praverčia pažiūrėti į `Log`'us:
+```bash
+scripts/logs.sh
+```
+
+* Jei kažką stipriai sugadinote ir niekaip nepavyksta atstatyti.
+  Viską pravalyti (**naudokite atsakingai**) galima su:
+```bash
+scripts/clean-and-start-fresh.sh
 ```
 
 ### Feedbackas

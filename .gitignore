@@ -39,3 +39,8 @@ npm-debug.log
 /project.tar.gz
 /.deploy/*.retry
 ###< Old symfony and common infrastructure ###
+
+###> Infrastructure ###
+!/.docker/.gitkeep
+/.docker/*
+###< Infrastructure ###
