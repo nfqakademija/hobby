@@ -96,6 +96,26 @@ scripts/logs.sh
 scripts/clean-and-start-fresh.sh
 ```
 
+### Dažniausiai užduodami klausimai
+
+* **Kaip įkelti savo pakeitimus į LIVE?**
+Jei viskas gerai sukonfiguruota, užteks sudėti pakeitimus į `master`.
+Jei neveiks, plačiau žr. [įkėlimo į serverį dokumentacijoje](https://github.com/nfqakademija/docker/blob/master/docs/deploy-project.md)
+
+* **Kaip prisijungti prie duomenų bazės su savo mėgstamu MySql redagtoriumi?**
+Trumpai: `scripts/mysql.sh` atspausdina visus prisijungimus.
+Plačiau žr. [MySql GUI dokumentacijoje](https://github.com/nfqakademija/docker/blob/master/docs/use-mysql-with-gui.md)
+
+* **Kaip pasileisti xDebug?**
+Trumpai: `./scripts/backend.sh /enable_xdebug.sh <TAVO_KOMPO_IP_ADRESAS>`
+Plačiau žr. [xDebug dokumentacijoje](https://github.com/nfqakademija/docker/blob/master/docs/setup-xdebug.md)
+
+* **Turių daugiau techninių klausimų?**
+Google ir StackOverflow yra geriausi tavo draugai.
+Nepavykus – kreipkis į savo mentorių. Jei jis nepadės,
+nukreips į atitinkamą lektorių arba pamokys `git blame`,
+kad žinotumei, kur kreiptis toliau. 
+
 ### Feedbackas
 
 Jeigu taip nutiktų, kad repositorijoje, projekto template ar instrukcijoje rastumėte klaidą, tai nesišnibždėkite vieni tarp kitų, o sukurkite "issue". 
