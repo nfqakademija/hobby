@@ -1,13 +1,17 @@
 ---
 
+# This is Ansible playbook (configuration), used by .deploy/deploy.sh
+# It is used to automate common deployment tasks.
+# (E.g. copy to server, change deployed version, merge configs, warmup framework)
+
 - hosts: all
   vars:
       deployment:
           deploy_path: "/home/{{ ansible_user_id }}"
           archive_path: ../project.tar.gz
-          linked_files:
+          linked_files: # <-- Common place to add your files, that should be reused between deployments
               - .env
-          linked_directories:
+          linked_directories: # <-- Common place to add your files, that should be reused between deployments
               - var/log
 
   tasks:
@@ -55,7 +59,7 @@
             state: link
         with_items: "{{ deployment.linked_directories + deployment.linked_files }}"
 
-      - name: Warm up application cache
+      - name: "Warm up application cache" # <-- Symfony specific task, to be ready for new version
         shell: bin/console cache:warmup --env=prod --no-debug
         args:
             chdir: "{{ deploy_helper.new_release_path }}"
