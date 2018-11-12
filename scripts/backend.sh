@@ -16,9 +16,25 @@ fi
 if [ "$ARGS" != "" ]; then
     echo "Executing in PHP container: $ARGS"
     docker exec -it php.symfony bash -c "$ARGS"
+    
+    # Fix for known docker issue, when with "-it" parameter, command exits with status 129
+    EXIT_CODE=$?
+    if [ $EXIT_CODE -eq 129 ]; then
+		exit 0
+	else
+		exit $EXIT_CODE
+	fi  
 else
     echo "Dependencies can be installed via: composer install"
     echo "Many Symfony tools can be accessed via: bin/console"
     echo 'Type "exit" to get out of terminal'
     docker exec -it php.symfony bash
+    
+    # Fix for known docker issue, when with "-it" parameter, command exits with status 129
+    EXIT_CODE=$?
+    if [ $EXIT_CODE -eq 129 ]; then
+		exit 0
+	else
+		exit $EXIT_CODE
+	fi  
 fi
