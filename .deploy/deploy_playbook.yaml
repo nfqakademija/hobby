@@ -69,3 +69,4 @@
             path: "{{ deployment.deploy_path }}"
             release: "{{ deploy_helper.new_release }}"
             state: finalize
+            keep_releases: 2
