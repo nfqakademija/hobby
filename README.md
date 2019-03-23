@@ -52,7 +52,7 @@ scripts/start.sh
 
 * Įsidiegiame PHP ir JavaScript bibliotekas:
 ```bash
-scripts/install-prod.sh
+install-first.sh
 ```
 
 * Pasižiūrime, ar veikia.
@@ -68,6 +68,11 @@ scripts/stop.sh
 * _Development_ režimas (detalesnė informacija apie klaidas, automatiškai generuojami JavaScript/CSS):
 ```bash
 scripts/install-dev.sh
+```
+
+* _Production_ režimas (imituoti, kaip daroma LIVE serveryje. Plačiau [.deploy/build.sh](.deploy/build.sh)):
+```bash
+scripts/install-prod.sh
 ```
 
 * Jei norite pridėti PHP biblioteką arba dirbti su Symfony karkasu per komandinę eilutę:
