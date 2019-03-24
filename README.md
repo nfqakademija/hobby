@@ -52,7 +52,7 @@ scripts/start.sh
 
 * Įsidiegiame PHP ir JavaScript bibliotekas:
 ```bash
-install-first.sh
+scripts/install-first.sh
 ```
 
 * Pasižiūrime, ar veikia.
