@@ -29,7 +29,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     docker rm -f nginx.symfony
     docker rm -f mysql.symfony
     docker rm -f frontend.symfony
-    docker rm -f ide.symfony
 
     echo "Pulling newest container images..."
     docker-compose -f "$SCRIPT_DIR/docker-compose.yml" pull
