@@ -6,13 +6,13 @@ NFQ Akademija
 # Intro
 
 Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony `4.1.6` minimalų projekto paketą su jau paruoštais 
+Šioje repositorijoje rasite Symfony `4.2.4` minimalų projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
-- Lokalaus development'o aplinka (docker) (PHP 7.2, MySql DB, Nginx)
-- Pradinis bundle (AppBundle) kartu su stiliaus failais.
+- Lokalaus development'o aplinka (docker) (PHP 7.3, MySql DB, Nginx)
+- Paprastas pavyzdys (Conroller, Template, CSS)
 - Įdiegtas bootstrap
-- Asset'ų buildinimas (npm, yarn, sass)
+- Asset'ų buildinimas (encore, yarn, sass)
 - Travis CI template
 
 
@@ -33,12 +33,12 @@ Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/inst
 
 Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
-Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
+Taip pat rekomenduojama įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 #### Versijų reikalavimai
 * docker: `18.x-ce`
-* docker-compose: `1.20.1`
+* docker-compose: `1.23.2`
 
 
 ### Projekto paleidimas
@@ -56,7 +56,7 @@ scripts/install-first.sh
 ```
 
 * Pasižiūrime, ar veikia.
-  Naršyklėje atidarius [`http://127.0.0.1:8000/`](http://127.0.0.1:8000/) turėtų rašyti `NFQ Akademija
+  Naršyklėje atidarius [`http://127.0.0.1:8000/`](http://127.0.0.1:8000/) turėtų rašyti `NFQ Akademija`
 
 * Pabaigus, gražiai išjungiame:
 ```bash

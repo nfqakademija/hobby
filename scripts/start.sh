@@ -29,5 +29,5 @@ docker-compose -f "$SCRIPT_DIR/docker-compose.yml" up -d
 if [ -d "vendor" ] && [ -d "node_modules" ]; then
     echo "Now open in browser http://127.0.0.1:8000"
 else
-    echo "Now run scripts/install-prod.sh"
+    echo "Now run scripts/install-first.sh"
 fi
