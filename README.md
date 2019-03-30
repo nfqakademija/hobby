@@ -6,10 +6,10 @@ NFQ Akademija
 # Intro
 
 Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony `4.1.6` minimalų projekto paketą su jau paruoštais 
+Šioje repositorijoje rasite Symfony `4.2.4` minimalų projekto paketą su jau paruoštais 
 visais reikalingais failais ir įrankiais darbui:
  
-- Lokalaus development'o aplinka (docker) (PHP 7.2, MySql DB, Nginx)
+- Lokalaus development'o aplinka (docker) (PHP 7.3, MySql DB, Nginx)
 - Pradinis bundle (AppBundle) kartu su stiliaus failais.
 - Įdiegtas bootstrap
 - Asset'ų buildinimas (npm, yarn, sass)
@@ -33,12 +33,12 @@ Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/inst
 
 Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
 
-Taip pat reikia įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
+Taip pat rekomenduojama įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
  Šis įrankis padės geriau organizuoti dokerio konteinerius. 
 
 #### Versijų reikalavimai
 * docker: `18.x-ce`
-* docker-compose: `1.20.1`
+* docker-compose: `1.23.2`
 
 
 ### Projekto paleidimas
