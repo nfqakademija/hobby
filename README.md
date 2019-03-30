@@ -10,9 +10,9 @@ Sveiki! Tai yra Jūsų startinis projekto "template".
 visais reikalingais failais ir įrankiais darbui:
  
 - Lokalaus development'o aplinka (docker) (PHP 7.3, MySql DB, Nginx)
-- Pradinis bundle (AppBundle) kartu su stiliaus failais.
+- Paprastas pavyzdys (Conroller, Template, CSS)
 - Įdiegtas bootstrap
-- Asset'ų buildinimas (npm, yarn, sass)
+- Asset'ų buildinimas (encore, yarn, sass)
 - Travis CI template
 
 
@@ -56,7 +56,7 @@ scripts/install-first.sh
 ```
 
 * Pasižiūrime, ar veikia.
-  Naršyklėje atidarius [`http://127.0.0.1:8000/`](http://127.0.0.1:8000/) turėtų rašyti `NFQ Akademija
+  Naršyklėje atidarius [`http://127.0.0.1:8000/`](http://127.0.0.1:8000/) turėtų rašyti `NFQ Akademija`
 
 * Pabaigus, gražiai išjungiame:
 ```bash
