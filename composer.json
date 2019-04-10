@@ -12,7 +12,6 @@
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
-        "symfony/framework-standard-edition": "^3.4",
         "symfony/orm-pack": "^1.0",
         "symfony/security": "4.2.*",
         "symfony/security-core": "4.2.*",
