@@ -10,7 +10,7 @@
           deploy_path: "/home/{{ ansible_user_id }}"
           archive_path: ../project.tar.gz
           linked_files: # <-- Common place to add your files, that should be reused between deployments
-              - .env
+              - .env.local
           linked_directories: # <-- Common place to add your files, that should be reused between deployments
               - var/log
 
