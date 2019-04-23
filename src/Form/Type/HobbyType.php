@@ -14,10 +14,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HobbyType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -26,23 +22,9 @@ class HobbyType extends AbstractType
             ->add('amount')
             ->add('email')
             ->add('username')
-            ->add('endDate', DateTimeType::class, [
-//                'placeholder' => '',
-                'widget' => 'single_text',
-                'required' => true,
-                'inherit_data' => true,
-            ])
-//            ->add('datePicture', 'datetime', array(
-//                'description' => 'The date when the picture was taken',
-//                'widget' => 'single_text',
-//                'date-format' => 'yyyy/MM/dd',
-//            ))
             ->add('save', SubmitType::class);
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
