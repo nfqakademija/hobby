@@ -39,6 +39,7 @@ class HobbyController extends AbstractFOSRestController
     public function postMovieAction(Request $request)
     {
         $hobby = new Hobby();
+        $response = new Response();
         $form = $this->createForm(HobbyType::class, $hobby);
         $data = json_decode($request->getContent(), true);
         $form->submit($data);
@@ -46,9 +47,11 @@ class HobbyController extends AbstractFOSRestController
             $em = $this->getDoctrine()->getManager();
             $em->persist($hobby);
             $em->flush();
-            return $this->handleView($this->view([], Response::HTTP_CREATED));
+            $response->headers->set('Access-Control-Allow-Origin', '*');
+
+            return $response->setContent([]);
         }
-        return $this->handleView($this->view($form->getErrors()));
+        return $response->setContent(Response::HTTP_BAD_REQUEST);
     }
 
 }
