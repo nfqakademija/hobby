@@ -44,6 +44,12 @@ class Hobby
     private $username;
 
     /**
+     * @var \DateTimeInterface
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $endDate = null;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -159,6 +165,26 @@ class Hobby
     public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getEndDate(): \DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param \DateTimeInterface $endDate
+     *
+     * @return Hobby
+     */
+    public function setEndDate(\DateTimeInterface $endDate): self
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }

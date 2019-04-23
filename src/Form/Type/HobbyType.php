@@ -6,13 +6,18 @@ namespace App\Form\Type;
 
 use App\Entity\Hobby;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\Movie;
 
 class HobbyType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -21,9 +26,23 @@ class HobbyType extends AbstractType
             ->add('amount')
             ->add('email')
             ->add('username')
-            ->add('save', SubmitType::class)
-        ;
+            ->add('endDate', DateTimeType::class, [
+//                'placeholder' => '',
+                'widget' => 'single_text',
+                'required' => true,
+                'inherit_data' => true,
+            ])
+//            ->add('datePicture', 'datetime', array(
+//                'description' => 'The date when the picture was taken',
+//                'widget' => 'single_text',
+//                'date-format' => 'yyyy/MM/dd',
+//            ))
+            ->add('save', SubmitType::class);
     }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
