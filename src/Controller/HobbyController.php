@@ -49,7 +49,7 @@ class HobbyController extends AbstractFOSRestController
             $em->flush();
             $response->headers->set('Access-Control-Allow-Origin', '*');
 
-            return $response->setContent([]);
+            return $response->setContent('');
         }
         return $response->setContent(Response::HTTP_BAD_REQUEST);
     }
