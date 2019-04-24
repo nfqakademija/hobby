@@ -28,6 +28,15 @@ class HobbyType extends AbstractType
             ->add('amount', NumberType::class)
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
+            ->add(
+                'endDate',
+                TextType::class,
+                [
+                    'required' => false,
+                    'empty_data' => null,
+                ]
+
+            )
             ->add('save', SubmitType::class);
     }
 

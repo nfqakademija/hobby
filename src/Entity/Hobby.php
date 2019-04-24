@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HobbyRepository")
@@ -47,6 +45,12 @@ class Hobby
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $username;
+
+    /**
+     * @var \DateTimeInterface|null
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $endDate;
 
     /**
      * @return mixed
@@ -164,6 +168,27 @@ class Hobby
     public function setUsername(?string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $endDate
+     *
+     * @return Hobby
+     * @throws \Exception
+     */
+    public function setEndDate(?string $endDate): self
+    {
+        $this->endDate = new \DateTime($endDate);
 
         return $this;
     }
