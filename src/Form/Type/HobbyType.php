@@ -35,7 +35,6 @@ class HobbyType extends AbstractType
                     'required' => false,
                     'empty_data' => null,
                 ]
-
             )
             ->add('save', SubmitType::class);
     }

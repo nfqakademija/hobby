@@ -51,5 +51,4 @@ class HobbyController extends AbstractFOSRestController
         }
         return $this->handleView($this->view($form->getErrors()));
     }
-
 }
