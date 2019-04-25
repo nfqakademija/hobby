@@ -8,6 +8,7 @@
         "doctrine/doctrine-bundle": "^1.10",
         "friendsofsymfony/rest-bundle": "^2.5",
         "jms/serializer-bundle": "^3.2",
+        "lexik/jwt-authentication-bundle": "^2.6",
         "sensio/framework-extra-bundle": "^5.3",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
