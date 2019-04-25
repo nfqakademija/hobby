@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Hobby;
 use App\Form\Type\HobbyType;
@@ -10,10 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
-/**
- * Hobby Controller
- * @Route("/api", name="api_")
- */
 class HobbyController extends AbstractFOSRestController
 {
     /**
