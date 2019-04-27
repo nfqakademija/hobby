@@ -1,14 +1,32 @@
-const $ = require('jquery');
-// this "modifies" the jquery module: adding behavior to it
-// the bootstrap module doesn't export/return anything
-require('bootstrap');
+import React, { Component, Fragment } from 'react';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 
-require('../css/app.scss');
+import Home from './components/Home/Home';
+import NavBar from './components/NavBar/NavBar';
+import ProjectsList from  './components/ProjectsList/ProjectsList';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import ProjectRegistration from './components/ProjectRegistration/ProjectRegistration';
+import ProjectInfo from './components/ProjectInfo/ProjectInfo';
 
-// or you can include specific pieces
-// require('bootstrap/js/dist/tooltip');
-// require('bootstrap/js/dist/popover');
+class App extends Component {
+  render() {
+    return (
+      <HashRouter basename={process.env.PUBLIC_URL}>
+        <Fragment>
+          <NavBar/>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/projects' component={ProjectsList}/>
+            <Route path='/login' component={Login}/>
+            <Route path='/register' component={Register}/>
+            <Route path='/project-registration' component={ProjectRegistration}/>
+            <Route path='/project/:id' component={ProjectInfo}/>
+          </Switch>
+        </Fragment>
+      </HashRouter>
+    );
+  }
+}
 
-$(document).ready(function() {
-    $('[data-toggle="popover"]').popover();
-});
+export default App;
