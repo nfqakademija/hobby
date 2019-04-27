@@ -6,7 +6,7 @@ import './Home.scss';
 const Home = () => {
   return (
     <div className='Home'>
-      <p>This is place for your hobby projects.</p>
+      <p>This is a place for your hobby projects.</p>
       <p>To see projects, please go to{' '}
         <Link className='Link' to='/projects'>Projects List</Link>
       </p>

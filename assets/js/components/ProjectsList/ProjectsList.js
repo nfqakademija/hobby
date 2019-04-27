@@ -26,7 +26,7 @@ class ProjectsList extends Component {
         )
       })
     } else {
-      projectsList = <p>Projects will be soon...</p>
+      projectsList = <p>Projects will be here soon...</p>
     }
     return (
       <div className='ProjectsList'>

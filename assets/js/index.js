@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
 import './index.scss';
-import App from './App';
+import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios';
 
@@ -24,7 +24,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 ReactDOM.render(<Provider store={store}>
-  <App/>
+  <Routes/>
 </Provider>, document.getElementById('root'));
 
 
