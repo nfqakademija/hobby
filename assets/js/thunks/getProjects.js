@@ -3,7 +3,6 @@ import axios from 'axios'
 
 export const setProjectList = () => (dispatch) => {
   const projectList = axios
-      // .get('http://hobby.projektai.nfqakademija.lt/api/hobbies')
       .get('/api/hobbies')
     .then((res) => dispatch(getProjects(res.data)))
     .catch((error) => console.log(error))

@@ -19,7 +19,6 @@ export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) 
     "endDate": formattedDate
   });
   axios
-      // .post('http://hobby.projektai.nfqakademija.lt/api/hobby',json)
       .post('/api/hobby',json)
     .then(res=>{
       dispatch(actions.onProjectRegisterFormSubmit(res));
