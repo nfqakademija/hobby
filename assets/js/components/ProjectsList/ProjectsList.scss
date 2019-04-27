@@ -1,0 +1,39 @@
+.ProjectsList {
+  height: auto;
+  //overflow: scroll;
+
+  p {
+    text-align: center;
+  }
+
+  .Project-item {
+    background-color: #bbbbbb;
+    border-radius: 4px;
+    display: block;
+    margin: 10px auto;
+    width: 40%;
+    padding: 10px;
+
+    h4 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .Project-item__span {
+      display: block;
+    }
+
+    .Info {
+      display: block;
+      margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .ProjectsList {
+    .Project-item {
+      width: 80%;
+    }
+  }
+}

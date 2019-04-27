@@ -1,0 +1,20 @@
+.Loader{
+    width:40px;
+    height:40px;
+    background: transparent;
+    border-radius: 50%;
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    margin: auto;
+    animation-name: loader;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes loader {
+    0%{
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
