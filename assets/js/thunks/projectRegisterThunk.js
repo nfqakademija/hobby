@@ -18,10 +18,12 @@ export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) 
     "username": projectInfo.username,
     "endDate": formattedDate
   });
-  axios.post('https://hobby-api.herokuapp.com/api',json)
+  axios
+      // .post('http://hobby.projektai.nfqakademija.lt/api/hobby',json)
+      .post('/api/hobby',json)
     .then(res=>{
       dispatch(actions.onProjectRegisterFormSubmit(res));
-      history.push('/');
+      history.push('/projects');
     })
     .catch(error => dispatch(actions.onProjectRegisterFormError('Server error. Please try again later.')))
 
