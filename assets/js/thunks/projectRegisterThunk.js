@@ -1,6 +1,7 @@
 import * as actions from '../actions/projectRegisterActions';
 import moment from 'moment';
 import axios from 'axios';
+import uuidv4 from 'uuid'
 
 export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) => {
   dispatch(actions.onProjectRegisterFormLoading());
@@ -11,6 +12,7 @@ export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) 
   const formattedDate = moment(projectInfo.endDate).format('YYYY-MM-DD');
 
   const json = JSON.stringify({
+    "projectId": uuidv4(),
     "title": projectInfo.hobbyName,
     "description": projectInfo.description,
     "amount": projectInfo.amount,
