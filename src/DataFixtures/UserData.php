@@ -15,22 +15,22 @@ class UserData extends Fixture
     public function load(ObjectManager $manager): void
     {
         $user = new UserRegistration();
-        $titles = ['Tenisas', 'Kartingai', 'Krepsinis'];
-        $descriptions = ['Smagus', 'Nuobodus', 'Itraukiantis'];
-        $usernames = ['Ieva', 'Viktoras', 'Miroslav'];
+        $username = ['Lukas', 'Ieva', 'Miroslav'];
         $email = ['istanynaite@nfq.lt', 'vkarcikovas@gmail.com', 'mpetkevic@gmail.com'];
-        $amounts = [100, 99.99, 1.12];
-        $endDates = ['2018-09-10', '2019-01-01', '2017-07-07'];
+        $password = ['123', '123', '1234'];
+        $salt = ['','',''];
+        $role = ['','',''];
+        $cash = [30,30,30];
 
         for ($i = 0; $i < 3; $i++) {
-            $hobby->setTitle($titles[array_rand($titles)]);
-            $hobby->setDescription($descriptions[array_rand($descriptions)]);
-            $hobby->setUsername($usernames[array_rand($usernames)]);
-            $hobby->setEmail($email[array_rand($email)]);
-            $hobby->setAmount($amounts[array_rand($amounts)]);
-            $hobby->setEndDate($endDates[array_rand($endDates)]);
+            $user->setUsername($username[array_rand($username)]);
+            $user->setEmail($email[array_rand($email)]);
+            $user->setPassword($password[array_rand($password)]);
+            $user->setSalt($salt[array_rand($salt)]);
+            $user->setRole($role[array_rand($role)]);
+            $user->setCash($cash[array_rand($cash)]);
 
-            $manager->persist($hobby);
+            $manager->persist($user);
             $manager->flush();
             $manager->clear();
         }
