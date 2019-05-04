@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Api;
 
 use App\Entity\Hobby;
@@ -7,18 +9,17 @@ use App\Form\Type\HobbyType;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 class HobbyController extends AbstractFOSRestController
 {
     /**
      * Lists all Hobbies.
-     * @Rest\Get("/hobbies")
+     * @Rest\Get("/hobbies", name="get_hobbies")
      *
      * @return Response
      */
-    public function getMovieAction()
+    public function getMovieAction(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hobby::class);
         $hobbies = $repository->findall();
@@ -27,12 +28,12 @@ class HobbyController extends AbstractFOSRestController
 
     /**
      * Create Hobby.
-     * @Rest\Post("/hobby")
+     * @Rest\Post("/hobby", name="post_hobby")
      * @param Request $request
      *
      * @return Response
      */
-    public function postMovieAction(Request $request)
+    public function postMovieAction(Request $request): Response
     {
         $hobby = new Hobby();
         $form = $this->createForm(HobbyType::class, $hobby);

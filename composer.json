@@ -17,6 +17,7 @@
         "symfony/framework-bundle": "4.2.*",
         "symfony/orm-pack": "^1.0",
         "symfony/security": "4.2.*",
+        "symfony/security-bundle": "4.2.*",
         "symfony/security-core": "4.2.*",
         "symfony/security-csrf": "4.2.*",
         "symfony/translation": "4.2.*",
@@ -73,6 +74,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.1",
         "squizlabs/php_codesniffer": "^3.4",
-        "symfony/maker-bundle": "^1.11"
+        "symfony/maker-bundle": "^1.11",
+        "symfony/profiler-pack": "^1.0"
     }
 }
