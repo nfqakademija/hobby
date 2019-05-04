@@ -13,7 +13,6 @@ class ProjectsList extends Component {
 
   render() {
     const {projects} =this.props;
-
     let projectsList;
     if(projects.length !== 0) {
       projectsList = projects && projects.map((project, i) => {
