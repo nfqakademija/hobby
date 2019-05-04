@@ -12,13 +12,12 @@ export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) 
   const formattedDate = moment(projectInfo.endDate).format('YYYY-MM-DD');
 
   const json = JSON.stringify({
-    "projectId": uuidv4(),
     "title": projectInfo.hobbyName,
     "description": projectInfo.description,
     "amount": projectInfo.amount,
     "email": projectInfo.email,
     "username": projectInfo.username,
-    "endDate": formattedDate
+    "fe_project_id": uuidv4(),
   });
   console.log(json);
   axios
