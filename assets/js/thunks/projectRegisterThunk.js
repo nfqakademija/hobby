@@ -20,12 +20,16 @@ export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) 
     "username": projectInfo.username,
     "endDate": formattedDate
   });
+  console.log(json);
   axios
       .post('/api/hobby',json)
     .then(res=>{
       dispatch(actions.onProjectRegisterFormSubmit(res));
       history.push('/projects');
     })
-    .catch(error => dispatch(actions.onProjectRegisterFormError('Server error. Please try again later.')))
+    .catch(error => {
+      dispatch(actions.onProjectRegisterFormError('Server error. Please try again later.'))
+      console.log(error)
+    })
 
 }

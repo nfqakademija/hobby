@@ -1,4 +1,5 @@
 import * as actions from '../actions/registerActions';
+import axios from "axios";
 
 export const onRegisterFormSubmit = (user, history) => (dispatch) => {
   dispatch(actions.onFormLoading());
@@ -14,9 +15,17 @@ export const onRegisterFormSubmit = (user, history) => (dispatch) => {
     email: user.email,
     password: user.password,
     password2: user.password2
-  }
+  };
 
-  console.log(registerJson);
-  // history.push('/login');
+  axios.post('/api/register', registerJson)
+      .then(res =>{
+        dispatch(actions.onRegisterFormSuccess(registerJson))
+        history.push('/login')
+      })
+      .catch(err => {
+            dispatch(actions.onRegisterFormError('Server error. Please try again later.'))
+
+          }
+      )
 
 }

@@ -14,7 +14,7 @@ export function onFormLoading() {
   }
 }
 
-export function onLoginFormError(error) {
+export function onRegisterFormError(error) {
   return {
     type: types.REGISTER_FORM_ERROR,
     error
