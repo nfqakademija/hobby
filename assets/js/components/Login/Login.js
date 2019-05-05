@@ -27,11 +27,11 @@ class Login extends Component {
         }}>{error}</p> : null}
         <form onSubmit={this.onFormSubmit}>
           <input
-            type="email"
+            type="text"
             name='email'
             value={email}
             onChange={onInputChange}
-            placeholder='Please enter your email'/>
+            placeholder='Please enter login'/>
           <input
             type="password"
             name='password'
