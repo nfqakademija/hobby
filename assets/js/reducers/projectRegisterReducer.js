@@ -22,7 +22,16 @@ export default (state=initialState, action) => {
     case types.PROJECT_REGISTER_FORM_ERROR:
       return {...state, error: action.error, loading:false};
     case types.PROJECT_REGISTER_FORM_SUCCESS:
-      return {...state, username: '', hobbyName: '', email: '', amount: '', description: '', loading:false, error:''}
+      return {
+        ...state,
+        username: '',
+        hobbyName: '',
+        email: '',
+        amount: '',
+        description: '',
+        endDate: null,
+        loading:false,
+        error:''}
     default:
       return state;
   }
