@@ -39,7 +39,7 @@ class Hobby
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $email;
 
@@ -50,10 +50,10 @@ class Hobby
     private $username;
 
     /**
-     * @var \DateTimeInterface|null
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $endDate;
+    private $feProjectId;
 
     /**
      * @return mixed
@@ -176,22 +176,21 @@ class Hobby
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return string|null
      */
-    public function getEndDate(): ?\DateTimeInterface
+    public function getFeProjectId(): ?string
     {
-        return $this->endDate;
+        return $this->feProjectId;
     }
 
     /**
-     * @param \DateTimeInterface|null $endDate
+     * @param string|null $feProjectId
      *
      * @return Hobby
-     * @throws \Exception
      */
-    public function setEndDate(?string $endDate): self
+    public function setFeProjectId(?string $feProjectId): Hobby
     {
-        $this->endDate = new \DateTime($endDate);
+        $this->feProjectId = $feProjectId;
 
         return $this;
     }

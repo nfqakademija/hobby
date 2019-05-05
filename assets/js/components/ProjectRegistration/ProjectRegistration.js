@@ -68,6 +68,7 @@ class ProjectRegistration extends Component {
           <input
             type="number"
             name='amount'
+            min={1}
             value={amount}
             onChange={onInputChange}
             placeholder='Please enter amount for your needs'/>

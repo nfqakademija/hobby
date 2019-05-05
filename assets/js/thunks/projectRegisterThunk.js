@@ -1,6 +1,7 @@
 import * as actions from '../actions/projectRegisterActions';
 import moment from 'moment';
 import axios from 'axios';
+import uuidv4 from 'uuid'
 
 export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) => {
   dispatch(actions.onProjectRegisterFormLoading());
@@ -16,14 +17,18 @@ export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) 
     "amount": projectInfo.amount,
     "email": projectInfo.email,
     "username": projectInfo.username,
-    "endDate": formattedDate
+    "fe_project_id": uuidv4(),
   });
+  console.log(json);
   axios
       .post('/api/hobby',json)
     .then(res=>{
       dispatch(actions.onProjectRegisterFormSubmit(res));
       history.push('/projects');
     })
-    .catch(error => dispatch(actions.onProjectRegisterFormError('Server error. Please try again later.')))
+    .catch(error => {
+      dispatch(actions.onProjectRegisterFormError('Server error. Please try again later.'))
+      console.log(error)
+    })
 
 }

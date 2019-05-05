@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Switch, Route, HashRouter } from 'react-router-dom';
+import { Switch, Route, HashRouter, BrowserRouter } from 'react-router-dom';
 
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
@@ -12,7 +12,7 @@ import ProjectInfo from './components/ProjectInfo/ProjectInfo';
 class App extends Component {
   render() {
     return (
-      <HashRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Fragment>
           <NavBar/>
           <Switch>
@@ -24,7 +24,7 @@ class App extends Component {
             <Route path='/project/:id' component={ProjectInfo}/>
           </Switch>
         </Fragment>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
