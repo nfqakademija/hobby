@@ -20,7 +20,6 @@ security:
                 check_path: /api/security/login
                 username_path: security.credentials.username
                 password_path: security.credentials.password
-                provider: custom_provider
 
             logout:
                 path: /api/security/logout
@@ -36,6 +35,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
 #        - { path: ^/api/admin, roles: ROLE_USER }
-        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/security/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/, roles: ROLE_USER }
         
