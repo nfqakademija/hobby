@@ -1,0 +1,7 @@
+{
+  "build/index.css": "/build/index.css",
+  "build/index.js": "/build/index.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~index.css": "/build/vendors~index.css",
+  "build/vendors~index.js": "/build/vendors~index.js"
+}
