@@ -1,107 +1,107 @@
 @import '../../index';
-
-.NavBar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  .Logo-link {
-    color: black;
-    text-decoration: none;
-  }
-
-  .hamburger {
-    display: none;
-  }
-}
-
-.NavBar-link {
-  margin: 0 10px;
-  color: black;
-  text-decoration: none;
-  transition: color 0.5s;
-
-  &:hover {
-    color: $main-color;
-
-  }
-}
-
-.active-link {
-  color: $main-color;
-}
-
-.SignIn-link {
-  padding: 10px;
-  background-color: $main-color;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-left: 3px;
-  color: black;
-  transition: color 0.5s;
-
-  &:hover{
-    color: white;
-  }
-}
-
-.New-Project {
-  text-transform: uppercase;
-}
-
-.Hover {
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-@media (max-width: 650px) {
-  .NavBar{
-    justify-content: space-between;
-    padding: 0 20px;
-    .hamburger {
-      display: inline-block;
-      z-index: 120;
-    }
-
-    .Navigation {
-      display: none;
-    }
-
-    .SignIn-links {
-      display: none;
-    }
-  }
-
-  .Hover {
-    .Hover--Navigation {
-      padding-top: 80px;
-      ul {
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        a {
-          text-align: center;
-          color: white;
-          font-size: 20px;
-          padding: 10px 0;
-
-          &:hover {
-            color: $main-color;
-          }
-        }
-      }
-
-    }
-    .Hover--SignIn-links {
-      display: block;
-      width: 50%;
-      margin: 50px auto 0;
-      text-align: center;
-    }
-  }
-}
+//
+//.NavBar {
+//  display: flex;
+//  justify-content: space-around;
+//  align-items: center;
+//
+//  .Logo-link {
+//    color: black;
+//    text-decoration: none;
+//  }
+//
+//  .hamburger {
+//    display: none;
+//  }
+//}
+//
+//.NavBar-link {
+//  margin: 0 10px;
+//  color: black;
+//  text-decoration: none;
+//  transition: color 0.5s;
+//
+//  &:hover {
+//    color: $main-color;
+//
+//  }
+//}
+//
+//.active-link {
+//  color: $main-color;
+//}
+//
+//.SignIn-link {
+//  padding: 10px;
+//  background-color: $main-color;
+//  text-decoration: none;
+//  border-radius: 4px;
+//  margin-left: 3px;
+//  color: black;
+//  transition: color 0.5s;
+//
+//  &:hover{
+//    color: white;
+//  }
+//}
+//
+//.New-Project {
+//  text-transform: uppercase;
+//}
+//
+//.Hover {
+//  position: fixed;
+//  z-index: 100;
+//  top: 0;
+//  left: 0;
+//  width: 100vw;
+//  height: 100vh;
+//  background-color: rgba(0, 0, 0, 0.7);
+//}
+//
+//@media (max-width: 650px) {
+//  .NavBar{
+//    justify-content: space-between;
+//    padding: 0 20px;
+//    .hamburger {
+//      display: inline-block;
+//      z-index: 120;
+//    }
+//
+//    .Navigation {
+//      display: none;
+//    }
+//
+//    .SignIn-links {
+//      display: none;
+//    }
+//  }
+//
+//  .Hover {
+//    .Hover--Navigation {
+//      padding-top: 80px;
+//      ul {
+//        padding: 0;
+//        display: flex;
+//        flex-direction: column;
+//        a {
+//          text-align: center;
+//          color: white;
+//          font-size: 20px;
+//          padding: 10px 0;
+//
+//          &:hover {
+//            color: $main-color;
+//          }
+//        }
+//      }
+//
+//    }
+//    .Hover--SignIn-links {
+//      display: block;
+//      width: 50%;
+//      margin: 50px auto 0;
+//      text-align: center;
+//    }
+//  }
+//}
