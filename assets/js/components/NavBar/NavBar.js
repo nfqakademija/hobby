@@ -44,7 +44,7 @@ class NavBar extends Component {
 
    render() {
       const { classes, onLogout } = this.props;
-      const {email, isAuth} = this.props.auth;
+      const {email, isAuth, amount} = this.props.auth;
       return (
           <MuiThemeProvider theme={theme}>
       <Grid
@@ -63,7 +63,7 @@ class NavBar extends Component {
                           <Tab  component={RouterLinkNav} exact to='/' label="Home" />
                           <Tab  component={RouterLinkNav} to='/projects'   label="Projects" />
                           <Tab  component={RouterLinkNav} to='/project-registration' label="Create Project" />
-                        {isAuth ? <Tab  component={RouterLink}  to='/user' label={email} /> :
+                        {isAuth ? <Tab  component={RouterLink}  to='/user' label={`${email} (${amount}€)`} /> :
                             <Tab  component={RouterLink}  to='/login' label="Sign In" />
                         }
                         {isAuth ? <Tab onClick={onLogout}  component={RouterLink}  to='/logout' label='Logout' /> :
