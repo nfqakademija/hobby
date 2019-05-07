@@ -41,15 +41,7 @@ const Home = ( ) => {
                 color="primary"
                 size="large"
             >Large</Button>
-              {/*<Typography variant='subtitle1'  >To see projects, please go to{' '}*/}
-                {/*<Link component={RouterLink} color="secondary"  to='/projects'>Projects List</Link>*/}
-              {/*</Typography>*/}
-              {/*<Typography variant='subtitle1'>If you have an account please{' '}*/}
-                {/*<Link component={RouterLink}  className='Link' to='/login'>Sing In</Link>*/}
-              {/*</Typography>*/}
-              {/*<Typography variant='subtitle1'>If you don't have an account please{' '}*/}
-                {/*<Link component={RouterLink} className='Link' to='/register'>Sing Up</Link>*/}
-              {/*</Typography>*/}
+
         </div>
       </MuiThemeProvider>
   );

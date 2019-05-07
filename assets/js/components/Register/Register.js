@@ -122,7 +122,7 @@ class Register extends Component {
                     fullWidth
                     gutterBottom
                     type="submit">
-                  {loading ? <Loader color={'#fff'} h={15} /> : 'Sign In'}
+                  {loading ? <Loader color={'#fff'} h={15} /> : 'Sign Up'}
                 </Button>
               </form>
             </Paper>,
