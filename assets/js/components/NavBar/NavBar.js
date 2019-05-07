@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Logo from '../Logo/Logo'
 
 const theme = createMuiTheme({
     palette: {
@@ -19,6 +20,8 @@ const theme = createMuiTheme({
         },
     },
 });
+//
+// const logo  = require('/public/apple-touch-icon.png');
 
 const styles = {
     root: {
@@ -56,6 +59,7 @@ class NavBar extends Component {
                            textColor="primary"
                            centered
                     >
+                          <Logo />
                           <Tab  component={RouterLinkNav} exact to='/' label="Home" />
                           <Tab  component={RouterLinkNav} to='/projects'   label="Projects" />
                           <Tab  component={RouterLinkNav} to='/project-registration' label="Create Project" />

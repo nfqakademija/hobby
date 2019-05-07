@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
+
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 
 
@@ -37,10 +38,60 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     justify: theme.center,
   },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  fabProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
 });
 
 
 class Register extends Component {
+  state = {
+    loading: false,
+    success: false,
+  };
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
+  handleButtonClick = () => {
+    if (!this.state.loading) {
+      this.setState(
+          {
+            success: false,
+            loading: true,
+          },
+          () => {
+            this.timer = setTimeout(() => {
+              this.setState({
+                loading: false,
+                success: true,
+              });
+            }, 2000);
+          },
+      );
+    }
+  };
+
+
   onFormSubmit = (e) => {
     e.preventDefault();
     this.props.onFormSubmit(this.props.register, this.props.history);
@@ -48,9 +99,14 @@ class Register extends Component {
 
 
   render() {
-    const {username, email, password, password2, error, loading,} = this.props.register;
+    const {username, email, password, password2, error } = this.props.register;
     const {onInputChange} = this.props;
+    const { loading, success } = this.state;
     const { classes } = this.props;
+    const buttonClassname = classNames({
+      [classes.buttonSuccess]: success,
+    });
+
     return (
           <MuiThemeProvider theme={theme} >
             <Paper elevation={8} className='Register'>
