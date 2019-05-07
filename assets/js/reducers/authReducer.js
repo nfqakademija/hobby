@@ -14,6 +14,13 @@ export default (state = initialState, action) => {
                 email: action.user.username,
                 isAuth: true
             }
+        case types.LOG_OUT:
+            return {
+                ...state,
+                email: '',
+                amount: 0,
+                isAuth: false
+            };
         default:
             return state;
     }

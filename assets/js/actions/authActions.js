@@ -7,3 +7,8 @@ export function authUser(user) {
     }
 }
 
+export function logout() {
+    return {
+        type: types.LOG_OUT
+    }
+}

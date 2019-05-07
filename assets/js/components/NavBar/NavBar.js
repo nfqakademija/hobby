@@ -9,6 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {onLogOut as Logout} from '../../thunks/logoutThunk';
+
 
 const theme = createMuiTheme({
     palette: {
@@ -40,8 +42,8 @@ class NavBar extends Component {
         this.setState({ value });
     };
 
-  render() {
-      const { classes } = this.props;
+   render() {
+      const { classes, onLogout } = this.props;
       const {email, isAuth} = this.props.auth;
       return (
           <MuiThemeProvider theme={theme}>
@@ -64,7 +66,7 @@ class NavBar extends Component {
                         {isAuth ? <Tab  component={RouterLink}  to='/user' label={email} /> :
                             <Tab  component={RouterLink}  to='/login' label="Sign In" />
                         }
-                        {isAuth ? <Tab  component={RouterLink}  to='/logout' label='Logout' /> :
+                        {isAuth ? <Tab onClick={onLogout}  component={RouterLink}  to='/logout' label='Logout' /> :
                             <Tab  component={RouterLink}  to='/register' label="Sign Up" />
                         }
 
@@ -90,4 +92,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(NavBar));
+const mapDispatchToProps = (dispatch) => ({
+    onLogout: () => dispatch(Logout())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(NavBar));

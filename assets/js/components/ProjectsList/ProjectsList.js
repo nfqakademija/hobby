@@ -5,6 +5,7 @@ import {setProjectList} from '../../thunks/getProjects';
 import {connect} from "react-redux";
 import Typography from '@material-ui/core/Typography';
 import Link from "@material-ui/core/Link";
+
 class ProjectsList extends Component {
 
   componentDidMount() {
