@@ -10,7 +10,7 @@ export const onFormSubmit = (user, history) => (dispatch) => {
   const loginJson = 	{
       "security": {
           "credentials": {
-              "username": user.email,
+              "email": user.email,
               "password": user.password
           }
       }
