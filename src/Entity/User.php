@@ -5,67 +5,77 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="user")
+ * @UniqueEntity(
+ *     fields={"email"}
+ * )
  */
 class User implements UserInterface, \Serializable
 {
     /**
-     * @var int
+     * @var int|null
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $id;
 
     /**
-     * @var string
-     * @ORM\Column(name="email", type="string", unique=true)
+     * @var string|null
+     * @ORM\Column(name="email", type="string", unique=true, nullable=true)
      * @Assert\NotBlank()
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
 
     /**
-     * @var string
-     * @ORM\Column(name="username", type="string", unique=true)
+     * @var string|null
+     * @ORM\Column(name="username", type="string", unique=true, nullable=true)
      */
     private $username;
 
     /**
-     * @var string
-     * @ORM\Column(name="role", type="string")
+     * @var string|null
+     * @ORM\Column(name="role", type="string", nullable=true)
      */
     private $role;
 
     /**
-     * @var int
-     * @ORM\Column(name="budget", type="integer")
+     * @var int|null
+     * @ORM\Column(name="budget", type="integer", nullable=true)
      */
     private $budget;
 
+    public function __construct()
+    {
+        $this->setBudget(30);
+        $this->setRole('ROLE_USER');
+    }
+
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @param int|null $id
      *
      * @return User
      */
-    public function setId(int $id): User
+    public function setId(?int $id): User
     {
         $this->id = $id;
 
@@ -73,19 +83,19 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      *
      * @return User
      */
-    public function setEmail(string $email): User
+    public function setEmail(?string $email): User
     {
         $this->email = $email;
 
@@ -105,7 +115,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setPassword($password): User
+    public function setPassword($password)
     {
         $this->password = $password;
 
@@ -113,19 +123,19 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
     /**
-     * @param string $username
+     * @param string|null $username
      *
      * @return User
      */
-    public function setUsername(string $username): User
+    public function setUsername(?string $username): User
     {
         $this->username = $username;
 
@@ -133,19 +143,19 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRole(): string
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
     /**
-     * @param string $role
+     * @param string|null $role
      *
      * @return User
      */
-    public function setRole(string $role): User
+    public function setRole(?string $role): User
     {
         $this->role = $role;
 
@@ -153,19 +163,19 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getBudget(): int
+    public function getBudget(): ?int
     {
         return $this->budget;
     }
 
     /**
-     * @param int $budget
+     * @param int|null $budget
      *
      * @return User
      */
-    public function setBudget(int $budget): User
+    public function setBudget(?int $budget): User
     {
         $this->budget = $budget;
 
