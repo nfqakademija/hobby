@@ -12,6 +12,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 email: action.user.email,
+                amount: action.user.budget,
                 isAuth: true
             }
         case types.LOG_OUT:
