@@ -8,7 +8,7 @@ security:
         custom_provider:
             entity:
                 class: App\Entity\User
-                property: username
+                property: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -18,7 +18,7 @@ security:
 
             json_login:
                 check_path: /api/security/login
-                username_path: security.credentials.username
+                username_path: security.credentials.email
                 password_path: security.credentials.password
 
             logout:
