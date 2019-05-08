@@ -16,7 +16,7 @@ class ProjectsList extends Component {
 
   render() {
     const {projects,onVoteClick} =this.props;
-    const {email} = this.props.auth
+    const {amount} = this.props.auth;
     let projectsList;
     if(projects.length !== 0) {
       projectsList = projects && projects.map((project, i) => {
@@ -24,10 +24,12 @@ class ProjectsList extends Component {
           <div className='Project-item' key={i}>
             <span className='Project-item__span'><span className="bold">Hobby Author:</span> {project.username}</span>
             <span className='Project-item__span'><span className="bold">Hobby Description:</span> {project.description}</span>
-            <button onClick={() => onVoteClick(email, project.id, 5)}>Vote 5€</button>
-            <button onClick={() => onVoteClick(email, project.id, 15)}>Vote 15€</button>
-            <button onClick={() => onVoteClick(email, project.id, 30)}>Vote 30€</button>
-            <Link component={ RouterLink } className='Link Info' to={`/project/${project.id}`}>See more info</Link>
+            <span className='Project-item__span'><span className="bold">Hobby Collected:</span> {project.budget}</span>
+            <span className='Project-item__span'><span className="bold">Hobby Goal:</span> {project.amount}</span>
+            <span className='Project-item__span'><span className="bold">Hobby Contact:</span> {project.email}</span>
+            <button onClick={() => onVoteClick(project.id, 5)} disabled={amount < 5}>Vote 5€</button>
+            <button onClick={() => onVoteClick(project.id, 15)} disabled={amount < 15}>Vote 15€</button>
+            <button onClick={() => onVoteClick(project.id, 30)} disabled={amount < 30}>Vote 30€</button>
           </div>
         )
       })
@@ -63,7 +65,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onGetProjectsList: () => dispatch(setProjectList()),
-  onVoteClick: (userEmail, projectId, amount) => dispatch(onVote(userEmail, projectId, amount))
+  onVoteClick: (projectId, amount) => dispatch(onVote(projectId, amount))
 
 });
 export default connect(mapStateToProps,mapDispatchToProps)(ProjectsList);

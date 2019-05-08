@@ -22,6 +22,11 @@ export default (state = initialState, action) => {
                 amount: 0,
                 isAuth: false
             };
+        case types.VOTE_USER:
+            return {
+                ...state,
+                amount: state.amount-action.amount
+            }
         default:
             return state;
     }

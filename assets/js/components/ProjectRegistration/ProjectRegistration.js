@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './ProjectRegistration.scss';
 import Loader from '../Loader/Loader';
 import {connect} from 'react-redux';
-import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import * as actions from '../../actions/projectRegisterActions';
 import {onProjectRegisterFormSubmit} from '../../thunks/projectRegisterThunk';
@@ -41,22 +40,21 @@ const styles = theme => ({
 class ProjectRegistration extends Component {
   onFormSubmit = (e) => {
     e.preventDefault();
-    this.props.onFormSubmit(this.props.projectRegister, this.props.history)
+    this.props.onFormSubmit(this.props.projectRegister, this.props.history, this.props.auth.email)
   }
 
   render() {
     const {
       username,
       hobbyName,
-      email,
       description,
       amount,
-      endDate,
       loading,
       error
     } =this.props.projectRegister;
     const {onInputChange, onDateChange} = this.props;
     const { classes } = this.props;
+    const { email } =this.props.auth
     return (
         <MuiThemeProvider theme={theme}>
           <Paper elevation={8} className='ProjectForm'>
@@ -97,13 +95,6 @@ class ProjectRegistration extends Component {
                   margin="normal"
                   variant="outlined"
                   className={classes.textField}
-              />
-              <DatePicker
-                onChange={onDateChange}
-                selected={endDate}
-                placeholderText="Select project end date"
-                dateFormat="yyyy MM dd"
-                minDate={new Date()}
               />
               <TextField
                   type="email"
@@ -163,13 +154,14 @@ class ProjectRegistration extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    projectRegister: state.projectRegister
+    projectRegister: state.projectRegister,
+    auth: state.auth
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   onInputChange: (e) => dispatch(actions.onInputChange(e)),
   onDateChange: (date) => dispatch(actions.onDateChange(date)),
-  onFormSubmit: (projectInfo, history)=>dispatch(onProjectRegisterFormSubmit(projectInfo,history))
+  onFormSubmit: (projectInfo, history, email)=>dispatch(onProjectRegisterFormSubmit(projectInfo,history,email))
 });
 export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(ProjectRegistration));
