@@ -21,14 +21,15 @@ class HobbyData extends Fixture
         $descriptions = ['Smagus', 'Nuobodus', 'Itraukiantis'];
         $usernames = ['Ieva', 'Viktoras', 'Miroslav'];
         $email = ['istanynaite@nfq.lt', 'vkarcikovas@gmail.com', 'mpetkevic@gmail.com'];
-        $amounts = [90, 60 , 30];
+        $amount = 60;
 
         for ($i = 0; $i < 3; $i++) {
             $hobby->setTitle($titles[array_rand($titles)]);
             $hobby->setDescription($descriptions[array_rand($descriptions)]);
             $hobby->setUsername($usernames[array_rand($usernames)]);
             $hobby->setEmail($email[array_rand($email)]);
-            $hobby->setAmount($amounts[array_rand($amounts)]);
+            $hobby->setAmount($amount);
+            $hobby->setBudget($amount);
 
             $manager->persist($hobby);
             $manager->flush();
