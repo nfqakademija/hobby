@@ -66,7 +66,7 @@ class Hobby
     public function __construct()
     {
         $this->votes = new ArrayCollection();
-        $this->setBudget(0);
+        $this->setAmount(0);
     }
 
     /**
