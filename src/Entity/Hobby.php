@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,10 +52,15 @@ class Hobby
     private $username;
 
     /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var Vote
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="hobby")
      */
-    private $feProjectId;
+    private $votes;
+
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -176,22 +183,10 @@ class Hobby
     }
 
     /**
-     * @return string|null
+     * @return Collection|Vote[]
      */
-    public function getFeProjectId(): ?string
+    public function getVotes(): Collection
     {
-        return $this->feProjectId;
-    }
-
-    /**
-     * @param string|null $feProjectId
-     *
-     * @return Hobby
-     */
-    public function setFeProjectId(?string $feProjectId): Hobby
-    {
-        $this->feProjectId = $feProjectId;
-
-        return $this;
+        return $this->votes;
     }
 }
