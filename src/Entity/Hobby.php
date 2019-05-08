@@ -43,7 +43,7 @@ class Hobby
      * @var int|null
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $budget;
+    private $budget = 0;
 
     /**
      * @var string|null
