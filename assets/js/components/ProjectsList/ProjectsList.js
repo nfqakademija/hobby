@@ -17,12 +17,14 @@ class ProjectsList extends Component {
   render() {
     const {projects,onVoteClick} =this.props;
     const {amount} = this.props.auth;
+    console.log(projects)
     let projectsList;
     if(projects.length !== 0) {
       projectsList = projects && projects.map((project, i) => {
         return (
           <div className='Project-item' key={i}>
             <span className='Project-item__span'><span className="bold">Hobby Author:</span> {project.username}</span>
+            <span className='Project-item__span'><span className="bold">Hobby Title:</span> {project.title}</span>
             <span className='Project-item__span'><span className="bold">Hobby Description:</span> {project.description}</span>
             <span className='Project-item__span'><span className="bold">Hobby Collected:</span> {project.budget}</span>
             <span className='Project-item__span'><span className="bold">Hobby Goal:</span> {project.amount}</span>
