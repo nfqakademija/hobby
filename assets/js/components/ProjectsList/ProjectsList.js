@@ -17,7 +17,6 @@ class ProjectsList extends Component {
   render() {
     const {projects,onVoteClick} =this.props;
     const {amount} = this.props.auth;
-    console.log(projects)
     let projectsList;
     if(projects.length !== 0) {
       projectsList = projects && projects.map((project, i) => {
