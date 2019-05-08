@@ -34,10 +34,15 @@ class Voter
         if (false === $this->checkAmountAndUpdateUser($user, $amount)) {
             return 'Insufficient budget';
         }
+
+        if (null === $this->em->getRepository(Hobby::class)->find($hobbyId)) {
+            return 'This hobby does not exist';
+        }
+
         /** @var Hobby $hobby */
         $hobby = $this->em->getRepository(Hobby::class)->find($hobbyId);
 
-        if (false === $this->updateHobbyAmount($hobby, $amount)) {
+        if (false === $this->updateHobbyAmount($hobby, $amount) || null === $hobby) {
             return 'Insufficient budget';
         }
 
@@ -85,11 +90,7 @@ class Voter
      */
     private function updateHobbyAmount(Hobby $hobby, int $amount): bool
     {
-        if ($amount > $hobby->getAmount()) {
-            return false;
-        }
-
-        $hobby->setAmount($hobby->getAmount() - $amount);
+        $hobby->setBudget($hobby->getBudget() + $amount);
 
         $this->em->persist($hobby);
         $this->em->flush();
