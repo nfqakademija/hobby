@@ -34,10 +34,16 @@ class Hobby
     private $description;
 
     /**
-     * @var float|null
-     * @ORM\Column(type="float", nullable=true)
+     * @var integer|null
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $amount;
+
+    /**
+     * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $budget;
 
     /**
      * @var string|null
@@ -123,21 +129,41 @@ class Hobby
     }
 
     /**
-     * @return float|null
+     * @return int|null
      */
-    public function getAmount(): ?float
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
     /**
-     * @param float|null $amount
+     * @param int|null $amount
      *
      * @return Hobby
      */
-    public function setAmount(?float $amount): self
+    public function setAmount(?int $amount): Hobby
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getBudget(): ?int
+    {
+        return $this->budget;
+    }
+
+    /**
+     * @param int|null $budget
+     *
+     * @return Hobby
+     */
+    public function setBudget(?int $budget): Hobby
+    {
+        $this->budget = $budget;
 
         return $this;
     }

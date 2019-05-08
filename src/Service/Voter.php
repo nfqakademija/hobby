@@ -23,17 +23,14 @@ class Voter
 
     /**
      * @param int $hobbyId
-     * @param string $userEmail
+     * @param User $user
      * @param int $amount
      * @return string
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function vote(int $hobbyId, string $userEmail, int $amount): string
+    public function vote(int $hobbyId, int $amount, User $user): string
     {
-        /** @var User $user */
-        $user = $this->em->getRepository(User::class)->findOneBy(['email' => $userEmail]);
-
         if (false === $this->checkAmountAndUpdateUser($user, $amount)) {
             return 'Insufficient budget';
         }
