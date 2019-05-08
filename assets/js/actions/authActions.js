@@ -12,3 +12,10 @@ export function logout() {
         type: types.LOG_OUT
     }
 }
+
+export function voteUser(amount) {
+    return {
+        type: types.VOTE_USER,
+        amount
+    }
+}

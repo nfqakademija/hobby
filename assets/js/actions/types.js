@@ -28,3 +28,4 @@ export const GET_PROJECTS = 'GET_PROJECTS';
 
 export const AUTH_USER = 'AUTH_USER';
 export const LOG_OUT = 'LOG_OUT';
+export const VOTE_USER = 'VOTE_USER';
