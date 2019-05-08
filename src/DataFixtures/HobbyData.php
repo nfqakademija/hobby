@@ -21,7 +21,7 @@ class HobbyData extends Fixture
         $descriptions = ['Smagus', 'Nuobodus', 'Itraukiantis'];
         $usernames = ['Ieva', 'Viktoras', 'Miroslav'];
         $email = ['istanynaite@nfq.lt', 'vkarcikovas@gmail.com', 'mpetkevic@gmail.com'];
-        $amounts = [100, 99.99, 1.12];
+        $amounts = [90, 60 , 30];
 
         for ($i = 0; $i < 3; $i++) {
             $hobby->setTitle($titles[array_rand($titles)]);

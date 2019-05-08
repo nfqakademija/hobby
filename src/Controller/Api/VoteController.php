@@ -28,7 +28,7 @@ class VoteController extends AbstractFOSRestController
         $voter = new Voter($this->getDoctrine()->getManager());
 
         //TODO this if should be modify
-        if ('success' !== $voter->vote($data['hobby'], $data['user'], $data['amount'])) {
+        if ('success' !== $voter->vote($data['hobby'], $data['amount'], $this->getUser())) {
 
             return JsonResponse::create('insufficient budget', Response::HTTP_BAD_REQUEST);
         }
