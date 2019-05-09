@@ -29,3 +29,13 @@ services:
 
     sensio_framework_extra.view.listener:
         alias: Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener
+
+    serializer.form.error:
+        class: App\Serializer\FormErrorSerializer
+        public: true
+
+    service.voter:
+        class: App\Service\Voter
+        public: true
+        arguments:
+            - '@doctrine.orm.entity_manager'

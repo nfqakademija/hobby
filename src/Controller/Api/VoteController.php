@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
+use App\Serializer\FormErrorSerializer;
 use App\Service\Voter;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,23 +14,33 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 
 class VoteController extends AbstractFOSRestController
 {
+    /** @var FormErrorSerializer */
+    private $formErrorSerializer;
+
+    public function __construct(FormErrorSerializer $formErrorSerializer)
+    {
+        $this->formErrorSerializer = $formErrorSerializer;
+    }
+
     /**
      * @Rest\Post("/vote", name="vote")
      * @param Request $request
      * @return JsonResponse
-     * @throws ORMException
-     * @throws OptimisticLockException
      */
     public function voteAction(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        $voter = new Voter($this->getDoctrine()->getManager());
 
-        //TODO this if should be modify
-        if ('success' !== $voter->vote($data['hobby'], $data['amount'], $this->getUser())) {
-            return JsonResponse::create('insufficient budget', Response::HTTP_BAD_REQUEST);
+        try {
+//            $this->container->get('service.voter')->vote($data['hobby'], $data['amount'], $this->getUser());
+            $voter = new Voter($this->getDoctrine()->getManager());
+            $voter->vote($data['hobby'], $data['amount'], $this->getUser());
+
+            return JsonResponse::create([], Response::HTTP_OK);
+        } catch (\Throwable $exception) {
+            return JsonResponse::create(['error' => $exception->getMessage()], Response::HTTP_SERVICE_UNAVAILABLE);
         }
 
-        return JsonResponse::create('', Response::HTTP_OK);
+
     }
 }
