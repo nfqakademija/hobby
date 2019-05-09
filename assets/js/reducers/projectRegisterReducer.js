@@ -6,7 +6,6 @@ const initialState = {
   email: '',
   description: '',
   amount: '',
-  endDate: null,
   loading: false,
   error: ''
 }

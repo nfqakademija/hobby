@@ -1,24 +1,13 @@
-$main-color: #FF690E;
-
+$main-color: #EA7925;
+$link-color: light blue;
 
 
 body {
+  text-decoration: bold;
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
+  background-color: #F8F8F8;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.Link {
-  text-decoration: none;
-  color: $main-color;
-}
-
-.bold {
-  font-weight: 700;
-}

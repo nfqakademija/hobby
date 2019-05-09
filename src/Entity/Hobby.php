@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,10 +34,16 @@ class Hobby
     private $description;
 
     /**
-     * @var float|null
-     * @ORM\Column(type="float", nullable=true)
+     * @var integer|null
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $amount;
+
+    /**
+     * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $budget = 0;
 
     /**
      * @var string|null
@@ -50,10 +58,16 @@ class Hobby
     private $username;
 
     /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var Vote
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="hobby")
      */
-    private $feProjectId;
+    private $votes;
+
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+        $this->setAmount(0);
+    }
 
     /**
      * @return mixed
@@ -116,21 +130,41 @@ class Hobby
     }
 
     /**
-     * @return float|null
+     * @return int|null
      */
-    public function getAmount(): ?float
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
     /**
-     * @param float|null $amount
+     * @param int|null $amount
      *
      * @return Hobby
      */
-    public function setAmount(?float $amount): self
+    public function setAmount(?int $amount): Hobby
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getBudget(): ?int
+    {
+        return $this->budget;
+    }
+
+    /**
+     * @param int|null $budget
+     *
+     * @return Hobby
+     */
+    public function setBudget(?int $budget): Hobby
+    {
+        $this->budget = $budget;
 
         return $this;
     }
@@ -176,22 +210,10 @@ class Hobby
     }
 
     /**
-     * @return string|null
+     * @return Collection|Vote[]
      */
-    public function getFeProjectId(): ?string
+    public function getVotes(): Collection
     {
-        return $this->feProjectId;
-    }
-
-    /**
-     * @param string|null $feProjectId
-     *
-     * @return Hobby
-     */
-    public function setFeProjectId(?string $feProjectId): Hobby
-    {
-        $this->feProjectId = $feProjectId;
-
-        return $this;
+        return $this->votes;
     }
 }

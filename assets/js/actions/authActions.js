@@ -7,8 +7,15 @@ export function authUser(user) {
     }
 }
 
-export function logOutUser() {
+export function logout() {
     return {
-        type: types.LOG_OUT_USER
+        type: types.LOG_OUT
+    }
+}
+
+export function voteUser(amount) {
+    return {
+        type: types.VOTE_USER,
+        amount
     }
 }

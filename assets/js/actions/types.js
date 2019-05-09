@@ -27,4 +27,5 @@ export const GET_PROJECTS = 'GET_PROJECTS';
 // Auth types
 
 export const AUTH_USER = 'AUTH_USER';
-export const LOG_OUT_USER = 'LOG_OUT_USER';
+export const LOG_OUT = 'LOG_OUT';
+export const VOTE_USER = 'VOTE_USER';

@@ -1,22 +1,49 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-
+import {Link as RouterLink } from "react-router-dom";
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
 import './Home.scss';
+import Button from "@material-ui/core/Button";
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 
-const Home = () => {
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#EA7925',
+        },
+        secondary: {
+            main: '#0044ff',
+        },
+    },
+});
+
+const Home = ( ) => {
   return (
-    <div className='Home'>
-      <p>This is a place for your hobby projects.</p>
-      <p>To see projects, please go to{' '}
-        <Link className='Link' to='/projects'>Projects List</Link>
-      </p>
-      <p>If you have an account please{' '}
-        <Link className='Link' to='/login'>Sing In</Link>
-      </p>
-      <p>If you don't have an account please{' '}
-        <Link className='Link' to='/register'>Sing Up</Link>
-      </p>
-    </div>
+      <MuiThemeProvider theme={theme}>
+        <div className='Home'>
+                <Typography
+                    variant="h3"
+                    gutterBottom
+                    align="Left"
+                >A New and Better way to engange<br/>
+                and retain employs
+                </Typography>
+            <Typography
+                variant="subheading"
+                gutterBottom
+                align="Left"
+            >Companies use HobbyCraft to organize their<br/>
+                employees hobby budget, its a perfect<br/>
+                internal croud funding system for you !
+            </Typography>
+            <Button
+                variant="contained"
+                color="primary"
+                size="large"
+            >Large</Button>
+
+        </div>
+      </MuiThemeProvider>
   );
 };
 

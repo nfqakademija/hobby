@@ -3,10 +3,11 @@ import moment from 'moment';
 import axios from 'axios';
 import uuidv4 from 'uuid'
 
-export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) => {
+export const onProjectRegisterFormSubmit = (projectInfo, history, email) => (dispatch) => {
+
   dispatch(actions.onProjectRegisterFormLoading());
-  if(projectInfo.username === '' || projectInfo.hobbyName === '' || projectInfo.email === '' ||
-  projectInfo.description === '' || projectInfo.amount === '' || projectInfo.endDate === null) {
+  if(projectInfo.username === '' || projectInfo.hobbyName === '' ||
+  projectInfo.description === '' || projectInfo.amount === '' ) {
     return dispatch(actions.onProjectRegisterFormError('Please fill all fields'))
   }
   const formattedDate = moment(projectInfo.endDate).format('YYYY-MM-DD');
@@ -15,9 +16,8 @@ export const onProjectRegisterFormSubmit = (projectInfo, history) => (dispatch) 
     "title": projectInfo.hobbyName,
     "description": projectInfo.description,
     "amount": projectInfo.amount,
-    "email": projectInfo.email,
+    "email": email,
     "username": projectInfo.username,
-    "fe_project_id": uuidv4(),
   });
   console.log(json);
   axios

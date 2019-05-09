@@ -1,28 +1,28 @@
-import * as loginActions from '../actions/loginActions';
-import * as actions from '../actions/authActions';
+import * as actions from '../actions/loginActions';
+import {authUser} from '../actions/authActions';
 import axios from 'axios';
 
 export const onFormSubmit = (user, history) => (dispatch) => {
-  dispatch(loginActions.onFormLoading());
+  dispatch(actions.onFormLoading());
   if(user.email === '' || user.password === '' ) {
-    return dispatch(loginActions.onLoginFormError('Please fill fields'));
+    return dispatch(actions.onLoginFormError('Please fill fields'));
   }
-  const loginJson = {
+  const loginJson = 	{
       "security": {
           "credentials": {
-              "username": user.email,
+              "email": user.email,
               "password": user.password
           }
       }
   }
-  console.log(loginJson)
   axios.post('/api/security/login', loginJson)
       .then(res =>{
-        dispatch(actions.authUser(loginJson))
+        dispatch(authUser(res.data))
+        dispatch(actions.onLoginFormSuccess(user))
         history.push('/')
       })
       .catch(err => {
-        dispatch(loginActions.onLoginFormError('Server error. Please try again later.'))
+        dispatch(actions.onLoginFormError('Server error. Please try again later.'))
 
           }
       )

@@ -5,7 +5,6 @@ import './ProjectInfo.scss';
 import moment from 'moment';
 
 const ProjectInfo = (props) => {
-  console.log(props.projects)
   const projectInfo = props.projects.filter(project => {
     if(project.id.toString() === props.match.params.id) {
       return project;

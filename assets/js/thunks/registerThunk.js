@@ -10,13 +10,11 @@ export const onRegisterFormSubmit = (user, history) => (dispatch) => {
     return dispatch(actions.onRegisterFormError('Passwords doesn\'t match'));
   }
   const registerJson = {
-    username: user.username,
     email: user.email,
     password: user.password,
-    password2: user.password2
   };
 
-  axios.post('/api/register', registerJson)
+  axios.post('/api/security/register', registerJson)
       .then(res =>{
         dispatch(actions.onRegisterFormSuccess(registerJson))
         history.push('/login')

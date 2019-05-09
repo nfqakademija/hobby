@@ -1,83 +1,99 @@
 import React, { Component } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import Logo from '../Logo/Logo';
-import './NavBar.scss';
-import 'hamburgers/dist/hamburgers.css';
+import { NavLink as RouterLinkNav , Link as RouterLink } from 'react-router-dom';
+import {connect} from "react-redux";
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {onLogOut as Logout} from '../../thunks/logoutThunk';
 
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#EA7925',
+        },
+        secondary: {
+            main: '#0044ff',
+        },
+    },
+});
+
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+    Tabs:{
+    width: '100%',
+    }
+
+};
 
 class NavBar extends Component {
   state ={
-    isActive: false
+      value: 0,
   }
 
-  toggleActive = () => this.setState({isActive: !this.state.isActive})
+    handleChange = (event, value) => {
+        this.setState({ value });
+    };
 
-  render() {
-    const {isActive} = this.state;
-    return (
-      <div className='NavBar'>
-        <Link className='Logo-link' to='/'><Logo/></Link>
-        <nav className='Navigation'>
-          <ul>
-            <NavLink exact to='/' className='NavBar-link' activeClassName='active-link'>Home</NavLink>
-            <NavLink to='/projects' className='NavBar-link' activeClassName='active-link'>Projects</NavLink>
-            <NavLink to='/project-registration' className='NavBar-link New-Project' activeClassName='active-link'>New Project</NavLink>
-          </ul>
-        </nav>
+   render() {
+      const { classes, onLogout } = this.props;
+      const {email, isAuth, amount} = this.props.auth;
+      return (
+          <MuiThemeProvider theme={theme}>
+      <Grid
+          container className={classes.root}
+      >
+            <AppBar  color="default" elevation={8} >
+                <Toolbar >
+                    <Tabs  className={classes.Tabs}
+                           value={this.state.value}
+                           onChange={this.handleChange}
+                           componentColor="primary"
+                           indicatorColor="primary"
+                           textColor="primary"
+                           centered
+                    >
+                          <Tab  component={RouterLinkNav} exact to='/' label="Home" />
+                          <Tab  component={RouterLinkNav} to='/projects'   label="Projects" />
+                          <Tab  component={RouterLinkNav} to='/project-registration' label="Create Project" />
+                        {isAuth ? <Tab  component={RouterLink}  to='/user' label={`${email} (${amount}€)`} /> :
+                            <Tab  component={RouterLink}  to='/login' label="Sign In" />
+                        }
+                        {isAuth ? <Tab onClick={onLogout}  component={RouterLink}  to='/logout' label='Logout' /> :
+                            <Tab  component={RouterLink}  to='/register' label="Sign Up" />
+                        }
 
-        <div className='SignIn-links'>
-          <Link className='SignIn-link' to='/login'>Sign In</Link>
-          <Link className='SignIn-link' to='/register'>Sign Up</Link>
-        </div>
-        <button
-          onClick={this.toggleActive}
-          className={isActive ?
-            'hamburger hamburger--squeeze is-active' : 'hamburger hamburger--squeeze'}
-          type="button">
-            <span className="hamburger-box">
-              <span className="hamburger-inner"></span>
-            </span>
-        </button>
-        {isActive ?
-          <div className='Hover'>
-            <nav className='Hover--Navigation'>
-              <ul>
-                <NavLink
-                  exact
-                  to='/'
-                  className='NavBar-link'
-                  activeClassName='active-link'
-                  onClick={this.toggleActive}
-                >Home</NavLink>
-                <NavLink
-                  to='/projects'
-                  className='NavBar-link'
-                  activeClassName='active-link'
-                  onClick={this.toggleActive}
-                >Projects</NavLink>
-                <NavLink
-                  to='/project-registration'
-                  className='NavBar-link New-Project'
-                  activeClassName='active-link'
-                  onClick={this.toggleActive}
-                >New Project</NavLink>
-              </ul>
-            </nav>
-            <div className='Hover--SignIn-links'>
-              <Link
-                onClick={this.toggleActive}
-                className='SignIn-link'
-                to='/login'>Sign In</Link>
-              <Link
-                onClick={this.toggleActive}
-                className='SignIn-link'
-                to='/register'>Sign Up</Link>
-            </div>
-          </div> : null
-        }
-      </div>
+                    </Tabs>
+
+
+                </Toolbar>
+            </AppBar>
+      </Grid>
+          </MuiThemeProvider>
     );
   }
 }
 
-export default NavBar;
+NavBar.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    onLogout: () => dispatch(Logout())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(NavBar));
