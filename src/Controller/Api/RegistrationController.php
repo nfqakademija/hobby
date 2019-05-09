@@ -28,10 +28,9 @@ class RegistrationController extends AbstractFOSRestController
      * @Rest\Post("/security/register", name="register")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param GuardAuthenticatorHandler $guardHandler
      * @return Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
