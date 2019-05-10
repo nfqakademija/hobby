@@ -4,7 +4,9 @@ namespace App\Controller\Api;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Serializer\FormErrorSerializer;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
+use FOS\RestBundle\Serializer\Normalizer\FormErrorHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +21,12 @@ class RegistrationController extends AbstractFOSRestController
     /** @var TokenStorageInterface */
     private $tokenStorageInterface;
 
-    public function __construct(TokenStorageInterface $tokenStorageInterface)
+    /** @var FormErrorSerializer */
+    private $formErrorSerializer;
+
+    public function __construct(FormErrorSerializer $formErrorSerializer)
     {
+        $this->formErrorSerializer = $formErrorSerializer;
         $this->tokenStorageInterface = $tokenStorageInterface;
     }
 
@@ -56,10 +62,10 @@ class RegistrationController extends AbstractFOSRestController
                 'budget' => $user->getBudget()
             ];
 
-            return JsonResponse::create($view);
+            return JsonResponse::create($view, Response::HTTP_OK);
         }
 
-        return JsonResponse::create('Wrong credentials', Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
+        return JsonResponse::create(['errors' => $this->formErrorSerializer->convertFormToArray($form)], Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
     }
 
     /**

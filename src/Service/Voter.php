@@ -8,8 +8,10 @@ use App\Entity\Hobby;
 use App\Entity\User;
 use App\Entity\Vote;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Voter
 {
@@ -25,25 +27,25 @@ class Voter
      * @param int $hobbyId
      * @param User $user
      * @param int $amount
-     * @return string
+     * @return void
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function vote(int $hobbyId, int $amount, User $user): string
+    public function vote(int $hobbyId, int $amount, User $user): void
     {
         if (false === $this->checkAmountAndUpdateUser($user, $amount)) {
-            return 'Insufficient budget';
+            throw new NotFoundHttpException('Insufficient budget');
         }
 
         if (null === $this->em->getRepository(Hobby::class)->find($hobbyId)) {
-            return 'This hobby does not exist';
+            throw new NotFoundHttpException('This hobby does not exist');
         }
 
         /** @var Hobby $hobby */
         $hobby = $this->em->getRepository(Hobby::class)->find($hobbyId);
 
         if (false === $this->updateHobbyAmount($hobby, $amount) || null === $hobby) {
-            return 'Insufficient budget';
+            throw new NotFoundHttpException('Insufficient budget');
         }
 
         /** @var Vote $vote */
@@ -55,9 +57,6 @@ class Voter
 
         $this->em->persist($vote);
         $this->em->flush();
-
-        //TODO returns should be modify
-        return 'success';
     }
 
     /**
