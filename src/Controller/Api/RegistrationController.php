@@ -24,7 +24,7 @@ class RegistrationController extends AbstractFOSRestController
     /** @var FormErrorSerializer */
     private $formErrorSerializer;
 
-    public function __construct(FormErrorSerializer $formErrorSerializer)
+    public function __construct(FormErrorSerializer $formErrorSerializer, TokenStorageInterface $tokenStorageInterface)
     {
         $this->formErrorSerializer = $formErrorSerializer;
         $this->tokenStorageInterface = $tokenStorageInterface;
