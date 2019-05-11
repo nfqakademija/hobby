@@ -27,12 +27,14 @@ const styles = {
     root: {
         flexGrow: 1,
     },
+    Toolbar:{
+      height: 150,
+    },
     Tabs:{
     width: '100%',
     }
 
 };
-
 class NavBar extends Component {
   state ={
       value: 0,
@@ -47,11 +49,9 @@ class NavBar extends Component {
       const {email, isAuth, amount} = this.props.auth;
       return (
           <MuiThemeProvider theme={theme}>
-      <Grid
-          container className={classes.root}
-      >
-            <AppBar  color="default" elevation={8} >
-                <Toolbar >
+      <Grid container className={classes.root} >
+            <AppBar   color="default" elevation={8} >
+                <Toolbar className={classes.height} >
                     <Tabs  className={classes.Tabs}
                            value={this.state.value}
                            onChange={this.handleChange}
@@ -60,7 +60,7 @@ class NavBar extends Component {
                            textColor="primary"
                            centered
                     >
-                          <Tab  component={RouterLinkNav} exact to='/' label="Home" />
+                          <Tab   component={RouterLinkNav} exact to='/' label="Home" />
                           <Tab  component={RouterLinkNav} to='/projects'   label="Projects" />
                           <Tab  component={RouterLinkNav} to='/project-registration' label="Create Project" />
                         {isAuth ? <Tab  component={RouterLink}  to='/user' label={`${email} (${amount}€)`} /> :
@@ -69,10 +69,7 @@ class NavBar extends Component {
                         {isAuth ? <Tab onClick={onLogout}  component={RouterLink}  to='/logout' label='Logout' /> :
                             <Tab  component={RouterLink}  to='/register' label="Sign Up" />
                         }
-
                     </Tabs>
-
-
                 </Toolbar>
             </AppBar>
       </Grid>

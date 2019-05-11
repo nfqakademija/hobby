@@ -1,11 +1,12 @@
-$main-color: #EA7925;
-$link-color: light blue;
-
 
 body {
-  text-decoration: bold;
-  margin: 0;
+
+  width:100%;
+  height:100%;
   padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-decoration: bold;
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   background-color: #F8F8F8;

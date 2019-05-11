@@ -32,10 +32,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    height: 50,
   },
   button: {
     margin: theme.spacing.unit,
     justify: theme.center,
+    height: 50,
   },
 });
 

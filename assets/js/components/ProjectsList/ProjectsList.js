@@ -9,9 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Grid from "@material-ui/core/Grid"
 
 const theme = createMuiTheme({
@@ -20,30 +17,45 @@ const theme = createMuiTheme({
             main: '#EA7925',
         },
         secondary: {
-            main: '#656969',
+            main: '#0044ff',
+        },
+        success: {
+            main : "#ffffff",
         },
     },
 });
 
 
 const styles = theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        alignItems: 'center',
-        width: 500,
-        marginTop: '5%',
-        padding: 10,
-    },
-    margin: {
-        margin: theme.spacing.unit,
-    },
+    // root: {
+    //     flexGrow: 1,
+    // },
+    // paper: {
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     marginTop: '5%',
+    //     padding: 10,
+    //     direction:"column",
+    //
+    //
+    // },
+    //
+    // margin: {
+    //     margin: theme.spacing.unit,
+    // },
 });
 
 
 
 class ProjectsList extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            opened: false,
+        }
+    }
+
 
     componentDidMount() {
     this.props.onGetProjectsList();
@@ -51,56 +63,47 @@ class ProjectsList extends Component {
   }
 
     render() {
-        const { classes } = this.props;
+        // const { classes } = this.props;
     const {projects,onVoteClick} =this.props;
     const {amount} = this.props.auth;
+    const { opened } = this.state;
     let projectsList;
     if(projects.length !== 0) {
       projectsList = projects && projects.map((project, i) => {
         return (
 
-            <MuiThemeProvider theme={theme} className={classes.root} >
-                <Grid  >
-                        <Grid
-                            item xs={12}
-                            container
-                            direction="column"
-                            alignItems="center"
-                        >
-                      <Paper
+            <MuiThemeProvider theme={theme} className={"container"} >
+                <Grid className={'card'}>
+                      <Paper className={'Paper'}
                              container
                              elevation={8}
-                             className={classes.paper}
                              key={i}>
-                        <Typography variant="h4"  align="center" >{project.title}</Typography>
-                        <Typography variant="subheading" color='secondary' align="center" >{project.description}</Typography>
-                        <Typography align="center">Hobby Collected: {project.budget}$</Typography>
-                        <Typography align="center">Amount Needed: {project.amount}$</Typography>
-                        <div item xs={12}>
+                        <Typography  variant="h4" >{project.title}</Typography>
+                        <Typography variant="subheading" color='secondary'>{project.description}</Typography>
+                        <Typography>Hobby Collected: {project.budget}$</Typography>
+                        <Typography>Amount Needed: {project.amount}$</Typography>
+                            <div className={"Paper__Button"}>
                               <Button  variant="contained" onClick={() => onVoteClick(project.id, 5)} disabled={amount < 5}>Vote 5€</Button>
-                              <Button variant="contained" onClick={() => onVoteClick(project.id, 15)} disabled={amount < 15}>Vote 15€</Button>
+                              <Button  variant="contained" onClick={() => onVoteClick(project.id, 15)} disabled={amount < 15}>Vote 15€</Button>
                               <Button  variant="contained" onClick={() => onVoteClick(project.id, 30)} disabled={amount < 30}>Vote 30€</Button>
-                        </div>
-                          <ExpansionPanel
-                              align='center'
-                              elevation={0}>
-                              <ExpansionPanelSummary>
-                                <Button variant="contained">Read More</Button>
-                              </ExpansionPanelSummary>
-                              <ExpansionPanelDetails >
-                                  <Typography
-                                      >
-                                      Hobby Author: {project.username}<br/>
-                                      Hobby Contact: {project.email}
-                                  </Typography>
-                              </ExpansionPanelDetails>
-                          </ExpansionPanel>
+                            </div>
+                          <Button variant="contained" onClick={() => this.setState({ opened: !opened })}
+                          >Read More</Button>
+                          {opened
+                              ? (
+                                    <Typography>
+                                        Hobby Author: {project.username}<br/>
+                                        Hobby Contact: {project.email}
+                                    </Typography>
+                              )
+                              : null
+                          }
                       </Paper>
-                        </Grid>
                 </Grid>
             </MuiThemeProvider>
         )
       })
+
     } else {
       projectsList = <Typography
           variant="h4"
@@ -109,17 +112,19 @@ class ProjectsList extends Component {
       >Projects will be here soon...</Typography>
     }
     return (
-      <div className='ProjectsList'>
-        {projectsList}
-        <Typography
-            variant="h6"
-            gutterBottom
-            align="center"
-        >If you have a project, please{' '}
-          <Link component={ RouterLink } className='Link' to='/project-registration'>Register</Link>
-          {' '}your project(hobby).
-        </Typography>
-      </div>
+        <MuiThemeProvider theme={theme}>
+          <div className='ProjectsList'>
+            {projectsList}
+            <Typography
+                variant="h6"
+                gutterBottom
+                align="center"
+            >If you have a project, please{' '}
+              <Link component={ RouterLink } color={'secondary'} to='/project-registration'>Register</Link>
+              {' '}your project(hobby).
+            </Typography>
+          </div>
+        </MuiThemeProvider>
     );
   }
 }

@@ -17,7 +17,7 @@ const theme = createMuiTheme({
       main: '#EA7925',
     },
     secondary: {
-      main: '#0044ff',
+      main: '#ffffff',
     },
   },
 });
@@ -30,10 +30,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    height: 50,
   },
   button: {
     margin: theme.spacing.unit,
     justify: theme.center,
+    height: 50,
   },
 });
 
@@ -143,7 +145,7 @@ class ProjectRegistration extends Component {
                   gutterBottom
                   fullWidth
               >
-                {loading ? <Loader color={'#fff'} h={15} /> : 'Place your hobby'}
+                {loading ? <Loader textColor="secondary" color={'#fff'} h={15} /> : 'Place your hobby'}
               </Button>
             </form>
           </Paper>

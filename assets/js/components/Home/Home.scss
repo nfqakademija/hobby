@@ -2,13 +2,22 @@
 
 
 .Home {
-  margin: 8% auto 0;
-  display: flex;
+  margin: 8% 150px 50px;
+  background-size: cover;
+  //display: flex;
   //justify-content: center;
-  flex-direction: column;
-  height: 80vh;
-  padding: 10px;
+  //flex-direction: column;
+  //height: 50%;
+  ////padding: 0 auto;
+}
+* {
+  box-sizing: border-box;
 }
 
 
-
+.Home-floatLeft{
+   margin: 0 0 50px;
+ }
+.subheading{
+  font-size: 30px;
+}
