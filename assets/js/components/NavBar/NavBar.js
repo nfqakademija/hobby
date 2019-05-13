@@ -8,12 +8,12 @@ import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {onLogOut as Logout} from '../../thunks/logoutThunk';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography'
+
 
 const theme = createMuiTheme({
     palette: {
@@ -21,7 +21,7 @@ const theme = createMuiTheme({
             main: '#EA7925',
         },
         secondary: {
-            main: '#0044ff',
+            main: '#ffffff',
         },
     },
 });
@@ -34,8 +34,14 @@ const styles = {
         flexGrow: 1,
     },
     menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
+        marginRight: 100,
+    },
+    menuButtons:{
+        marginLeft: 100,
+    },
+
+    menuButtonRight: {
+        marginRight: 5,
     },
     sectionDesktop: {
         display: 'none',
@@ -66,10 +72,11 @@ class NavBar extends Component {
 
 
    render() {
-      const { classes, onLogout } = this.props;
+      const { classes } = this.props;
       const { anchorEl } = this.state;
       const { isAuth } = this.props.auth;
       const isMenuOpen = Boolean(anchorEl)
+
 
        const renderMenu = (
            <Menu
@@ -80,15 +87,7 @@ class NavBar extends Component {
                onClose={this.handleMenuClose}
            >
                <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-               <MenuItem
-               //     onClick={() => {
-               //     handleMenuClose();
-               //     anotherfunctionCall();
-               // }}
-                   onClick={this.handleMenuClose}
-                         component={RouterLink} to='/logout'>Logout</MenuItem>
-
-
+               <MenuItem onClick={() => { this.handleMenuClose();this.props.auth.onLogout()}} component={RouterLink} to='/logout'>Logout</MenuItem>
            </Menu>
        );
 
@@ -96,23 +95,27 @@ class NavBar extends Component {
       return (
           <MuiThemeProvider theme={theme}>
       <div className={classes.root} >
-            <AppBar  position="static" color="default" >
-                <Toolbar >
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-                        <MenuIcon />
-                    </IconButton>
+            <AppBar position="static" color="default">
+                <Toolbar>
+                    <div className={classes.sectionDesktop}>
+                        <div className={classes.menuButtons}>
+                        {isAuth ? <Button  component={RouterLinkNav} exact to='/'>Home</Button> :
+                           null
+                        }
+
+                        {isAuth ? <Button  component={RouterLinkNav} to='/projects'>Projects</Button> :
+                            null
+                        }
+                        {isAuth ? <Button  component={RouterLinkNav} to='/project-registration'>Create Project</Button> :
+                            null
+                        }
+                        </div>
+                    </div>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        <Button  component={RouterLinkNav} exact to='/'>Home</Button>
-                        <Button  component={RouterLinkNav} to='/projects'>Projects</Button>
-                        <Button  component={RouterLinkNav} to='/project-registration'>Create Project</Button>
-
-                        {isAuth ? null :
-                            <Button color='primary' variant="contained" component={RouterLink}  to='/register'>Sign Up</Button>
-                        }
                         {isAuth ? <Button disabled  component={RouterLink}>{this.props.auth.email}  {this.props.auth.amount}€</Button>
                             :
-                            <Button color='primary' variant="contained" component={RouterLink}  to='/login'>Sign In</Button>
+                            null
                         }
                         {isAuth ? <IconButton
                                 aria-owns={isMenuOpen ? 'material-appbar' : undefined}
@@ -123,6 +126,14 @@ class NavBar extends Component {
                             :
                             null
                         }
+                        <div className={classes.menuButton} >
+                        {isAuth ? null :
+                            <Button className={classes.menuButtonRight} color='primary' variant="contained" component={RouterLink}  to='/register'>Sign Up</Button>
+                        }
+                        {isAuth ? null :
+                            <Button  color='primary' variant="contained" component={RouterLink}  to='/login'>Sign In</Button>
+                        }
+                        </div>
                     </div>
                 </Toolbar>
             </AppBar>
