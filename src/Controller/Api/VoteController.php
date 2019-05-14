@@ -40,7 +40,5 @@ class VoteController extends AbstractFOSRestController
         } catch (\Throwable $exception) {
             return JsonResponse::create(['error' => $exception->getMessage()], Response::HTTP_SERVICE_UNAVAILABLE);
         }
-
-
     }
 }
