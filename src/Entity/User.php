@@ -56,6 +56,12 @@ class User implements UserInterface, \Serializable
      */
     private $budget;
 
+    /**
+     * @var Company
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id")
+     */
+    private $company;
+
     public function __construct()
     {
         $this->setBudget(30);
@@ -75,7 +81,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setId(?int $id): User
+    public function setId(?int $id): self
     {
         $this->id = $id;
 
@@ -95,7 +101,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setEmail(?string $email): User
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -135,7 +141,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setUsername(?string $username): User
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 
@@ -155,7 +161,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setRole(?string $role): User
+    public function setRole(?string $role): self
     {
         $this->role = $role;
 
@@ -175,9 +181,29 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setBudget(?int $budget): User
+    public function setBudget(?int $budget): self
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return Company
+     */
+    public function getCompany(): Company
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     *
+     * @return User
+     */
+    public function setCompany(Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }

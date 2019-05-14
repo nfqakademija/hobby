@@ -142,7 +142,7 @@ class Hobby
      *
      * @return Hobby
      */
-    public function setAmount(?int $amount): Hobby
+    public function setAmount(?int $amount): self
     {
         $this->amount = $amount;
 
@@ -162,7 +162,7 @@ class Hobby
      *
      * @return Hobby
      */
-    public function setBudget(?int $budget): Hobby
+    public function setBudget(?int $budget): self
     {
         $this->budget = $budget;
 
