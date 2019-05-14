@@ -8,11 +8,22 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegistrationController extends AbstractFOSRestController
 {
+    /** @var TokenStorageInterface */
+    private $tokenStorageInterface;
+
+    public function __construct(TokenStorageInterface $tokenStorageInterface)
+    {
+        $this->tokenStorageInterface = $tokenStorageInterface;
+    }
+
     /**
      * @Rest\Post("/security/register", name="register")
      * @param Request $request
@@ -26,10 +37,7 @@ class RegistrationController extends AbstractFOSRestController
         $data = json_decode($request->getContent(), true);
         $form->submit($data);
 
-//        var_dump($form->isValid());die;
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -40,11 +48,29 @@ class RegistrationController extends AbstractFOSRestController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            return JsonResponse::create('', Response::HTTP_OK);
+            $this->authenticateUser($user);
+
+            $view = [
+                'email' => $user->getEmail(),
+                'budget' => $user->getBudget()
+            ];
+
+            return JsonResponse::create($view);
         }
 
         return JsonResponse::create('Wrong credentials', Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
+    }
+
+    /**
+     * @param User $user
+     * @return void
+     */
+    private function authenticateUser(User $user): void
+    {
+        $providerKey = 'main';
+        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+
+        $this->tokenStorageInterface->setToken($token);
     }
 }
