@@ -10,16 +10,24 @@ use FOS\RestBundle\Serializer\Normalizer\FormErrorHandler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegistrationController extends AbstractFOSRestController
 {
+
+    /** @var TokenStorageInterface */
+    private $tokenStorageInterface;
+  
     /** @var FormErrorSerializer */
     private $formErrorSerializer;
 
-    public function __construct(FormErrorSerializer $formErrorSerializer)
+    public function __construct(TokenStorageInterface $tokenStorageInterface, FormErrorSerializer $formErrorSerializer)
     {
+        $this->tokenStorageInterface = $tokenStorageInterface;
         $this->formErrorSerializer = $formErrorSerializer;
     }
 
@@ -37,7 +45,6 @@ class RegistrationController extends AbstractFOSRestController
         $form->submit($data);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -48,11 +55,29 @@ class RegistrationController extends AbstractFOSRestController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            return JsonResponse::create([], Response::HTTP_OK);
+            $this->authenticateUser($user);
+
+            $view = [
+                'email' => $user->getEmail(),
+                'budget' => $user->getBudget()
+            ];
+
+            return JsonResponse::create($view);
         }
 
         return JsonResponse::create(['errors' => $this->formErrorSerializer->convertFormToArray($form)], Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
+    }
+
+    /**
+     * @param User $user
+     * @return void
+     */
+    private function authenticateUser(User $user): void
+    {
+        $providerKey = 'main';
+        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+
+        $this->tokenStorageInterface->setToken($token);
     }
 }
