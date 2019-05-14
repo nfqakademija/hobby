@@ -1,6 +1,7 @@
 import * as actions from '../actions/loginActions';
 import {authUser} from '../actions/authActions';
 import axios from 'axios';
+import {setUserToLS} from '../storage/storage';
 
 export const onFormSubmit = (user, history) => (dispatch) => {
   dispatch(actions.onFormLoading());
@@ -17,6 +18,7 @@ export const onFormSubmit = (user, history) => (dispatch) => {
   }
   axios.post('/api/security/login', loginJson)
       .then(res =>{
+        setUserToLS(res.data)
         dispatch(authUser(res.data))
         dispatch(actions.onLoginFormSuccess(user))
         history.push('/')

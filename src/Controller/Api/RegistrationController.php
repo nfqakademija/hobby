@@ -18,16 +18,17 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class RegistrationController extends AbstractFOSRestController
 {
+
     /** @var TokenStorageInterface */
     private $tokenStorageInterface;
-
+  
     /** @var FormErrorSerializer */
     private $formErrorSerializer;
 
-    public function __construct(FormErrorSerializer $formErrorSerializer, TokenStorageInterface $tokenStorageInterface)
+    public function __construct(TokenStorageInterface $tokenStorageInterface, FormErrorSerializer $formErrorSerializer)
     {
-        $this->formErrorSerializer = $formErrorSerializer;
         $this->tokenStorageInterface = $tokenStorageInterface;
+        $this->formErrorSerializer = $formErrorSerializer;
     }
 
     /**
@@ -62,7 +63,7 @@ class RegistrationController extends AbstractFOSRestController
                 'budget' => $user->getBudget()
             ];
 
-            return JsonResponse::create($view, Response::HTTP_OK);
+            return JsonResponse::create($view);
         }
 
         return JsonResponse::create(['errors' => $this->formErrorSerializer->convertFormToArray($form)], Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
