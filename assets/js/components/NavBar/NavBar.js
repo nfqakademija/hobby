@@ -14,7 +14,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Typography from '@material-ui/core/Typography'
 
-
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -113,7 +112,7 @@ class NavBar extends Component {
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        {isAuth ? <Button disabled  component={RouterLink}>{this.props.auth.email}  {this.props.auth.amount}€</Button>
+                        {isAuth ? <Button color='default' disabled >{this.props.auth.email}  {this.props.auth.amount}€</Button>
                             :
                             null
                         }
@@ -128,10 +127,12 @@ class NavBar extends Component {
                         }
                         <div className={classes.menuButton} >
                         {isAuth ? null :
-                            <Button className={classes.menuButtonRight} color='primary' variant="contained" component={RouterLink}  to='/register'>Sign Up</Button>
+                            <Button className={classes.menuButtonRight} textColor="secondary" color='primary' variant="contained" component={RouterLink}  to='/register'>
+                                <Typography color="secondary" >Sign Up</Typography></Button>
                         }
                         {isAuth ? null :
-                            <Button  color='primary' variant="contained" component={RouterLink}  to='/login'>Sign In</Button>
+                            <Button  color='primary' variant="contained" component={RouterLink}  to='/login'>
+                                <Typography color="secondary" >Sign In</Typography></Button>
                         }
                         </div>
                     </div>

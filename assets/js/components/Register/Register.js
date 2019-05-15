@@ -21,6 +21,9 @@ const theme = createMuiTheme({
     secondary: {
       main: '#0044ff',
     },
+    error: {
+      main: '#ffffff',
+    }
   },
 });
 
@@ -124,7 +127,8 @@ class Register extends Component {
                     fullWidth
                     gutterBottom
                     type="submit">
-                  {loading ? <Loader color={'#fff'} h={15} /> : 'Sign Up'}
+                  {loading ? <Loader color={'#fff'} h={15} /> :
+                      <Typography color="error" >Sign up</Typography> }
                 </Button>
               </form>
             </Paper>,

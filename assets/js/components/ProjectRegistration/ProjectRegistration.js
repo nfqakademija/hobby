@@ -52,9 +52,9 @@ class ProjectRegistration extends Component {
       description,
       amount,
       loading,
-      error
+      error,
     } =this.props.projectRegister;
-    const {onInputChange, onDateChange} = this.props;
+    const {onInputChange} = this.props;
     const { classes } = this.props;
     const { email } =this.props.auth
     return (
@@ -69,6 +69,7 @@ class ProjectRegistration extends Component {
               color: 'red',
               textAlign: 'center'
             }}>{error}</p> : null}
+
             <form
                 onSubmit={this.onFormSubmit}
                 className={classes.container}

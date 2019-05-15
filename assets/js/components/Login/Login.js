@@ -22,6 +22,9 @@ const theme = createMuiTheme({
     secondary: {
       main: '#0044ff',
     },
+    error: {
+      main: '#ffffff',
+    },
   },
 });
 
@@ -103,7 +106,8 @@ class Login extends Component {
                   gutterBottom
                   type="submit"
               >
-                {loading ? <Loader color={'#fff'} h={15} /> : 'Sign Up'}
+                {loading ? <Loader color={'#fff'} h={15} /> :
+                    <Typography color="error" >Sign In</Typography>}
               </Button>
             </form>
           </Paper>,

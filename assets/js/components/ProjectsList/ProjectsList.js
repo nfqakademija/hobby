@@ -7,7 +7,7 @@ import Link from "@material-ui/core/Link";
 import {onVote} from '../../thunks/voteThunk';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid"
 
@@ -19,32 +19,8 @@ const theme = createMuiTheme({
         secondary: {
             main: '#0044ff',
         },
-        success: {
-            main : "#ffffff",
-        },
     },
 });
-
-
-const styles = theme => ({
-    // root: {
-    //     flexGrow: 1,
-    // },
-    // paper: {
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     marginTop: '5%',
-    //     padding: 10,
-    //     direction:"column",
-    //
-    //
-    // },
-    //
-    // margin: {
-    //     margin: theme.spacing.unit,
-    // },
-});
-
 
 
 class ProjectsList extends Component {
@@ -63,7 +39,6 @@ class ProjectsList extends Component {
   }
 
     render() {
-        // const { classes } = this.props;
     const {projects,onVoteClick} =this.props;
     const {amount} = this.props.auth;
     const { opened } = this.state;
@@ -141,4 +116,4 @@ const mapDispatchToProps = (dispatch) => ({
   onVoteClick: (projectId, amount) => dispatch(onVote(projectId, amount))
 
 });
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(ProjectsList));
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectsList);
