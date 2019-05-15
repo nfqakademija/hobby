@@ -4,7 +4,6 @@ export function getUserFromLS() {
 }
 
 export function setUserToLS(user) {
-  console.log('User set to LS')
   localStorage.setItem('hobbyCraft-user', JSON.stringify(user))
   return;
 }
