@@ -31,6 +31,7 @@ class Routes extends Component {
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
             {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}
+            <Route path='/admin' />
             <Route path='/project/:id' component={ProjectInfo}/>
           </Switch>
         </Fragment>

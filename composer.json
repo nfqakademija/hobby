@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^1.10",
+        "easycorp/easyadmin-bundle": "^2.1",
         "friendsofsymfony/rest-bundle": "^2.5",
         "jms/serializer-bundle": "^3.2",
         "sensio/framework-extra-bundle": "^5.3",
