@@ -146,7 +146,7 @@ class Login extends Component {
                   fullWidth
                   gutterBottom
                   type="submit"
-                  // onClick={this.handleClick}
+                  onClick={this.handleClick}
               >
                 {loading ? <Loader color={'#fff'} h={15} /> :
                     <Typography color="error" >Sign In</Typography>}

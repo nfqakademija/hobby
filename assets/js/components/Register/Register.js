@@ -11,6 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const theme = createMuiTheme({
@@ -46,6 +49,26 @@ const styles = theme => ({
 
 
 class Register extends Component {
+  state = {
+    open: false,
+  };
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false });
+  };
+
+  handleClickVariant = variant => () => {
+    this.props.enqueueSnackbar('This is a warning message!', { variant });
+  };
+
+
   onFormSubmit = (e) => {
     e.preventDefault();
     this.props.onFormSubmit(this.props.register, this.props.history);
@@ -64,10 +87,33 @@ class Register extends Component {
                   gutterBottom
                   align="center">Sign Up
               </Typography>
-              {error ? <p style={{
-                color: 'red',
-                textAlign: 'center'
-              }}>{error}</p> : null}
+              {error ? <Snackbar
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  open={this.state.open}
+                  autoHideDuration={6000}
+                  onClose={this.handleClose}
+                  ContentProps={{
+                    'aria-describedby': 'message-id',
+                  }}
+                  message={<span id="message-id">{error}</span>}
+                  action={[
+                    <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
+                      CLOSE
+                    </Button>,
+                    <IconButton
+                        key="close"
+                        aria-label="Close"
+                        color="inherit"
+                        className={classes.close}
+                        onClick={this.handleClose}
+                    >
+                      <CloseIcon />
+                    </IconButton>,
+                  ]}
+              /> : null}
               <form onSubmit={this.onFormSubmit}  className={classes.container}  noValidate autoComplete="off">
                 <TextField
                       type="text"
@@ -126,6 +172,7 @@ class Register extends Component {
                     margin="normal"
                     fullWidth
                     gutterBottom
+                    onClick={this.handleClickVariant('warning')}
                     type="submit">
                   {loading ? <Loader color={'#fff'} h={15} /> :
                       <Typography color="error" >Sign up</Typography> }
