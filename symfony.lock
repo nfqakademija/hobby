@@ -93,6 +93,19 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "easycorp/easyadmin-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "0a51040a43c6f2172a3a0135cd15daf2043905d7"
+        },
+        "files": [
+            "config/packages/easy_admin.yaml",
+            "config/routes/easy_admin.yaml"
+        ]
+    },
     "friendsofsymfony/rest-bundle": {
         "version": "2.2",
         "recipe": {
@@ -176,6 +189,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.2"
     },
+    "pagerfanta/pagerfanta": {
+        "version": "v2.1.2"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -251,6 +267,9 @@
     },
     "symfony/event-dispatcher": {
         "version": "v4.2.4"
+    },
+    "symfony/expression-language": {
+        "version": "v4.2.8"
     },
     "symfony/filesystem": {
         "version": "v4.2.4"
@@ -455,6 +474,18 @@
     },
     "symfony/yaml": {
         "version": "v4.2.4"
+    },
+    "twig/extensions": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "ddb2e0a77773b7fd75d8d649545f174e664500ab"
+        },
+        "files": [
+            "config/packages/twig_extensions.yaml"
+        ]
     },
     "twig/twig": {
         "version": "v2.7.4"
