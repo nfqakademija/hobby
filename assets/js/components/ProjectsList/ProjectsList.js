@@ -3,11 +3,35 @@ import {Link as RouterLink } from 'react-router-dom';
 import './ProjectsList.scss';
 import {setProjectList} from '../../thunks/getProjects';
 import {connect} from "react-redux";
-import Typography from '@material-ui/core/Typography';
 import Link from "@material-ui/core/Link";
 import {onVote} from '../../thunks/voteThunk';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Grid from "@material-ui/core/Grid"
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#EA7925',
+        },
+        secondary: {
+            main: '#0044ff',
+        },
+    },
+});
+
 
 class ProjectsList extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            opened: false,
+        }
+    }
+
 
   componentDidMount() {
     this.props.onGetProjectsList();
@@ -17,21 +41,41 @@ class ProjectsList extends Component {
   render() {
     const {projects,onVoteClick} =this.props;
     const {amount} = this.props.auth;
+    const { opened } = this.state;
     let projectsList;
     if(projects.length !== 0) {
       projectsList = projects && projects.map((project, i) => {
         return (
-          <div className='Project-item' key={i}>
-            <span className='Project-item__span'><span className="bold">Hobby Author:</span> {project.username}</span>
-            <span className='Project-item__span'><span className="bold">Hobby Title:</span> {project.title}</span>
-            <span className='Project-item__span'><span className="bold">Hobby Description:</span> {project.description}</span>
-            <span className='Project-item__span'><span className="bold">Hobby Collected:</span> {project.budget}</span>
-            <span className='Project-item__span'><span className="bold">Hobby Goal:</span> {project.amount}</span>
-            <span className='Project-item__span'><span className="bold">Hobby Contact:</span> {project.email}</span>
-            <button onClick={() => onVoteClick(project.id, 5)} disabled={amount < 5}>Vote 5€</button>
-            <button onClick={() => onVoteClick(project.id, 15)} disabled={amount < 15}>Vote 15€</button>
-            <button onClick={() => onVoteClick(project.id, 30)} disabled={amount < 30}>Vote 30€</button>
-          </div>
+
+            <MuiThemeProvider theme={theme} className={"container"} >
+                <Grid className={'card'}>
+                      <Paper className={'Paper'}
+                             container
+                             elevation={8}
+                             key={i}>
+                        <Typography  variant="h4" >{project.title}</Typography>
+                        <Typography variant="subheading" color='secondary'>{project.description}</Typography>
+                        <Typography>Hobby Collected: {project.budget}$</Typography>
+                        <Typography>Amount Needed: {project.amount}$</Typography>
+                            <div className={"Paper__Button"}>
+                              <Button  variant="contained" onClick={() => onVoteClick(project.id, 5)} disabled={amount < 5}>Vote 5€</Button>
+                              <Button  variant="contained" onClick={() => onVoteClick(project.id, 15)} disabled={amount < 15}>Vote 15€</Button>
+                              <Button  variant="contained" onClick={() => onVoteClick(project.id, 30)} disabled={amount < 30}>Vote 30€</Button>
+                            </div>
+                          <Button variant="contained" onClick={() => this.setState({ opened: !opened })}
+                          >Read More</Button>
+                          {opened
+                              ? (
+                                    <Typography>
+                                        Hobby Author: {project.username}<br/>
+                                        Hobby Contact: {project.email}
+                                    </Typography>
+                              )
+                              : null
+                          }
+                      </Paper>
+                </Grid>
+            </MuiThemeProvider>
         )
       })
     } else {
@@ -42,17 +86,19 @@ class ProjectsList extends Component {
       >Projects will be here soon...</Typography>
     }
     return (
-      <div className='ProjectsList'>
-        {projectsList}
-        <Typography
-            variant="h6"
-            gutterBottom
-            align="center"
-        >If you have a project, please{' '}
-          <Link component={ RouterLink } className='Link' to='/project-registration'>Register</Link>
-          {' '}your project(hobby).
-        </Typography>
-      </div>
+        <MuiThemeProvider theme={theme}>
+          <div className='ProjectsList'>
+            {projectsList}
+            <Typography
+                variant="h6"
+                gutterBottom
+                align="center"
+            >If you have a project, please{' '}
+              <Link component={ RouterLink } color={'secondary'} to='/project-registration'>Register</Link>
+              {' '}your project(hobby).
+            </Typography>
+          </div>
+        </MuiThemeProvider>
     );
   }
 }

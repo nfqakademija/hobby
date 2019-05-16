@@ -1,6 +1,5 @@
 import React from 'react';
-import {Link as RouterLink } from "react-router-dom";
-import Link from '@material-ui/core/Link';
+import {Link as RouterLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import './Home.scss';
 import Button from "@material-ui/core/Button";
@@ -12,7 +11,7 @@ const theme = createMuiTheme({
             main: '#EA7925',
         },
         secondary: {
-            main: '#0044ff',
+            main: '#ffffff',
         },
     },
 });
@@ -21,12 +20,13 @@ const Home = ( ) => {
   return (
       <MuiThemeProvider theme={theme}>
         <div className='Home'>
+            <div className='Home-floatLeft'>
                 <Typography
                     variant="h3"
                     gutterBottom
                     align="Left"
                 >A New and Better way to engange<br/>
-                and retain employs
+                and retain employees
                 </Typography>
             <Typography
                 variant="subheading"
@@ -36,13 +36,16 @@ const Home = ( ) => {
                 employees hobby budget, its a perfect<br/>
                 internal croud funding system for you !
             </Typography>
-            <Button
-                variant="contained"
-                color="primary"
-                size="large"
-            >Large</Button>
-
         </div>
+          <Button
+              className='Home'
+              component={RouterLink}
+              variant="contained"
+              color="primary"
+              size="large"
+              to='/login'
+          ><Typography color="secondary" >Get Started</Typography></Button>
+            </div>
       </MuiThemeProvider>
   );
 };

@@ -12,6 +12,8 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 
+
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -19,6 +21,9 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#0044ff',
+    },
+    error: {
+      main: '#ffffff',
     },
   },
 });
@@ -31,10 +36,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    height: 50,
   },
   button: {
     margin: theme.spacing.unit,
     justify: theme.center,
+    height: 50,
   },
 });
 
@@ -91,15 +98,16 @@ class Login extends Component {
                   className={classes.textField}
               />
               <Button
-                  type="submit"
                   variant="contained"
-                  color="primary"
                   className={classes.button}
+                  color={"primary"}
                   margin="normal"
-                  gutterBottom
                   fullWidth
+                  gutterBottom
+                  type="submit"
               >
-                {loading ? <Loader color={'#fff'} h={15} /> : 'Sign In'}
+                {loading ? <Loader color={'#fff'} h={15} /> :
+                    <Typography color="error" >Sign In</Typography>}
               </Button>
             </form>
           </Paper>,

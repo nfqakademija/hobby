@@ -21,6 +21,9 @@ const theme = createMuiTheme({
     secondary: {
       main: '#0044ff',
     },
+    error: {
+      main: '#ffffff',
+    }
   },
 });
 
@@ -32,10 +35,12 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    height: 50,
   },
   button: {
     margin: theme.spacing.unit,
     justify: theme.center,
+    height: 50,
   },
 });
 
@@ -122,7 +127,8 @@ class Register extends Component {
                     fullWidth
                     gutterBottom
                     type="submit">
-                  {loading ? <Loader color={'#fff'} h={15} /> : 'Sign Up'}
+                  {loading ? <Loader color={'#fff'} h={15} /> :
+                      <Typography color="error" >Sign up</Typography> }
                 </Button>
               </form>
             </Paper>,
