@@ -31,12 +31,9 @@ class VoteRepository extends ServiceEntityRepository
 
         $qb
             ->select(
-                'hobby.id,
-                hobby.title,
-                hobby.username,
-                hobby.description,
-                hobby.budget,
-                hobby.amount'
+                'hobby.title',
+                'vote.id',
+                'vote.amount'
             )
             ->innerJoin(
                 'vote.user',
