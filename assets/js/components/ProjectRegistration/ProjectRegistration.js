@@ -9,6 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -40,6 +43,22 @@ const styles = theme => ({
 });
 
 class ProjectRegistration extends Component {
+  state = {
+    open: false,
+  };
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false });
+  };
+
+
   onFormSubmit = (e) => {
     e.preventDefault();
     this.props.onFormSubmit(this.props.projectRegister, this.props.history, this.props.auth.email)
@@ -65,10 +84,33 @@ class ProjectRegistration extends Component {
                 gutterBottom
                 align="center">Register Your Hobby
             </Typography>
-            {error ? <p style={{
-              color: 'red',
-              textAlign: 'center'
-            }}>{error}</p> : null}
+            {error ? <Snackbar
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                open={this.state.open}
+                autoHideDuration={6000}
+                onClose={this.handleClose}
+                ContentProps={{
+                  'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">{error}</span>}
+                action={[
+                  <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
+                    CLOSE
+                  </Button>,
+                  <IconButton
+                      key="close"
+                      aria-label="Close"
+                      color="inherit"
+                      className={classes.close}
+                      onClick={this.handleClose}
+                  >
+                    <CloseIcon />
+                  </IconButton>,
+                ]}
+            />: null}
 
             <form
                 onSubmit={this.onFormSubmit}
@@ -145,6 +187,7 @@ class ProjectRegistration extends Component {
                   margin="normal"
                   gutterBottom
                   fullWidth
+                  onClick={this.handleClick}
               >
                 {loading ? <Loader textColor="secondary" color={'#fff'} h={15} /> : 'Place your hobby'}
               </Button>
