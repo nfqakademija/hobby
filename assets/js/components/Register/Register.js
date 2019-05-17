@@ -14,6 +14,8 @@ import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/st
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import ErrorIcon from '@material-ui/icons/Error';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const theme = createMuiTheme({
@@ -26,7 +28,7 @@ const theme = createMuiTheme({
     },
     error: {
       main: '#ffffff',
-    }
+    },
   },
 });
 
@@ -44,6 +46,17 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     justify: theme.center,
     height: 50,
+  },
+  root: {
+    background: theme.palette.error.dark,
+  },
+  icon: {
+    fontSize:20,
+    marginRight: 10,
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
   },
 });
 
@@ -63,11 +76,6 @@ class Register extends Component {
     }
     this.setState({ open: false });
   };
-
-  handleClickVariant = variant => () => {
-    this.props.enqueueSnackbar('This is a warning message!', { variant });
-  };
-
 
   onFormSubmit = (e) => {
     e.preventDefault();
@@ -90,28 +98,31 @@ class Register extends Component {
               {error ? <Snackbar
                   anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'center',
                   }}
                   open={this.state.open}
                   autoHideDuration={6000}
                   onClose={this.handleClose}
                   ContentProps={{
                     'aria-describedby': 'message-id',
+                      classes: {
+                          root: classes.root
+                      },
                   }}
-                  message={<span id="message-id">{error}</span>}
+                  message={<span className={classes.message}>
+                    <ErrorIcon className={classes.icon}/>
+                    {error}
+                  </span>}
                   action={[
-                    <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
-                      CLOSE
-                    </Button>,
-                    <IconButton
-                        key="close"
-                        aria-label="Close"
-                        color="inherit"
-                        className={classes.close}
-                        onClick={this.handleClose}
-                    >
-                      <CloseIcon />
-                    </IconButton>,
+                    <Tooltip title="Close">
+                      <IconButton aria-label="Close"
+                                  key="close"
+                                  color="inherit"
+                                  className={classes.close}
+                                  onClick={this.handleClose}>
+                        <CloseIcon />
+                      </IconButton>
+                    </Tooltip>,
                   ]}
               /> : null}
               <form onSubmit={this.onFormSubmit}  className={classes.container}  noValidate autoComplete="off">
@@ -168,6 +179,7 @@ class Register extends Component {
                 <Button
                     variant="contained"
                     color="primary"
+                    textColor="secondary"
                     className={classes.button}
                     margin="normal"
                     fullWidth

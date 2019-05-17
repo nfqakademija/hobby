@@ -11,9 +11,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Snackbar from '@material-ui/core/Snackbar';
+import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
+import ErrorIcon from '@material-ui/icons/Error';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 
@@ -45,6 +47,17 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     justify: theme.center,
     height: 50,
+  },
+  root: {
+    background: theme.palette.error.dark,
+  },
+  icon: {
+    fontSize:20,
+    marginRight: 10,
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
   },
 });
 
@@ -86,28 +99,31 @@ class Login extends Component {
             {error ? <Snackbar
                 anchorOrigin={{
                   vertical: 'bottom',
-                  horizontal: 'left',
+                  horizontal: 'center',
                 }}
                 open={this.state.open}
                 autoHideDuration={6000}
                 onClose={this.handleClose}
                 ContentProps={{
                   'aria-describedby': 'message-id',
+                  classes: {
+                    root: classes.root
+                  },
                 }}
-                message={<span id="message-id">{error}</span>}
+                message={<span className={classes.message}>
+                    <ErrorIcon className={classes.icon}/>
+                  {error}
+                  </span>}
                 action={[
-                  <Button key="undo" color="secondary" size="small" onClick={this.handleClose}>
-                    CLOSE
-                  </Button>,
-                  <IconButton
-                      key="close"
-                      aria-label="Close"
-                      color="inherit"
-                      className={classes.close}
-                      onClick={this.handleClose}
-                  >
-                    <CloseIcon />
-                  </IconButton>,
+                  <Tooltip title="Close">
+                    <IconButton aria-label="Close"
+                                key="close"
+                                color="inherit"
+                                className={classes.close}
+                                onClick={this.handleClose}>
+                      <CloseIcon />
+                    </IconButton>
+                  </Tooltip>,
                 ]}
             /> : null}
             <form
@@ -140,14 +156,14 @@ class Login extends Component {
               />
               <Button
                   variant="contained"
+                  color="primary"
+                  textColor="secondary"
                   className={classes.button}
-                  color={"primary"}
                   margin="normal"
                   fullWidth
                   gutterBottom
-                  type="submit"
                   onClick={this.handleClick}
-              >
+                  type="submit">
                 {loading ? <Loader color={'#fff'} h={15} /> :
                     <Typography color="error" >Sign In</Typography>}
               </Button>
