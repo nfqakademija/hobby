@@ -37,7 +37,7 @@ const theme = createMuiTheme({
 const styles = theme => ({
   main: {
     width: 'auto',
-    display: 'block', // Fix IE 11 issue.
+    display: 'block',
     marginLeft: theme.spacing.unit * 3,
     marginRight: theme.spacing.unit * 3,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
@@ -46,7 +46,6 @@ const styles = theme => ({
       marginRight: 'auto',
     },
   },
-
   paper: {
     marginTop: theme.spacing.unit * 8,
     display: 'flex',
@@ -63,13 +62,10 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     height: 50,
   },
-  button: {
-    margin: theme.spacing.unit,
-    justify: theme.center,
+  submit: {
+    marginTop: theme.spacing.unit * 3,
     height: 50,
   },
   root: {
@@ -121,9 +117,8 @@ class Login extends Component {
               <LockOutlinedIcon />
             </Avatar>
             <Typography
-                variant="h5"
-                gutterBottom
-                align="center">Sign In
+                component="h1" variant="h5">
+              Sign In
             </Typography>
             {error ? <Snackbar
                 anchorOrigin={{
@@ -186,7 +181,7 @@ class Login extends Component {
                   variant="contained"
                   color="primary"
                   textColor="secondary"
-                  className={classes.button}
+                  className={classes.submit}
                   margin="normal"
                   fullWidth
                   gutterBottom
