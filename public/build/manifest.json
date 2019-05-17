@@ -1,7 +1,7 @@
 {
-  "build/0.283bfa27.css": "/build/0.283bfa27.css",
-  "build/0.a05a36bf.js": "/build/0.a05a36bf.js",
-  "build/index.css": "/build/index.c5ab3788.css",
-  "build/index.js": "/build/index.8d35e859.js",
-  "build/runtime.js": "/build/runtime.1ba6bf05.js"
+  "build/index.css": "/build/index.css",
+  "build/index.js": "/build/index.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors~index.css": "/build/vendors~index.css",
+  "build/vendors~index.js": "/build/vendors~index.js"
 }

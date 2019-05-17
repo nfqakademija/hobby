@@ -172,7 +172,7 @@ class Register extends Component {
                     margin="normal"
                     fullWidth
                     gutterBottom
-                    onClick={this.handleClickVariant('warning')}
+                    onClick={this.handleClick}
                     type="submit">
                   {loading ? <Loader color={'#fff'} h={15} /> :
                       <Typography color="error" >Sign up</Typography> }

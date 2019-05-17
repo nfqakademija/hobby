@@ -86,7 +86,7 @@ class NavBar extends Component {
                onClose={this.handleMenuClose}
            >
                <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-               <MenuItem onClick={() => { this.handleMenuClose();this.props.auth.onLogout()}} component={RouterLink} to='/logout'>Logout</MenuItem>
+               <MenuItem onClick={this.props.auth.onLogout} component={RouterLink} to='/logout'>Logout</MenuItem>
            </Menu>
        );
 
