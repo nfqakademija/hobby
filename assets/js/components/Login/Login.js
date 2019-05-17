@@ -16,8 +16,9 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import ErrorIcon from '@material-ui/icons/Error';
 import Tooltip from '@material-ui/core/Tooltip';
-
-
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,18 +35,37 @@ const theme = createMuiTheme({
 });
 
 const styles = theme => ({
-  container: {
+  main: {
+    width: 'auto',
+    display: 'block',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      width: 400,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
     display: 'flex',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+  },
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: '#EA7925',
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing.unit,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     height: 50,
   },
-  button: {
-    margin: theme.spacing.unit,
-    justify: theme.center,
+  submit: {
+    marginTop: theme.spacing.unit * 3,
     height: 50,
   },
   root: {
@@ -90,11 +110,15 @@ class Login extends Component {
     const { classes } = this.props;
     return (
         <MuiThemeProvider theme={theme}>
-          <Paper elevation={8} className='Login'>
+          <main className={classes.main}>
+            <Paper className={classes.paper}>
+            <CssBaseline />
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
             <Typography
-                variant="h5"
-                gutterBottom
-                align="center">Sign In
+                component="h1" variant="h5">
+              Sign In
             </Typography>
             {error ? <Snackbar
                 anchorOrigin={{
@@ -126,9 +150,8 @@ class Login extends Component {
                   </Tooltip>,
                 ]}
             /> : null}
-            <form
+            <form className={classes.form}
                 onSubmit={this.onFormSubmit}
-                className={classes.container}
                 noValidate autoComplete="off">
               <TextField
                   type="email"
@@ -158,7 +181,7 @@ class Login extends Component {
                   variant="contained"
                   color="primary"
                   textColor="secondary"
-                  className={classes.button}
+                  className={classes.submit}
                   margin="normal"
                   fullWidth
                   gutterBottom
@@ -168,7 +191,7 @@ class Login extends Component {
                     <Typography color="error" >Sign In</Typography>}
               </Button>
             </form>
-          </Paper>,
+          </Paper>
           <Typography
               variant="caption"
               gutterBottom
@@ -181,6 +204,7 @@ class Login extends Component {
               Sign Up
             </Link>
           </Typography>
+          </main>
         </MuiThemeProvider>
     );
   }
