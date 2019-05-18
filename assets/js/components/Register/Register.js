@@ -140,7 +140,7 @@ class Register extends Component {
                                   onClick={this.handleClose}>
                         <CloseIcon />
                       </IconButton>
-                    </Tooltip>,
+                    </Tooltip>
                   ]}
               /> : null}
               <form onSubmit={this.onFormSubmit}  className={classes.container}  noValidate autoComplete="off">
@@ -208,7 +208,7 @@ class Register extends Component {
                       <Typography color="error" >Sign up</Typography> }
                 </Button>
               </form>
-            </Paper>,
+            </Paper>
               <Typography
                   variant="caption"
                   gutterBottom
