@@ -38,7 +38,7 @@ const Home = ( ) => {
             </Typography>
         </div>
           <Button
-              className='Home'
+              className='button'
               component={RouterLink}
               variant="contained"
               color="primary"
