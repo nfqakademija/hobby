@@ -30,6 +30,7 @@ class User implements UserInterface, \Serializable
      * @var string|null
      * @ORM\Column(name="email", type="string", unique=true, nullable=true)
      * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -37,12 +38,6 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
-
-    /**
-     * @var string|null
-     * @ORM\Column(name="username", type="string", unique=true, nullable=true)
-     */
-    private $username;
 
     /**
      * @var string|null
@@ -97,6 +92,14 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
      * @param string|null $email
      *
      * @return User
@@ -124,26 +127,6 @@ class User implements UserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string|null $username
-     *
-     * @return User
-     */
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }
