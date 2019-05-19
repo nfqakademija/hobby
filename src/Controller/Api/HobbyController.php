@@ -19,7 +19,7 @@ class HobbyController extends AbstractFOSRestController
      *
      * @return Response
      */
-    public function getMovieAction(): Response
+    public function showHobbiesAction(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hobby::class);
         $hobbies = $repository->findall();
@@ -33,7 +33,7 @@ class HobbyController extends AbstractFOSRestController
      *
      * @return Response
      */
-    public function postMovieAction(Request $request): Response
+    public function createHobbyAction(Request $request): Response
     {
         $hobby = new Hobby();
         $form = $this->createForm(HobbyType::class, $hobby);
