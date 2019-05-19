@@ -126,7 +126,7 @@ class NavBar extends Component {
                                         Up With Email</Button>
                                 }
                                 {isAuth ?
-                                    <Button className={classes.button} >{this.props.auth.email}  {this.props.auth.amount}€</Button>
+                                    <Button className={classes.button} component={RouterLinkNav} to='/user'>{this.props.auth.email}  {this.props.auth.amount}€</Button>
                                     :
                                     <Button className={classes.button}>
                                         About Us

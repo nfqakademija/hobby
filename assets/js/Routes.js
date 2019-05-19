@@ -11,6 +11,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ProjectRegistration from './components/ProjectRegistration/ProjectRegistration';
 import ProjectInfo from './components/ProjectInfo/ProjectInfo';
+import User from './components/User/User';
 
 
 class Routes extends Component {
@@ -34,6 +35,7 @@ class Routes extends Component {
             {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}
             <Route path='/admin' />
             <Route path='/project/:id' component={ProjectInfo}/>
+            <Route path='/user' component={User} />
           </Switch>
         </Fragment>
       </BrowserRouter>
