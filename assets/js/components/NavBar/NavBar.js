@@ -37,13 +37,13 @@ const styles = {
     title: {
         color: '#ffffff',
         display: 'none',
-        [theme.breakpoints.up('lg')]: {
+        [theme.breakpoints.up('md')]: {
             display: 'block',
         },
     },
     sectionDesktop: {
         display: 'none',
-        [theme.breakpoints.up('lg')]: {
+        [theme.breakpoints.up('md')]: {
             display: 'block',
         },
     },
@@ -67,7 +67,7 @@ const styles = {
     },
     sectionMobile: {
         display: 'flex',
-        [theme.breakpoints.up('lg')]: {
+        [theme.breakpoints.up('md')]: {
             display: 'none',
         },
     },
