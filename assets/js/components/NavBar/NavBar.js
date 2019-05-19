@@ -82,7 +82,6 @@ const styles = {
 class NavBar extends Component {
   state ={
       value: 0,
-      left: false,
   }
 
     handleChange = (event, value) => {
@@ -123,7 +122,7 @@ class NavBar extends Component {
                                 {isAuth ?
                                     <Button className={classes.buttonSingUp} component={RouterLinkNav} to='/project-registration'>Create a Project</Button>
                                     :
-                                    <Button className={classes.buttonSingUp} component={RouterLink} to='/register'>Sign
+                                    <Button className={classes.buttonSingUp} component={RouterLinkNav} to='/register'>Sign
                                         Up With Email</Button>
                                 }
                                 {isAuth ?
@@ -143,7 +142,7 @@ class NavBar extends Component {
                             <div className={classes.grow} />
                             <div className={classes.sectionDesktop}>
                                 {isAuth  ?
-                                    < Button className = {classes.button} component={RouterLink} onClick={this.props.auth.onLogout} to='/logout'>
+                                    < Button className = {classes.button} onClick={this.props.onLogoutClick} to='/logout'>
                                     Logout
                                     </Button>
                                     :
@@ -179,7 +178,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    onLogout: () => dispatch(Logout())
+    onLogoutClick: () => dispatch(Logout())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(NavBar));
