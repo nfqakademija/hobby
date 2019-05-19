@@ -76,17 +76,20 @@ const styles = {
     },
     IconMobile: {
         color:"#ffffff",
-    }
+    },
 };
 
 class NavBar extends Component {
   state ={
       value: 0,
+      left: false,
   }
 
     handleChange = (event, value) => {
         this.setState({ value });
     };
+
+
 
    render() {
       const { classes } = this.props;
@@ -96,64 +99,67 @@ class NavBar extends Component {
           <MuiThemeProvider theme={theme}>
             <div className={classes.root} >
                 <AppBar className={classes.menubar} >
-                    {isAuth ?
-                    <Toolbar>
-                        <Typography variant="h6" className={classes.title}>
-                            HobbyCraft
-                        </Typography>
-
-                        <div className={classes.sectionMobile}>
-                            <IconButton className={classes.IconMobile}>
-                                <MenuIcon/>
-                            </IconButton>
-                        </div>
-
-                        <div className={classes.grow}  />
-                            <div className={classes.sectionDesktop} >
-                                <Button className={classes.button} component={RouterLinkNav} exact to='/'>
-                                    Discover
-                                </Button>
-                                <Button className={classes.buttonSingUp} component={RouterLink}  to='/register'>Sign Up With Email</Button>
-                                <Button className={classes.button}>
-                                    About Us
-                                </Button>
-                            </div>
-                        <div className={classes.sectionMobile}>
-                            <Typography variant="h6" className={classes.titleMobile}>
-                                HobbyCraft
-                            </Typography>
-                        </div>
-
-                        <div className={classes.grow} />
-                            <div className={classes.sectionDesktop}>
-                                <Button className={classes.button} component={RouterLink}  to='/login'>
-                                    Sign In
-                                </Button>
-                            </div>
-
-                        <div className={classes.sectionMobile}>
-                            <IconButton className={classes.IconMobile}>
-                                <SearchIcon />
-                            </IconButton>
-                        </div>
-
-                    </Toolbar> : <Toolbar>
+                        <Toolbar>
                             <Typography variant="h6" className={classes.title}>
                                 HobbyCraft
                             </Typography>
+
+                            <div className={classes.sectionMobile}>
+                                <IconButton className={classes.IconMobile}>
+                                    <MenuIcon/>
+                                </IconButton>
+                            </div>
+
+                            <div className={classes.grow}  />
+                            <div className={classes.sectionDesktop} >
+                                {isAuth ?
+                                    < Button className={classes.button} component={RouterLinkNav} exact to='/projects'>
+                                        Discover Projects
+                                    </Button>
+                                    :
+                                    < Button className={classes.button} component={RouterLinkNav} exact to='/'>
+                                        Discover
+                                    </Button> }
+                                {isAuth ?
+                                    <Button className={classes.buttonSingUp} component={RouterLinkNav} to='/project-registration'>Create a Project</Button>
+                                    :
+                                    <Button className={classes.buttonSingUp} component={RouterLink} to='/register'>Sign
+                                        Up With Email</Button>
+                                }
+                                {isAuth ?
+                                    <Button className={classes.button} >{this.props.auth.email}  {this.props.auth.amount}€</Button>
+                                    :
+                                    <Button className={classes.button}>
+                                        About Us
+                                    </Button>
+                                }
+                            </div>
+                            <div className={classes.sectionMobile}>
+                                <Typography variant="h6" className={classes.titleMobile}>
+                                    HobbyCraft
+                                </Typography>
+                            </div>
+
                             <div className={classes.grow} />
-                            <Button className={classes.button} component={RouterLinkNav} to='/projects'>
-                                Projects
-                            </Button>
-                            <Button className={classes.buttonSingUp} component={RouterLinkNav} to='/project-registration'>Create Project</Button>
-                            <Button className={classes.button}>
-                                About Us
-                            </Button>
-                            <div className={classes.grow} />
-                            <Button className={classes.button} onClick={this.props.auth.onLogout} component={RouterLink} to='/logout'>
-                                Logout
-                            </Button>
-                        </Toolbar>}
+                            <div className={classes.sectionDesktop}>
+                                {isAuth  ?
+                                    < Button className = {classes.button} component={RouterLink} onClick={this.props.auth.onLogout} to='/logout'>
+                                    Logout
+                                    </Button>
+                                    :
+                                    < Button className = {classes.button} component={RouterLink}  to='/login'>
+                                        Sign In
+                                    </Button>
+                                }
+                            </div>
+
+                            <div className={classes.sectionMobile}>
+                                <IconButton className={classes.IconMobile}>
+                                    <SearchIcon />
+                                </IconButton>
+                            </div>
+
+                        </Toolbar>
                 </AppBar>
             </div>
           </MuiThemeProvider>
