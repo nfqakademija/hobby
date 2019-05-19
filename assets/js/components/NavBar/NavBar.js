@@ -5,32 +5,78 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {onLogOut as Logout} from '../../thunks/logoutThunk';
-
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
 
 const theme = createMuiTheme({
     palette: {
         primary: {
             main: '#EA7925',
         },
-        secondary: {
-            main: '#0044ff',
-        },
     },
 });
 
 const styles = {
     root: {
-        flexGrow: 1,
+        width: '100%',
     },
-    Tabs:{
-    width: '100%',
-    }
+    menubar: {
+        position:"static",
+        background:"#181818",
 
+    },
+    grow: {
+        flexGrow: 1,
+        align: 'center',
+    },
+    title: {
+        color: '#ffffff',
+        display: 'none',
+        [theme.breakpoints.up('lg')]: {
+            display: 'block',
+        },
+    },
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('lg')]: {
+            display: 'block',
+        },
+    },
+    button: {
+        color: '#A4A4A4',
+        '&:hover': {
+            color: '#ffffff',
+        },
+        margin: 'auto',
+        paddingLeft:  20,
+        paddingRight: 20,
+    },
+    buttonSingUp: {
+        color: '#ffffff',
+        backgroundColor: "#EA7925",
+        borderRadius: 25,
+        fontWeight: 600,
+        '&:hover': {
+            backgroundColor: "#A15421",
+        },
+    },
+    sectionMobile: {
+        display: 'flex',
+        [theme.breakpoints.up('lg')]: {
+            display: 'none',
+        },
+    },
+    titleMobile: {
+        color: '#ffffff',
+    },
+    IconMobile: {
+        color:"#ffffff",
+    }
 };
 
 class NavBar extends Component {
@@ -43,39 +89,73 @@ class NavBar extends Component {
     };
 
    render() {
-      const { classes, onLogout } = this.props;
-      const {email, isAuth, amount} = this.props.auth;
+      const { classes } = this.props;
+      const { isAuth } = this.props.auth;
+
       return (
           <MuiThemeProvider theme={theme}>
-      <Grid
-          container className={classes.root}
-      >
-            <AppBar  color="default" elevation={8} >
-                <Toolbar >
-                    <Tabs  className={classes.Tabs}
-                           value={this.state.value}
-                           onChange={this.handleChange}
-                           componentColor="primary"
-                           indicatorColor="primary"
-                           textColor="primary"
-                           centered
-                    >
-                          <Tab  component={RouterLinkNav} exact to='/' label="Home" />
-                          <Tab  component={RouterLinkNav} to='/projects'   label="Projects" />
-                          <Tab  component={RouterLinkNav} to='/project-registration' label="Create Project" />
-                        {isAuth ? <Tab  component={RouterLink}  to='/user' label={`${email} (${amount}€)`} /> :
-                            <Tab  component={RouterLink}  to='/login' label="Sign In" />
-                        }
-                        {isAuth ? <Tab onClick={onLogout}  component={RouterLink}  to='/logout' label='Logout' /> :
-                            <Tab  component={RouterLink}  to='/register' label="Sign Up" />
-                        }
+            <div className={classes.root} >
+                <AppBar className={classes.menubar} >
+                    {isAuth ?
+                    <Toolbar>
+                        <Typography variant="h6" className={classes.title}>
+                            HobbyCraft
+                        </Typography>
 
-                    </Tabs>
+                        <div className={classes.sectionMobile}>
+                            <IconButton className={classes.IconMobile}>
+                                <MenuIcon/>
+                            </IconButton>
+                        </div>
 
+                        <div className={classes.grow}  />
+                            <div className={classes.sectionDesktop} >
+                                <Button className={classes.button} component={RouterLinkNav} exact to='/'>
+                                    Discover
+                                </Button>
+                                <Button className={classes.buttonSingUp} component={RouterLink}  to='/register'>Sign Up With Email</Button>
+                                <Button className={classes.button}>
+                                    About Us
+                                </Button>
+                            </div>
+                        <div className={classes.sectionMobile}>
+                            <Typography variant="h6" className={classes.titleMobile}>
+                                HobbyCraft
+                            </Typography>
+                        </div>
 
-                </Toolbar>
-            </AppBar>
-      </Grid>
+                        <div className={classes.grow} />
+                            <div className={classes.sectionDesktop}>
+                                <Button className={classes.button} component={RouterLink}  to='/login'>
+                                    Sign In
+                                </Button>
+                            </div>
+
+                        <div className={classes.sectionMobile}>
+                            <IconButton className={classes.IconMobile}>
+                                <SearchIcon />
+                            </IconButton>
+                        </div>
+
+                    </Toolbar> : <Toolbar>
+                            <Typography variant="h6" className={classes.title}>
+                                HobbyCraft
+                            </Typography>
+                            <div className={classes.grow} />
+                            <Button className={classes.button} component={RouterLinkNav} to='/projects'>
+                                Projects
+                            </Button>
+                            <Button className={classes.buttonSingUp} component={RouterLinkNav} to='/project-registration'>Create Project</Button>
+                            <Button className={classes.button}>
+                                About Us
+                            </Button>
+                            <div className={classes.grow} />
+                            <Button className={classes.button} onClick={this.props.auth.onLogout} component={RouterLink} to='/logout'>
+                                Logout
+                            </Button>
+                        </Toolbar>}
+                </AppBar>
+            </div>
           </MuiThemeProvider>
     );
   }

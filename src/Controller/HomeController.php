@@ -11,7 +11,7 @@ class HomeController extends AbstractController
 {
     /**
     * @Route("/", name="home_FE")
-    * @Route("/{route}", name="react_pages", requirements={"route"="^(?!api).+"})
+    * @Route("/{route}", name="react_pages", requirements={"route"="^(?!api|admin).+"})
     */
     public function index()
     {

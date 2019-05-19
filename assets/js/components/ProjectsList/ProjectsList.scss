@@ -1,40 +1,33 @@
 .ProjectsList {
-  margin: 8% auto 0;
-  height: auto;
-  //overflow: scroll;
-
-  p {
-    text-align: center;
-  }
-
-  .Project-item {
-    background-color: #bbbbbb;
-    border-radius: 4px;
-    display: block;
-    margin: 10px auto;
-    width: 40%;
-    padding: 10px;
-
-    h4 {
-      text-align: center;
-      margin-top: 0;
-    }
-
-    .Project-item__span {
-      display: block;
-    }
-
-    .Info {
-      display: block;
-      margin-top: 10px;
-    }
-  }
+  width: 100%;
+  overflow-y: auto;
 }
 
-@media (max-width: 650px) {
-  .ProjectsList {
-    .Project-item {
-      width: 80%;
+.card {
+  position: relative;
+  display: inline-block;
+  width: calc(33.33333% - 40px);
+  margin:  20px;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.23s ease-in-out;
     }
-  }
+}
+.button {
+
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  justify-items: center;
+}
+.Paper{
+  text-align: center;
+  height: auto;
+  min-height: 200px;
+  padding: 15px;
+}
+.Paper__Button{
+  padding: 0 10px;
 }

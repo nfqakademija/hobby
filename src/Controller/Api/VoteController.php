@@ -43,8 +43,9 @@ class VoteController extends AbstractFOSRestController
         } catch (\Throwable $exception) {
             return JsonResponse::create(['error' => $exception->getMessage()], Response::HTTP_SERVICE_UNAVAILABLE);
         }
-    }
 
+    }
+  
     /**
      * @Rest\Delete("/vote/{id}", name="remove_vote")
      * @ParamConverter("vote", class="App\Entity\Vote")
