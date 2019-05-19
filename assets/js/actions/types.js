@@ -29,3 +29,8 @@ export const GET_PROJECTS = 'GET_PROJECTS';
 export const AUTH_USER = 'AUTH_USER';
 export const LOG_OUT = 'LOG_OUT';
 export const VOTE_USER = 'VOTE_USER';
+
+// Vote types
+
+export const GET_VOTES = 'GET_VOTES';
+export const REMOVE_VOTE = 'REMOVE_VOTE';
