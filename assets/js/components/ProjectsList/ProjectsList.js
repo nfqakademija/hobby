@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid"
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const theme = createMuiTheme({
     palette: {
@@ -48,31 +49,35 @@ class ProjectsList extends Component {
         return (
 
             <MuiThemeProvider theme={theme} className={"container"} >
-                <Grid className={'card'}>
-                      <Paper className={'Paper'}
-                             container
-                             elevation={8}
-                             key={i}>
-                        <Typography  variant="h4" >{project.title}</Typography>
-                        <Typography variant="subheading" color='secondary'>{project.description}</Typography>
-                        <Typography>Hobby Collected: {project.budget}$</Typography>
-                        <Typography>Amount Needed: {project.amount}$</Typography>
-                            <div className={"Paper__Button"}>
-                              <Button  variant="contained" onClick={() => onVoteClick(project.id, 5)} disabled={amount < 5}>Vote 5€</Button>
-                              <Button  variant="contained" onClick={() => onVoteClick(project.id, 15)} disabled={amount < 15}>Vote 15€</Button>
-                              <Button  variant="contained" onClick={() => onVoteClick(project.id, 30)} disabled={amount < 30}>Vote 30€</Button>
+                <Grid className={'main'}>
+                      <Paper className={'Card'}>
+                         <div className={'Card-title'}>{project.title}</div>
+                          <div className={'Card-description'}>{project.description}</div>
+                          <div className={"Card-progress"}>
+                              <div>{project.amount}$</div>
+                              <div className={"Card-progress-bar"}>
+                                <LinearProgress/>
+                              </div>
+                              <div>{project.budget}$</div>
+                          </div>
+                            <div className={'VoteButtons'} >
+                                <Button variant="outlined" style={{borderRadius: 50, margin: 5 }} color="primary" onClick={() => onVoteClick(project.id, 5)}  disabled={amount < 5}>5€</Button>
+                                <Button variant="outlined" style={{borderRadius: 50, margin: 5 }} color="primary" onClick={() => onVoteClick(project.id, 15)} disabled={amount < 15}>15€</Button>
+                                <Button variant="outlined" style={{borderRadius: 50, margin: 5 }} color="primary" onClick={() => onVoteClick(project.id, 30)} disabled={amount < 30}>30€</Button>
                             </div>
-                          <Button variant="contained" onClick={() => this.setState({ opened: !opened })}
-                          >Read More</Button>
-                          {opened
-                              ? (
-                                    <Typography>
-                                        Hobby Author: {project.username}<br/>
-                                        Hobby Contact: {project.email}
-                                    </Typography>
-                              )
-                              : null
-                          }
+                          <div className={'ReadMoreButton'} >
+                            <Button variant="outlined" color="primary" onClick={() => this.setState({ opened: !opened })}
+                              >Read More</Button>
+                              {opened
+                                  ? (
+                                        <Typography>
+                                            Hobby Author: {project.username}<br/>
+                                            Hobby Contact: {project.email}
+                                        </Typography>
+                                  )
+                                  : null
+                              }
+                            </div>
                       </Paper>
                 </Grid>
             </MuiThemeProvider>
