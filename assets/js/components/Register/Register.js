@@ -209,10 +209,7 @@ class Register extends Component {
                 </Button>
               </form>
             </Paper>
-              <Typography
-                  variant="caption"
-                  gutterBottom
-                  align="center" >
+              <div className={"subheading"}>
                 Already have an account?{' '}
                 <Link
                     component={RouterLink}
@@ -220,7 +217,7 @@ class Register extends Component {
                     to='/login'>
                   Sign In
                 </Link>
-              </Typography>
+              </div>
             </main>
           </MuiThemeProvider>
     );

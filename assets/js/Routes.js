@@ -30,7 +30,6 @@ class Routes extends Component {
             <Route exact path='/' component={Home}/>
 
             <Route path='/login' component={Login}/>
-            {isAuth ? <Route path='/projects' component={ProjectsList}/> : <Redirect to='/login'/>}
             <Route path='/register' component={Register}/>
             {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}
             <Route path='/admin' />
