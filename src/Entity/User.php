@@ -30,6 +30,7 @@ class User implements UserInterface, \Serializable
      * @var string|null
      * @ORM\Column(name="email", type="string", unique=true, nullable=true)
      * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -37,12 +38,6 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
-
-    /**
-     * @var string|null
-     * @ORM\Column(name="username", type="string", unique=true, nullable=true)
-     */
-    private $username;
 
     /**
      * @var string|null
@@ -55,6 +50,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="budget", type="integer", nullable=true)
      */
     private $budget;
+
+    /**
+     * @var Company
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id")
+     */
+    private $company;
 
     public function __construct()
     {
@@ -75,7 +76,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setId(?int $id): User
+    public function setId(?int $id): self
     {
         $this->id = $id;
 
@@ -91,11 +92,19 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return string|null
+     */
+    public function getUsername(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
      * @param string|null $email
      *
      * @return User
      */
-    public function setEmail(?string $email): User
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -125,26 +134,6 @@ class User implements UserInterface, \Serializable
     /**
      * @return string|null
      */
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string|null $username
-     *
-     * @return User
-     */
-    public function setUsername(?string $username): User
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getRole(): ?string
     {
         return $this->role;
@@ -155,7 +144,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setRole(?string $role): User
+    public function setRole(?string $role): self
     {
         $this->role = $role;
 
@@ -175,9 +164,29 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setBudget(?int $budget): User
+    public function setBudget(?int $budget): self
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return Company
+     */
+    public function getCompany(): Company
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     *
+     * @return User
+     */
+    public function setCompany(Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
