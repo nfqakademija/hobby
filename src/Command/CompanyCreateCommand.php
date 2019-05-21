@@ -9,12 +9,12 @@ use App\Factory\Entity\UserFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -134,18 +134,17 @@ class CompanyCreateCommand extends Command
 
     /**
      * @param $object
-     * @return string
+     * @return void
      */
-    private function validate($object): string
+    private function validate($object): void
     {
         $errors = $this->validator->validate($object);
 
         if (count($errors) > 0) {
-            $errorsString = (string)$errors;
-
-            //TODO: throw errors in beauty mode
-
-            return $errorsString;
+            /** @var ConstraintViolation $error */
+            foreach ($errors as $error) {
+                throw new Exception('Poperty: ' . $error->getPropertyPath() . '. ' . $error->getMessage());
+            }
         }
     }
 }
