@@ -31,7 +31,7 @@ class UserFixtures extends Fixture
                 $this->userPasswordEncoder->encodePassword($user, 'pass')
             )
             ->setEmail('a@a.com')
-            ->setRole('ROLE_USER')
+            ->setRoles(['ROLE_USER'])
             ->setBudget(30)
         ; // todo add create_at
 

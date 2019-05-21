@@ -45,10 +45,10 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @var string|null
-     * @ORM\Column(name="role", type="string", nullable=true)
+     * @var array
+     * @ORM\Column(name="roles", type="array")
      */
-    private $role;
+    private $roles;
 
     /**
      * @var int|null
@@ -59,7 +59,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->setBudget(30);
-        $this->setRole('ROLE_USER');
+        $this->roles = (['ROLE_USER']);
     }
 
     /**
@@ -143,21 +143,21 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return string|null
+     * @return mixed
      */
-    public function getRole(): ?string
+    public function getRoles()
     {
-        return $this->role;
+        return $this->roles;
     }
 
     /**
-     * @param string|null $role
+     * @param array $roles
      *
      * @return User
      */
-    public function setRole(?string $role): User
+    public function setRoles(array $roles): User
     {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -204,16 +204,6 @@ class User implements UserInterface, \Serializable
             $this->username,
             $this->password,
             ) = unserialize($serialized);
-    }
-
-    /**
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        return [
-            'ROLE_USER'
-        ];
     }
 
     /**
