@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Entity\Company;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -24,13 +25,21 @@ class UserFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
+        $company = new Company();
+        $company
+            ->setName('CompanyA')
+            ->setBudget(1500);
+
+        $manager->persist($company);
+
         $user = new User();
         $user
+            ->setCompany($company)
             ->setPassword(
                 $this->userPasswordEncoder->encodePassword($user, 'pass')
             )
             ->setEmail('a@a.com')
-            ->setRoles(['ROLE_USER'])
+            ->setRoles(['ROLE_USER','ROLE_ADMIN'])
             ->setBudget(30)
         ; // todo add create_at
 

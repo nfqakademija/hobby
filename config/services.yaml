@@ -34,8 +34,7 @@ services:
         class: App\Serializer\FormErrorSerializer
         public: true
 
-    service.voter:
-        class: App\Service\Voter
+    App\Service\Voter:
         public: true
         arguments:
             - '@doctrine.orm.entity_manager'

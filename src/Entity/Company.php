@@ -36,6 +36,11 @@ class Company
      */
     private $name;
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * @return int
      */

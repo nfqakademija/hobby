@@ -104,6 +104,16 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @param string|null
+     *
+     * @return User
+     */
+    public function getUsername(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
      * @return mixed
      */
     public function getPassword()
@@ -164,19 +174,19 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return Company
+     * @return Company|null
      */
-    public function getCompany(): Company
+    public function getCompany(): ?Company
     {
         return $this->company;
     }
 
     /**
-     * @param Company $company
+     * @param Company|null $company
      *
      * @return User
      */
-    public function setCompany(Company $company): self
+    public function setCompany(?Company $company): User
     {
         $this->company = $company;
 
@@ -190,7 +200,7 @@ class User implements UserInterface, \Serializable
     {
         return serialize([
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
         ]);
     }
@@ -202,7 +212,7 @@ class User implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
             ) = unserialize($serialized);
     }
