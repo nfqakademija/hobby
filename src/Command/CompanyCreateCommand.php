@@ -16,6 +16,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CompanyCreateCommand extends Command
@@ -123,7 +124,7 @@ class CompanyCreateCommand extends Command
             $company,
             $userEmail,
             self::COMPANY_BUDGET,
-            self::ADMINISTRATOR_ROLE,
+            [self::ADMINISTRATOR_ROLE],
             $randomPassword
         );
 
