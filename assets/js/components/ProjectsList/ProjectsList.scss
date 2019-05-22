@@ -18,6 +18,7 @@
   }
 }
 .Card{
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   padding: 40px 50px 40px 50px;
@@ -40,7 +41,7 @@
   align-items: center;
 }
 .Card-progress-bar{
-  width: 90%;
+  width: 80%;
 }
 .VoteButtons{
   text-align: center;

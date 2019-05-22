@@ -36,29 +36,28 @@ class ProjectsList extends Component {
 
   componentDidMount() {
     this.props.onGetProjectsList();
+    }
 
-  }
+
 
   render() {
     const {projects,onVoteClick} =this.props;
     const {amount} = this.props.auth;
-    // const { opened } = this.state;
     let projectsList;
     if(projects.length !== 0) {
       projectsList = projects && projects.map((project, i) => {
         return (
-
-            <MuiThemeProvider theme={theme} className={"container"} >
+            <MuiThemeProvider theme={theme}  key={i} >
                 <Grid className={'main'}>
                       <Paper className={'Card'} component={ RouterLink }  to={`/project/${project.id}`}>
                          <div className={'Card-title'}>{project.title}</div>
                           <div className={'Card-description'}>{project.description}</div>
                           <div className={"Card-progress"}>
-                              <div>{project.amount}$</div>
-                              <div className={"Card-progress-bar"}>
-                                <LinearProgress/>
-                              </div>
                               <div>{project.budget}$</div>
+                              <div className={"Card-progress-bar"}>
+                                <LinearProgress variant={'buffer'} value={(project.budget/project.amount)*100}/>
+                              </div>
+                              <div>{project.amount}$</div>
                           </div>
                             <div className={'VoteButtons'} >
                                 <Button variant="outlined" style={{borderRadius: 50, margin: 5 }} color="primary" onClick={() => onVoteClick(project.id, 5)}  disabled={amount < 5}>5€</Button>
