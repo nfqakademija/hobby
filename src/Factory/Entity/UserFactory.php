@@ -16,7 +16,7 @@ class UserFactory
      * @param Company $company
      * @param string $email
      * @param int $budget
-     * @param string $role
+     * @param array $role
      * @param string $plainPassword
      * @return User
      */
@@ -25,7 +25,7 @@ class UserFactory
         Company $company,
         string $email,
         int $budget,
-        string $role,
+        array $role,
         string $plainPassword
     ): User {
 
@@ -34,7 +34,7 @@ class UserFactory
             ->setCompany($company)
             ->setEmail($email)
             ->setBudget($budget)
-            ->setRole($role);
+            ->setRoles($role);
 
         $user->setPassword(
             $encoder->encodePassword(
