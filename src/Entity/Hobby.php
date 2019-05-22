@@ -52,12 +52,6 @@ class Hobby
     private $email;
 
     /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $username;
-
-    /**
      * @var Vote
      * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="hobby")
      */
@@ -142,7 +136,7 @@ class Hobby
      *
      * @return Hobby
      */
-    public function setAmount(?int $amount): Hobby
+    public function setAmount(?int $amount): self
     {
         $this->amount = $amount;
 
@@ -162,7 +156,7 @@ class Hobby
      *
      * @return Hobby
      */
-    public function setBudget(?int $budget): Hobby
+    public function setBudget(?int $budget): self
     {
         $this->budget = $budget;
 
@@ -185,26 +179,6 @@ class Hobby
     public function setEmail(?string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string|null $username
-     *
-     * @return Hobby
-     */
-    public function setUsername(?string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }

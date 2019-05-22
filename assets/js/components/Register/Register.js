@@ -119,7 +119,7 @@ class Register extends Component {
                     horizontal: 'center',
                   }}
                   open={this.state.open}
-                  autoHideDuration={6000}
+                  autoHideDuration={3000}
                   onClose={this.handleClose}
                   ContentProps={{
                     'aria-describedby': 'message-id',
@@ -209,10 +209,7 @@ class Register extends Component {
                 </Button>
               </form>
             </Paper>
-              <Typography
-                  variant="caption"
-                  gutterBottom
-                  align="center" >
+              <div className={"subheading"}>
                 Already have an account?{' '}
                 <Link
                     component={RouterLink}
@@ -220,7 +217,7 @@ class Register extends Component {
                     to='/login'>
                   Sign In
                 </Link>
-              </Typography>
+              </div>
             </main>
           </MuiThemeProvider>
     );

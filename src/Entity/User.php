@@ -30,6 +30,7 @@ class User implements UserInterface, \Serializable
      * @var string|null
      * @ORM\Column(name="email", type="string", unique=true, nullable=true)
      * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -37,12 +38,6 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $password;
-
-    /**
-     * @var string|null
-     * @ORM\Column(name="username", type="string", unique=true, nullable=true)
-     */
-    private $username;
 
     /**
      * @var array
@@ -56,10 +51,16 @@ class User implements UserInterface, \Serializable
      */
     private $budget;
 
+    /**
+     * @var Company
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id")
+     */
+    private $company;
+
     public function __construct()
     {
         $this->setBudget(30);
-        $this->roles = (['ROLE_USER']);
+        $this->roles = ['ROLE_USER'];
     }
 
     /**
@@ -75,7 +76,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setId(?int $id): User
+    public function setId(?int $id): self
     {
         $this->id = $id;
 
@@ -95,7 +96,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setEmail(?string $email): User
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -118,26 +119,6 @@ class User implements UserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string|null $username
-     *
-     * @return User
-     */
-    public function setUsername(?string $username): User
-    {
-        $this->username = $username;
 
         return $this;
     }
@@ -175,9 +156,29 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setBudget(?int $budget): User
+    public function setBudget(?int $budget): self
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return Company
+     */
+    public function getCompany(): Company
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     *
+     * @return User
+     */
+    public function setCompany(Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }

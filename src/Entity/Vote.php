@@ -64,7 +64,7 @@ class Vote
      *
      * @return Vote
      */
-    public function setHobby(Hobby $hobby): Vote
+    public function setHobby(Hobby $hobby): self
     {
         $this->hobby = $hobby;
 
@@ -84,7 +84,7 @@ class Vote
      *
      * @return Vote
      */
-    public function setUser(User $user): Vote
+    public function setUser(User $user): self
     {
         $this->user = $user;
 

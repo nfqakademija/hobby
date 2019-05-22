@@ -39,3 +39,11 @@ services:
         public: true
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    App\Command\CompanyCreateCommand:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@security.user_password_encoder.generic'
+            - '@validator'
+        tags:
+            - { name: 'console.command' }
