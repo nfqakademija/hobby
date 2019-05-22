@@ -3,7 +3,6 @@ import { Switch, Route, BrowserRouter,Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getUserFromLS} from './storage/storage';
 import {authUser} from './actions/authActions';
-
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import ProjectsList from  './components/ProjectsList/ProjectsList';
@@ -12,6 +11,8 @@ import Register from './components/Register/Register';
 import ProjectRegistration from './components/ProjectRegistration/ProjectRegistration';
 import ProjectInfo from './components/ProjectInfo/ProjectInfo';
 import User from './components/User/User';
+
+
 
 
 class Routes extends Component {
@@ -28,7 +29,7 @@ class Routes extends Component {
           <NavBar/>
           <Switch>
             <Route exact path='/' component={Home}/>
-
+            <Route path='/projects' component={ProjectsList}/>
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
             {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}

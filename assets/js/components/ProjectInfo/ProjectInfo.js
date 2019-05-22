@@ -1,8 +1,26 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Link} from "react-router-dom";
+import {Link as RouterLink} from "react-router-dom";
 import './ProjectInfo.scss';
-import moment from 'moment';
+// import LinearProgress from "../ProjectsList/ProjectsList";
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Button from '@material-ui/core/Button';
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import Typography from "@material-ui/core/es/Typography/Typography";
+// import LinearProgress from "../ProjectsList/ProjectsList";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#EA7925',
+        },
+        secondary: {
+            main: '#ffffff',
+        },
+    },
+});
+
+
 
 const ProjectInfo = (props) => {
   const projectInfo = props.projects.filter(project => {
@@ -11,22 +29,54 @@ const ProjectInfo = (props) => {
     }
     return null;
   }).map((project, i) => {
-    const endDate = moment(project.end_date).format('YYYY-MM-DD');
     return (
       <div className='Project' key={i}>
-        <span className='Project-span'><span className="bold">Hobby Author:</span> {project.username}</span>
-        <span className='Project-span'><span className="bold">Hobby Description:</span> {project.description}</span>
-        <span className='Project-span'><span className="bold">Hobby Amount:</span> {project.amount}&euro;</span>
-        <span className='Project-span'><span className="bold">Hobby Contact:</span> {project.email}</span>
-        <span className='Project-span'><span className="bold">Hobby EndDate:</span> {endDate}</span>
+        <div className='Title'>{project.title}</div>
+          <div className='progress-bar'>
+              <div>{project.budget}</div>
+              <div className='LinearProgressMoney'>
+                  <LinearProgress variant={'buffer'} value={(project.budget/project.amount)*100}/>
+              </div>
+              <div>{project.amount}</div>
+          </div>
+          <div className='VoteButtons'>
+              <Button variant="outlined" >5€</Button>
+              <Button variant="outlined" >15€</Button>
+              <Button variant="outlined" >30€</Button>
+          </div>
+
+          <div className='container'>
+            <div className='Description'>{project.description}</div>
+            <div className='card'>
+                <div className='Text--left'>
+                    <p className="Text">Author:</p>
+                    <p className='Text--Bold'>{project.username}</p>
+                    <p className="Text">Author Email:</p>
+                    <p className='Text--Bold'>{project.email}</p>
+                </div>
+
+            </div>
+          </div>
+
       </div>
     )
   })
   return (
-    <div className='ProjectInfo'>
-      {projectInfo}
-      <Link className='Link Back' to='/projects'>Back to projects</Link>
-    </div>
+      <MuiThemeProvider theme={theme}>
+        <div className='ProjectInfo'>
+          {projectInfo}
+          <Button
+              className='Button'
+              variant="contained"
+              color="primary"
+              component={RouterLink}
+              to='/projects'>
+              <Typography
+                  color="secondary"
+              >Back to projects</Typography>
+          </Button>
+        </div>
+      </MuiThemeProvider>
   );
 };
 

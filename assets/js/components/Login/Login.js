@@ -20,6 +20,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
+
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -122,7 +123,7 @@ class Login extends Component {
                         </Typography>
                         {error ? <Snackbar
                             anchorOrigin={{
-                                vertical: 'bottom',
+                                vertical: 'top',
                                 horizontal: 'center',
                             }}
                             open={this.state.open}
