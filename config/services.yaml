@@ -34,8 +34,15 @@ services:
         class: App\Serializer\FormErrorSerializer
         public: true
 
-    service.voter:
-        class: App\Service\Voter
+    App\Service\Voter:
         public: true
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    App\Command\CompanyCreateCommand:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@security.user_password_encoder.generic'
+            - '@validator'
+        tags:
+            - { name: 'console.command' }
