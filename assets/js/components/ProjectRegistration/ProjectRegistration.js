@@ -119,7 +119,8 @@ class ProjectRegistration extends Component {
                   gutterBottom
                   align="center">Register Your Hobby
               </Typography>
-              {error ? <Snackbar
+              {error ?
+                    <Snackbar
                   anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
@@ -148,7 +149,8 @@ class ProjectRegistration extends Component {
                       </IconButton>
                     </Tooltip>,
                   ]}
-              /> : null}
+              />
+                    : null}
 
               <form
                   onSubmit={this.onFormSubmit}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 import './ProjectInfo.scss';
@@ -13,6 +13,7 @@ const ProjectInfo = (props) => {
   }).map((project, i) => {
     const endDate = moment(project.end_date).format('YYYY-MM-DD');
     return (
+
       <div className='Project' key={i}>
         <span className='Project-span'><span className="bold">Hobby Author:</span> {project.username}</span>
         <span className='Project-span'><span className="bold">Hobby Description:</span> {project.description}</span>

@@ -6,7 +6,7 @@
 .main {
   position: relative;
   display: inline-block;
-  width: calc(25% - 40px);
+  width: calc(33.3333% - 40px);
   margin:  20px;
   cursor: pointer;
   @media only screen and (max-width: 960px) {
@@ -20,17 +20,19 @@
 .Card{
   display: flex;
   flex-direction: column;
-  padding: 50px 50px 40px 50px;
+  padding: 40px 50px 40px 50px;
+  text-decoration: none;
+  color: inherit;
 }
 .Card-title{
   font-size: 22px;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
 }
 .Card-description{
   margin: 10px 0px 10px 0px;
   font-size: 15px;
-  text-align: left;
+  text-align: center;
 }
 .Card-progress{
   display: flex;
@@ -38,7 +40,7 @@
   align-items: center;
 }
 .Card-progress-bar{
-  width: 70%;
+  width: 90%;
 }
 .VoteButtons{
   text-align: center;
