@@ -3,7 +3,14 @@ easy_admin:
 #        - App\Entity\User
         User:
             class: App\Entity\User
-#            search:
+            controller: App\Controller\Admin\UserAdminController
+
+        Company:
+            class: App\Entity\Company
+            controller: App\Controller\Admin\HomeController
+
+
+            #            search:
 #                fields:
 #                    - { property: 'user.id', searchField: 'company' }
 
