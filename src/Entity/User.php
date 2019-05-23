@@ -53,7 +53,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var Company
-     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id", cascade={"persist"})
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
     private $company;
 

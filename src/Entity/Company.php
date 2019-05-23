@@ -17,9 +17,8 @@ class Company
     /**
      * @var int
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="User", mappedBy="company")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -35,6 +34,11 @@ class Company
      * @Assert\NotBlank()
      */
     private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="company")
+     */
+    protected $users;
 
     public function __toString()
     {
@@ -100,4 +104,25 @@ class Company
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param mixed $users
+     *
+     * @return Company
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
 }
