@@ -2,12 +2,12 @@ import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
 import {Link as RouterLink} from "react-router-dom";
 import './ProjectInfo.scss';
-// import LinearProgress from "../ProjectsList/ProjectsList";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from '@material-ui/core/Button';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/es/Typography/Typography";
-// import LinearProgress from "../ProjectsList/ProjectsList";
+import Paper from "@material-ui/core/es/Paper/Paper";
+
 
 const theme = createMuiTheme({
     palette: {
@@ -30,52 +30,51 @@ const ProjectInfo = (props) => {
     return null;
   }).map((project, i) => {
     return (
-      <div className='Project' key={i}>
-        <div className='Title'>{project.title}</div>
-          <div className='progress-bar'>
-              <div>{project.budget}</div>
-              <div className='LinearProgressMoney'>
-                  <LinearProgress variant={'buffer'} value={(project.budget/project.amount)*100}/>
+          <div className='Project' key={i}>
+            <div className='Title'>{project.title}</div>
+              <div className='progress-bar'>
+                  <div>{project.budget} €</div>
+                  <div className='LinearProgressMoney'>
+                      <LinearProgress variant={'buffer'} value={(project.budget/project.amount)*100}/>
+                  </div>
+                  <div>{project.amount} €</div>
               </div>
-              <div>{project.amount}</div>
-          </div>
-          <div className='VoteButtons'>
-              <Button variant="outlined" >5€</Button>
-              <Button variant="outlined" >15€</Button>
-              <Button variant="outlined" >30€</Button>
-          </div>
+              <div className='VoteButtons'>
+                  <Button variant="outlined" >5€</Button>
+                  <Button variant="outlined" >15€</Button>
+                  <Button variant="outlined" >30€</Button>
+              </div>
 
-          <div className='container'>
-            <div className='Description'>{project.description}</div>
-            <div className='card'>
-                <div className='Text--left'>
-                    <p className="Text">Author:</p>
-                    <p className='Text--Bold'>{project.username}</p>
-                    <p className="Text">Author Email:</p>
-                    <p className='Text--Bold'>{project.email}</p>
-                </div>
+              <div className='wrapper'>
+                    <div className='Author'>
+                      <div>Author Email: </div>
+                      <div className='Text--Bold'> {project.email}</div>
+                    </div>
+                  <div className='Description' >
+                      <div>{project.description}</div>
+                  </div>
+              </div>
 
-            </div>
+              <Button
+                  className='Button'
+                  variant="contained"
+                  color="primary"
+                  component={RouterLink}
+                  to='/projects'>
+                  <Typography
+                      color="secondary"
+                  >Back to projects</Typography>
+              </Button>
           </div>
-
-      </div>
     )
   })
   return (
       <MuiThemeProvider theme={theme}>
-        <div className='ProjectInfo'>
-          {projectInfo}
-          <Button
-              className='Button'
-              variant="contained"
-              color="primary"
-              component={RouterLink}
-              to='/projects'>
-              <Typography
-                  color="secondary"
-              >Back to projects</Typography>
-          </Button>
-        </div>
+          <Paper className='container'>
+            <div className='ProjectInfo'>
+              {projectInfo}
+            </div>
+          </Paper>
       </MuiThemeProvider>
   );
 };
