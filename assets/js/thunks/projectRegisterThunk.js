@@ -16,10 +16,8 @@ export const onProjectRegisterFormSubmit = (projectInfo, history, email) => (dis
     "title": projectInfo.hobbyName,
     "description": projectInfo.description,
     "amount": projectInfo.amount,
-    "email": email,
-    "username": projectInfo.username,
+    "email": email
   });
-  console.log(json);
   axios
       .post('/api/hobby',json)
     .then(res=>{
