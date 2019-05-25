@@ -36,7 +36,6 @@ class ProjectsList extends Component {
     }
   }
 
-
   componentDidMount() {
     this.props.onGetProjectsList();
   }
