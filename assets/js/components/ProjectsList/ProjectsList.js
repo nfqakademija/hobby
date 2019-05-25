@@ -11,6 +11,7 @@ import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid"
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Loader from '../Loader/Loader';
 
 const theme = createMuiTheme({
     palette: {
@@ -70,11 +71,9 @@ class ProjectsList extends Component {
         )
       })
     } else {
-      projectsList = <Typography
-          variant="h4"
-          gutterBottom
-          align="center"
-      >Projects will be here soon...</Typography>
+      projectsList = <div className='Loader-container'>
+        <Loader color={'#EA7925'} h={100}/>
+      </div>
     }
     return (
         <MuiThemeProvider theme={theme}>

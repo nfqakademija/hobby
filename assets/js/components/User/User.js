@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import './User.scss';
 import {connect} from "react-redux";
 import {votes} from '../../thunks/getVotesThunk';
-import {unVote} from '../../thunks/unVoteThunk'
+import {unVote} from '../../thunks/unVoteThunk';
+import Loader from '../Loader/Loader';
 
 class User extends Component {
   componentDidMount() {
@@ -12,6 +13,9 @@ class User extends Component {
   render() {
     const {votes} = this.props.votes;
     const {onUnVote} = this.props;
+    const loader = <div className="Loader-container">
+      <Loader color={'#EA7925'} h={100}/>
+    </div>
     const votesArray = votes.map(vote => {
       return (
           <div className='Vote' key={vote.id}>
@@ -24,7 +28,7 @@ class User extends Component {
     return (
         <div className='User'>
           My Votes
-          {votesArray}
+          {votes.length > 0 ? votesArray : loader}
         </div>
     );
   }
