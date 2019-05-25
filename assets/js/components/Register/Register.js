@@ -17,7 +17,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import ErrorIcon from '@material-ui/icons/Error';
 import Tooltip from '@material-ui/core/Tooltip';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import Avatar from '@material-ui/core/Avatar';
+import Account from '@material-ui/icons/AccountCircle';
 
 const theme = createMuiTheme({
   palette: {
@@ -74,6 +75,10 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: '#EA7925',
+  },
 });
 
 
@@ -107,7 +112,10 @@ class Register extends Component {
           <MuiThemeProvider theme={theme} >
             <main className={classes.main}>
               <Paper className={classes.paper}>
-                <CssBaseline />
+                <CssBaseline/>
+                  <Avatar className={classes.avatar} >
+                    <Account/>
+                  </Avatar>
               <Typography
                   variant="h5"
                   gutterBottom

@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {votes} from '../../thunks/getVotesThunk';
 import {unVote} from '../../thunks/unVoteThunk';
 import Loader from '../Loader/Loader';
+import Paper from "@material-ui/core/es/Paper/Paper";
+
 
 class User extends Component {
   componentDidMount() {
@@ -18,11 +20,13 @@ class User extends Component {
     </div>
     const votesArray = votes.map(vote => {
       return (
-          <div className='Vote' key={vote.id}>
-            <p>Voted Hobby: {vote.title}</p>
-            <p>Voted Amount: {vote.amount}€</p>
-            <button onClick={() => onUnVote(vote.id)}>UnVote</button>
-          </div>
+          <Paper>
+              <div className='Vote' key={vote.id}>
+                <p>Voted Hobby: {vote.title}</p>
+                <p>Voted Amount: {vote.amount}€</p>
+                <button onClick={() => onUnVote(vote.id)}>UnVote</button>
+              </div>
+          </Paper>
       )
     })
     return (

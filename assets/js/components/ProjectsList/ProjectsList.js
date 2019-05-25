@@ -91,7 +91,9 @@ class ProjectsList extends Component {
             <div className="SearchBar">
               <TextField
                   fullWidth
+                  variant='outlined'
                   placeholder="Please enter keywords"
+                  color="primary"
                   value={this.state.searchValue}
                   onChange={this.onSearchBarChange}
               />
