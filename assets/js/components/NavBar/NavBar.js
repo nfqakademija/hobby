@@ -130,7 +130,7 @@ class NavBar extends Component {
                       <Button className={classes.button} component={RouterLinkNav}
                               to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
                       :
-                      <Button className={classes.button}>
+                      <Button className={classes.button} component={RouterLinkNav} to="/about">
                         About Us
                       </Button>
                   }
