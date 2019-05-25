@@ -56,6 +56,18 @@ const styles = {
     paddingLeft: 20,
     paddingRight: 20,
   },
+  MobileButton: {
+    display: 'block',
+    color: '#ffffff',
+    '&:hover': {
+      color: '#A4A4A4',
+    },
+    margin: 'auto',
+    paddingLeft: 20,
+    paddingRight: 20,
+    fontSize: '20px',
+    textAlign: 'center'
+  },
   buttonSingUp: {
     color: '#ffffff',
     backgroundColor: "#EA7925",
@@ -77,11 +89,23 @@ const styles = {
   IconMobile: {
     color: "#ffffff",
   },
+  MobileMenu: {
+    position: 'fixed',
+    top: '56px',
+    right: 0,
+    paddingTop: '20px',
+    zIndex: 1000,
+    width: '100%',
+    height: '100vh',
+    backgroundColor: 'rgba(0,0,0, 0.75)',
+
+  }
 };
 
 class NavBar extends Component {
   state = {
     value: 0,
+    showMenu: false
   }
 
   handleChange = (event, value) => {
@@ -90,10 +114,12 @@ class NavBar extends Component {
 
   onLogOutToggle = () => this.props.onLogoutClick(this.props.history)
 
+  onMenuShow = () => this.setState({showMenu: !this.state.showMenu})
+
   render() {
-    const {classes, location } = this.props;
+    const {classes, location} = this.props;
     const {isAuth} = this.props.auth;
-    console.log(location.pathname)
+    const {showMenu} = this.state;
     return (
         <MuiThemeProvider theme={theme}>
           <div className={classes.root}>
@@ -105,8 +131,54 @@ class NavBar extends Component {
 
                 <div className={classes.sectionMobile}>
                   <IconButton className={classes.IconMobile}>
-                    <MenuIcon/>
+                    <MenuIcon onClick={this.onMenuShow}/>
                   </IconButton>
+                  {showMenu ? <div onClick={this.onMenuShow} className={classes.MobileMenu}>
+                    {isAuth ?
+                        <Button
+                            className={classes.MobileButton}
+                            component={RouterLinkNav}
+                            exact
+                            to='/projects'>
+                          Discover Projects
+                        </Button>
+                        :
+                        < Button
+                            className={classes.MobileButton}
+                            component={RouterLinkNav}
+                            exact
+                            to='/'>
+                          Discover
+                        </Button>
+                    }
+                    {isAuth ?
+                        <Button
+                            className={classes.MobileButton}
+                            component={RouterLinkNav}
+                            to='/project-registration'>Create
+                          a Project</Button>
+                        :
+                        <Button
+                            className={classes.MobileButton}
+                            component={RouterLinkNav}
+                            to='/register'>Sign
+                          Up With Email</Button>
+                    }
+                    {isAuth ?
+                        <Button
+                            className={classes.MobileButton}
+                            component={RouterLinkNav}
+                            to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
+                        :
+                        <Button
+                            className={classes.MobileButton}
+                            component={RouterLinkNav}
+                            to="/about">
+                          About Us
+                        </Button>
+                    }
+
+                  </div> : null}
                 </div>
 
                 <div className={classes.grow}/>
@@ -174,9 +246,15 @@ class NavBar extends Component {
                 </div>
 
                 <div className={classes.sectionMobile}>
-                  <IconButton className={classes.IconMobile}>
-                    <SearchIcon/>
-                  </IconButton>
+                  {isAuth ?
+                      < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
+                        Logout
+                      </Button>
+                      :
+                      < Button className={classes.button} component={RouterLink} to='/login'>
+                        Sign In
+                      </Button>
+                  }
                 </div>
 
               </Toolbar>
