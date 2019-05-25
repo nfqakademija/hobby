@@ -98,6 +98,7 @@ class ProjectsList extends Component {
                   onChange={this.onSearchBarChange}
               />
             </div>
+            <div className={'searchValue'}>{this.state.searchValue}</div>
             {projectsList}
             <Typography
                 variant="h6"

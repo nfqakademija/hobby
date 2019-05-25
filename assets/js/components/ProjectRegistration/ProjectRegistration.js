@@ -200,7 +200,7 @@ class ProjectRegistration extends Component {
                     onChange={onInputChange}
                     multiline
                     fullWidth
-                    rowsMax="3"
+                    rowsMax="1"
                     className={classes.textField}
                     label="Please describe it"
                     margin="normal"
