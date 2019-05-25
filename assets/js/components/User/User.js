@@ -7,8 +7,8 @@ import Loader from '../Loader/Loader';
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/es/Paper/Paper";
 import Button from "@material-ui/core/Button";
-import TextField from '@material-ui/core/TextField';
-import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import {createMuiTheme, MuiThemeProvider,} from '@material-ui/core/styles';
+
 
 
 const theme = createMuiTheme({
@@ -52,34 +52,24 @@ class User extends Component {
 
     const votesArray = votes.map(vote => {
       return (
-          <Grid className={'main'} >
-          <Paper className={'Card'}  key={vote.id} >
-              <div className={'Card-title'}>{vote.title}</div>
-              <div className={'Card-MoneySpend'} >Voted Amount: {vote.amount}€</div>
-              <Button
-                  color="primary"
-                  variant="outlined"
-                  onClick={() => onUnVote(vote.id)}>UnVote</Button>
-          </Paper>
-          </Grid>
+          <MuiThemeProvider theme={theme}>
+              <Grid className={'main'} >
+                  <Paper className={'Card'}  key={vote.id} >
+                      <div className={'Card-title'}>{vote.title}</div>
+                      <div className={'Card-MoneySpend'} >Voted Amount: {vote.amount}€</div>
+                      <Button
+                          color="primary"
+                          variant="outlined"
+                          onClick={() => onUnVote(vote.id)}>UnVote</Button>
+                  </Paper>
+              </Grid>
+          </MuiThemeProvider>
       )
     })
       return (
-          <MuiThemeProvider theme={theme}>
               <div className='User'>
-                  <div className="SearchBar">
-                      <TextField
-                          fullWidth
-                          variant='outlined'
-                          placeholder="Please enter keywords"
-                          color="primary"
-                          // value={this.state.searchValue}
-                          // onChange={this.onSearchBarChange}
-                      />
-                  </div>
                   {votes.length > 0 ? votesArray : loader}
               </div>
-          </MuiThemeProvider>
       );
   }
 }
