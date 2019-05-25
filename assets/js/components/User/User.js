@@ -4,33 +4,73 @@ import {connect} from "react-redux";
 import {votes} from '../../thunks/getVotesThunk';
 import {unVote} from '../../thunks/unVoteThunk';
 import Loader from '../Loader/Loader';
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/es/Paper/Paper";
+import Button from "@material-ui/core/Button";
+import {createMuiTheme, MuiThemeProvider,} from '@material-ui/core/styles';
+
+
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#EA7925',
+        },
+        secondary: {
+            main: '#0044ff',
+        },
+    },
+});
+
+
 
 class User extends Component {
-  componentDidMount() {
+    constructor() {
+        super();
+
+        this.state = {
+            opened: false,
+            searchValue: ''
+        }
+    }
+
+
+    componentDidMount() {
     this.props.onGetVotes()
   }
 
-  render() {
+    onSearchBarChange = e => this.setState({searchValue: e.target.value})
+
+
+    render() {
     const {votes} = this.props.votes;
     const {onUnVote} = this.props;
-    const loader = <div className="Loader-container">
-      <Loader color={'#EA7925'} h={100}/>
-    </div>
+
+      const loader = <div className="Loader-container">
+          <Loader color={'#EA7925'} h={100}/>
+      </div>
+
     const votesArray = votes.map(vote => {
       return (
-          <div className='Vote' key={vote.id}>
-            <p>Voted Hobby: {vote.title}</p>
-            <p>Voted Amount: {vote.amount}€</p>
-            <button onClick={() => onUnVote(vote.id)}>UnVote</button>
-          </div>
+          <MuiThemeProvider theme={theme}>
+              <Grid className={'main'} >
+                  <Paper className={'Card'}  key={vote.id} >
+                      <div className={'Card-title'}>{vote.title}</div>
+                      <div className={'Card-MoneySpend'} >Voted Amount: {vote.amount}€</div>
+                      <Button
+                          color="primary"
+                          variant="outlined"
+                          onClick={() => onUnVote(vote.id)}>UnVote</Button>
+                  </Paper>
+              </Grid>
+          </MuiThemeProvider>
       )
     })
-    return (
-        <div className='User'>
-          My Votes
-          {votes.length > 0 ? votesArray : loader}
-        </div>
-    );
+      return (
+              <div className='User'>
+                  {votes.length > 0 ? votesArray : loader}
+              </div>
+      );
   }
 }
 
