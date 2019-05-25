@@ -11,13 +11,15 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#EA7925',
     },
+    secondary:{
+      main: '#ffffff',
+    }
   },
 });
 
@@ -125,9 +127,10 @@ class NavBar extends Component {
           <div className={classes.root}>
             <AppBar className={classes.menubar}>
               <Toolbar>
-                <Typography variant="h6" className={classes.title}>
+                <Button color="secondary"
+                        component={RouterLinkNav} to='/' >
                   HobbyCraft
-                </Typography>
+                </Button>
 
                 <div className={classes.sectionMobile}>
                   <IconButton className={classes.IconMobile}>
