@@ -17,9 +17,8 @@ class Company
     /**
      * @var int
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity="User", mappedBy="company")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -36,7 +35,15 @@ class Company
      */
     private $name;
 
-    public function __toString()
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="company")
+     */
+    protected $users;
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return $this->getName();
     }
@@ -82,22 +89,43 @@ class Company
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      *
      * @return Company
      */
-    public function setName(string $name): self
+    public function setName(?string $name): Company
     {
         $this->name = $name;
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param mixed $users
+     *
+     * @return Company
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
 }

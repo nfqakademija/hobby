@@ -53,7 +53,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * @var Company
-     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id")
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id", cascade={"persist"})
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
     private $company;
 
@@ -61,6 +62,14 @@ class User implements UserInterface, \Serializable
     {
         $this->setBudget(30);
         $this->roles = ['ROLE_USER'];
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getUsername();
     }
 
     /**
