@@ -21,7 +21,7 @@ class UserAdminController extends EasyAdminController
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         //TODO:found golden spot
-        $currentCompany = $user->getCompany()->getName();
+        $currentCompany = $user->getCompany()->getId();
 
 
         /* @var EntityManager $em */
@@ -33,6 +33,8 @@ class UserAdminController extends EasyAdminController
         $queryBuilder = $em->createQueryBuilder()
             ->select('entity')
             ->from($entityConfig, 'entity')
+            ->where('entity.company = :company')
+            ->setParameter('company', $currentCompany)
         ;
 
         $isSortedByDoctrineAssociation = $this->isDoctrineAssociation($classMetadata, $sortField);
@@ -64,6 +66,7 @@ class UserAdminController extends EasyAdminController
 
         $fieldNameParts = \explode('.', $fieldName);
 
-        return false !== \strpos($fieldName, '.') && !\array_key_exists($fieldNameParts[0], $classMetadata->embeddedClasses);
+        return false !== \strpos($fieldName, '.')
+            && !\array_key_exists($fieldNameParts[0], $classMetadata->embeddedClasses);
     }
 }

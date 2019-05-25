@@ -40,7 +40,10 @@ class Company
      */
     protected $users;
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return $this->getName();
     }
@@ -86,19 +89,19 @@ class Company
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      *
      * @return Company
      */
-    public function setName(string $name): self
+    public function setName(?string $name): Company
     {
         $this->name = $name;
 

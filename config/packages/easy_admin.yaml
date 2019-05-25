@@ -1,20 +1,2 @@
-easy_admin:
-    entities:
-#        - App\Entity\User
-        User:
-            class: App\Entity\User
-            controller: App\Controller\Admin\UserAdminController
-
-        Company:
-            class: App\Entity\Company
-            controller: App\Controller\Admin\HomeController
-
-
-            #            search:
-#                fields:
-#                    - { property: 'user.id', searchField: 'company' }
-
-#        Company:
-#            class: App\Entity\Company
-#            controller: App\Controller\Admin\HomeController
-
+imports:
+    - {resource: admin/}
