@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -58,10 +60,16 @@ class User implements UserInterface, \Serializable
      */
     private $company;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ContributionToUser", mappedBy="user")
+     */
+    private $contributionToUsers;
+
     public function __construct()
     {
         $this->setBudget(30);
         $this->roles = ['ROLE_USER'];
+        $this->contributionToUsers = new ArrayCollection();
     }
 
     /**
@@ -237,5 +245,36 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return Collection|ContributionToUser[]
+     */
+    public function getContributionToUsers(): Collection
+    {
+        return $this->contributionToUsers;
+    }
+
+    public function addContributionToUser(ContributionToUser $contributionToUser): self
+    {
+        if (!$this->contributionToUsers->contains($contributionToUser)) {
+            $this->contributionToUsers[] = $contributionToUser;
+            $contributionToUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContributionToUser(ContributionToUser $contributionToUser): self
+    {
+        if ($this->contributionToUsers->contains($contributionToUser)) {
+            $this->contributionToUsers->removeElement($contributionToUser);
+            // set the owning side to null (unless already changed)
+            if ($contributionToUser->getUser() === $this) {
+                $contributionToUser->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

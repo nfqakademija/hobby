@@ -144,7 +144,7 @@ class CompanyCreateCommand extends Command
         if (count($errors) > 0) {
             /** @var ConstraintViolation $error */
             foreach ($errors as $error) {
-                throw new Exception('Poperty: ' . $error->getPropertyPath() . '. ' . $error->getMessage());
+                throw new Exception('Propert: ' . $error->getPropertyPath() . '. ' . $error->getMessage());
             }
         }
     }

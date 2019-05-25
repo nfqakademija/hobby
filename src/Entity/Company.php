@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -39,6 +41,16 @@ class Company
      * @ORM\OneToMany(targetEntity="User", mappedBy="company")
      */
     protected $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CompanyContribution", mappedBy="company")
+     */
+    private $companyContributions;
+
+    public function __construct()
+    {
+        $this->companyContributions = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -124,6 +136,47 @@ class Company
     public function setUsers($users)
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CompanyContribution[]
+     */
+    public function getCompanyContributions(): Collection
+    {
+        return $this->companyContributions;
+    }
+
+    /**
+     * @param CompanyContribution $companyContribution
+     *
+     * @return Company
+     */
+    public function addCompanyContribution(CompanyContribution $companyContribution): self
+    {
+        if (!$this->companyContributions->contains($companyContribution)) {
+            $this->companyContributions[] = $companyContribution;
+            $companyContribution->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CompanyContribution $companyContribution
+     *
+     * @return Company
+     */
+    public function removeCompanyContribution(CompanyContribution $companyContribution): self
+    {
+        if ($this->companyContributions->contains($companyContribution)) {
+            $this->companyContributions->removeElement($companyContribution);
+            // set the owning side to null (unless already changed)
+            if ($companyContribution->getCompany() === $this) {
+                $companyContribution->setCompany(null);
+            }
+        }
 
         return $this;
     }
