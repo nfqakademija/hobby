@@ -127,7 +127,9 @@ class NavBar extends Component {
           <div className={classes.root}>
             <AppBar className={classes.menubar}>
               <Toolbar>
-                <Button color="secondary"
+                <Button
+                    className={classes.title}
+                    color="secondary"
                         component={RouterLinkNav} to='/' >
                   HobbyCraft
                 </Button>
@@ -230,9 +232,9 @@ class NavBar extends Component {
                   }
                 </div>
                 <div className={classes.sectionMobile}>
-                  <Typography variant="h6" className={classes.titleMobile}>
+                  <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
                     HobbyCraft
-                  </Typography>
+                  </Button>
                 </div>
 
                 <div className={classes.grow}/>
