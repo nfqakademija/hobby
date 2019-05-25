@@ -33,10 +33,11 @@ class Routes extends Component {
             <Route path='/projects' component={ProjectsList}/>
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
+            <Route path='/user' component={User} />g
             {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}
             <Route path='/admin' />
             <Route path='/project/:id' component={ProjectInfo}/>
-            <Route path='/user' component={User} />
+
           </Switch>
         </Fragment>
       </BrowserRouter>

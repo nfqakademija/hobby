@@ -91,9 +91,9 @@ class NavBar extends Component {
   onLogOutToggle = () => this.props.onLogoutClick(this.props.history)
 
   render() {
-    const {classes } = this.props;
+    const {classes, location } = this.props;
     const {isAuth} = this.props.auth;
-
+    console.log(location.pathname)
     return (
         <MuiThemeProvider theme={theme}>
           <div className={classes.root}>
@@ -112,25 +112,44 @@ class NavBar extends Component {
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
                   {isAuth ?
-                      < Button className={classes.button} component={RouterLinkNav} exact to='/projects'>
+                      < Button
+                          className={'/projects' === location.pathname ? classes.buttonSingUp : classes.button}
+                          component={RouterLinkNav}
+                          exact
+                          to='/projects'>
                         Discover Projects
                       </Button>
                       :
-                      < Button className={classes.button} component={RouterLinkNav} exact to='/'>
+                      < Button
+                          className={'/' === location.pathname ? classes.buttonSingUp : classes.button}
+                          component={RouterLinkNav}
+                          exact
+                          to='/'>
                         Discover
                       </Button>}
                   {isAuth ?
-                      <Button className={classes.buttonSingUp} component={RouterLinkNav} to='/project-registration'>Create
+                      <Button
+                          className={'/project-registration' === location.pathname ? classes.buttonSingUp : classes.button}
+                          component={RouterLinkNav}
+                          to='/project-registration'>Create
                         a Project</Button>
                       :
-                      <Button className={classes.buttonSingUp} component={RouterLinkNav} to='/register'>Sign
+                      <Button
+                          className={'/register' === location.pathname ? classes.buttonSingUp : classes.button}
+                          component={RouterLinkNav}
+                          to='/register'>Sign
                         Up With Email</Button>
                   }
                   {isAuth ?
-                      <Button className={classes.button} component={RouterLinkNav}
-                              to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
+                      <Button
+                          className={'/user' === location.pathname ? classes.buttonSingUp : classes.button}
+                          component={RouterLinkNav}
+                          to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
                       :
-                      <Button className={classes.button} component={RouterLinkNav} to="/about">
+                      <Button
+                          className={'/about' === location.pathname ? classes.buttonSingUp : classes.button}
+                          component={RouterLinkNav}
+                          to="/about">
                         About Us
                       </Button>
                   }
