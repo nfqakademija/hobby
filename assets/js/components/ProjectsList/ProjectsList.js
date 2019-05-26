@@ -48,6 +48,14 @@ class ProjectsList extends Component {
     let projectsList;
     if (projects.length !== 0) {
       projectsList = projects && projects.filter(project => {
+        project.budget = 0;
+        if (project.votes.length > 1) {
+          project.budget = project.votes.reduce((total, vote)=> {
+            return total + vote.amount;
+          }, 0)
+        } else if(project.votes.length === 1) {
+          project.budget = project.votes[0].amount;
+        }
         if (project.title.toLowerCase().includes(this.state.searchValue.toLowerCase())) {
           return project;
         }
