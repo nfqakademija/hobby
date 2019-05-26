@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter,Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 import {getUserFromLS} from './storage/storage';
 import {authUser} from './actions/authActions';
+import {setProjectList} from './thunks/getProjects';
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import ProjectsList from  './components/ProjectsList/ProjectsList';
@@ -19,6 +20,7 @@ class Routes extends Component {
   componentDidMount() {
     const user = getUserFromLS();
     user ? this.props.onLoadAuth(user) : null
+    user ? this.props.onLoadProjects : null
   }
 
   render() {
@@ -33,10 +35,10 @@ class Routes extends Component {
             <Route path='/projects' component={ProjectsList}/>
             <Route path='/login' component={Login}/>
             <Route path='/register' component={Register}/>
-            <Route path='/user' component={User} />g
-            {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}
-            <Route path='/admin' />
+            <Route path='/user' component={User} />
+            {/*<Route path='/admin' />*/}
             <Route path='/project/:id' component={ProjectInfo}/>
+            {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}
 
           </Switch>
         </Fragment>
@@ -52,7 +54,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadAuth: (user) => dispatch(authUser(user))
+  onLoadAuth: (user) => dispatch(authUser(user)),
+  onLoadProjects: () => dispatch(setProjectList())
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Routes);
