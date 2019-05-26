@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimestampTrait;
+use App\Utils\DateTimeUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CompanyContribution
 {
+    use TimestampTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -30,30 +34,38 @@ class CompanyContribution
     private $budget;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created_at;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\ContributionToUser", mappedBy="companyContribution", orphanRemoval=true)
      */
     private $contributionToUsers;
 
+
     public function __construct()
     {
         $this->contributionToUsers = new ArrayCollection();
+        $this->createdAt = DateTimeUtils::create();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return Company|null
+     */
     public function getCompany(): ?Company
     {
         return $this->company;
     }
 
+    /**
+     * @param Company|null $company
+     *
+     * @return CompanyContribution
+     */
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
@@ -61,26 +73,22 @@ class CompanyContribution
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getBudget(): ?int
     {
         return $this->budget;
     }
 
+    /**
+     * @param int $budget
+     *
+     * @return CompanyContribution
+     */
     public function setBudget(int $budget): self
     {
         $this->budget = $budget;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
 
         return $this;
     }
@@ -93,6 +101,11 @@ class CompanyContribution
         return $this->contributionToUsers;
     }
 
+    /**
+     * @param ContributionToUser $contributionToUser
+     *
+     * @return CompanyContribution
+     */
     public function addContributionToUser(ContributionToUser $contributionToUser): self
     {
         if (!$this->contributionToUsers->contains($contributionToUser)) {
@@ -103,6 +116,11 @@ class CompanyContribution
         return $this;
     }
 
+    /**
+     * @param ContributionToUser $contributionToUser
+     *
+     * @return CompanyContribution
+     */
     public function removeContributionToUser(ContributionToUser $contributionToUser): self
     {
         if ($this->contributionToUsers->contains($contributionToUser)) {

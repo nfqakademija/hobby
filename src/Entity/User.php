@@ -65,11 +65,16 @@ class User implements UserInterface, \Serializable
      */
     private $contributionToUsers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="user")
+     */
+    private $votes;
+
     public function __construct()
     {
-        $this->setBudget(30);
         $this->roles = ['ROLE_USER'];
         $this->contributionToUsers = new ArrayCollection();
+        $this->votes = new ArrayCollection();
     }
 
     /**
@@ -175,6 +180,15 @@ class User implements UserInterface, \Serializable
      */
     public function getBudget(): ?int
     {
+        //TODO: fix this
+//        dd($this->contributionToUsers);
+        if (false === empty($this->contributionToUsers)) {
+            /** @var ContributionToUser $contributionToUser */
+            foreach ($this->contributionToUsers as $contributionToUser) {
+                $this->budget += $contributionToUser->getUserBudget();
+            }
+        }
+
         return $this->budget;
     }
 
@@ -272,6 +286,37 @@ class User implements UserInterface, \Serializable
             // set the owning side to null (unless already changed)
             if ($contributionToUser->getUser() === $this) {
                 $contributionToUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vote[]
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Vote $vote): self
+    {
+        if ($this->votes->contains($vote)) {
+            $this->votes->removeElement($vote);
+            // set the owning side to null (unless already changed)
+            if ($vote->getUser() === $this) {
+                $vote->setUser(null);
             }
         }
 

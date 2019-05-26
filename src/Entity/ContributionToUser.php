@@ -29,20 +29,32 @@ class ContributionToUser
     private $companyContribution;
 
     /**
-     * @ORM\Column(type="integer")
+     * @var int|null
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $userBudget;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     *
+     * @return ContributionToUser
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -50,11 +62,19 @@ class ContributionToUser
         return $this;
     }
 
+    /**
+     * @return CompanyContribution|null
+     */
     public function getCompanyContribution(): ?CompanyContribution
     {
         return $this->companyContribution;
     }
 
+    /**
+     * @param CompanyContribution|null $companyContribution
+     *
+     * @return ContributionToUser
+     */
     public function setCompanyContribution(?CompanyContribution $companyContribution): self
     {
         $this->companyContribution = $companyContribution;
@@ -62,12 +82,35 @@ class ContributionToUser
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getUserBudget(): ?int
     {
+//        if (false === empty($this->companyContribution)) {
+            //TODO:fix budget
+//            /** @var CompanyContribution $companyContribution */
+//            $companyContribution = $this->companyContribution;
+//            $companyContribution->getBudget();
+//
+//            dd($companyContribution->getCompany());
+
+
+//            /** @var ContributionToUser $contributionToUser */
+//            foreach ($this->contributionToUsers as $contributionToUser) {
+//                $this->budget += $contributionToUser->getUserBudget();
+//            }
+//        }
+
         return $this->userBudget;
     }
 
-    public function setUserBudget(int $userBudget): self
+    /**
+     * @param int|null $userBudget
+     *
+     * @return ContributionToUser
+     */
+    public function setUserBudget(?int $userBudget): ContributionToUser
     {
         $this->userBudget = $userBudget;
 

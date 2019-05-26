@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Entity\Hobby;
 use App\Entity\User;
 use App\Entity\Vote;
+use App\Factory\Entity\VoteFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -33,7 +34,7 @@ class Voter
      */
     public function vote(int $hobbyId, int $amount, User $user): void
     {
-        if (false === $this->checkAmountAndUpdateUser($user, $amount)) {
+        if (false === $this->checkAmountAndUpdateUser($user, $amount) || 0 > $amount) {
             throw new NotFoundHttpException('Insufficient budget');
         }
 
@@ -44,16 +45,12 @@ class Voter
         /** @var Hobby $hobby */
         $hobby = $this->em->getRepository(Hobby::class)->find($hobbyId);
 
-        if (false === $this->updateHobbyAmount($hobby, $amount) || null === $hobby) {
+//        if (false === $this->updateHobbyAmount($hobby, $amount) || null === $hobby) {
+        if (null === $hobby) {
             throw new NotFoundHttpException('Insufficient budget');
         }
 
-        /** @var Vote $vote */
-        $vote = new Vote();
-
-        $vote->setAmount($amount);
-        $vote->setHobby($hobby);
-        $vote->setUser($user);
+        $vote = VoteFactory::create($amount, $hobby, $user);
 
         $this->em->persist($vote);
         $this->em->flush();
@@ -80,20 +77,20 @@ class Voter
         return true;
     }
 
-    /**
-     * @param Hobby $hobby
-     * @param int $amount
-     * @return bool
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    private function updateHobbyAmount(Hobby $hobby, int $amount): bool
-    {
-        $hobby->setBudget($hobby->getBudget() + $amount);
-
-        $this->em->persist($hobby);
-        $this->em->flush();
-
-        return true;
-    }
+//    /**
+//     * @param Hobby $hobby
+//     * @param int $amount
+//     * @return bool
+//     * @throws ORMException
+//     * @throws OptimisticLockException
+//     */
+//    private function updateHobbyAmount(Hobby $hobby, int $amount): bool
+//    {
+//        $hobby->setBudget($hobby->getBudget() + $amount);
+//
+//        $this->em->persist($hobby);
+//        $this->em->flush();
+//
+//        return true;
+//    }
 }

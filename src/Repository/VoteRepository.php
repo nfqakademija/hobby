@@ -33,7 +33,7 @@ class VoteRepository extends ServiceEntityRepository
             ->select(
                 'hobby.title',
                 'vote.id',
-                'vote.amount'
+                'vote.budget'
             )
             ->innerJoin(
                 'vote.user',

@@ -25,12 +25,6 @@ class Company
     private $id;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    private $budget = 0;
-
-    /**
      * @var string
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
@@ -85,19 +79,15 @@ class Company
      */
     public function getBudget(): int
     {
-        return $this->budget;
-    }
+        $budget = 0;
+        if (false === empty($this->companyContributions)) {
+            /** @var CompanyContribution $companyContribution */
+            foreach ($this->companyContributions as $companyContribution) {
+                $budget += $companyContribution->getBudget();
+            }
+        }
 
-    /**
-     * @param int $budget
-     *
-     * @return Company
-     */
-    public function setBudget(int $budget): self
-    {
-        $this->budget = $budget;
-
-        return $this;
+        return $budget;
     }
 
     /**
@@ -129,13 +119,12 @@ class Company
     }
 
     /**
-     * @param mixed $users
-     *
+     * @param User $user
      * @return Company
      */
-    public function setUsers($users)
+    public function addUser(User $user)
     {
-        $this->users = $users;
+        $this->users[] = $user;
 
         return $this;
     }
