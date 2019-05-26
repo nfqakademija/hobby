@@ -11,6 +11,19 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+
+
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import HomeIcon from '@material-ui/icons/Home';
+import View from '@material-ui/icons/ViewModule';
+import AddIcon from '@material-ui/icons/LibraryAdd';
+import PersonIcon from '@material-ui/icons/Person';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
+
+
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -26,11 +39,25 @@ const styles = {
   root: {
     width: '100%',
   },
+
+  MobileNav:{
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    zIndex: 1000,
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+
+
   menubar: {
-    position: "static",
+    position: 'static',
     background: "#181818",
 
   },
+
   grow: {
     flexGrow: 1,
     align: 'center',
@@ -100,7 +127,7 @@ const styles = {
     height: '100vh',
     backgroundColor: 'rgba(0,0,0, 0.75)',
 
-  }
+  },
 };
 
 class NavBar extends Component {
@@ -121,6 +148,10 @@ class NavBar extends Component {
     const {classes, location} = this.props;
     const {isAuth} = this.props.auth;
     const {showMenu} = this.state;
+
+
+
+
     return (
         <MuiThemeProvider theme={theme}>
           <div className={classes.root}>
@@ -246,6 +277,7 @@ class NavBar extends Component {
                       < Button className={classes.button} component={RouterLink} to='/login'>
                         Sign In
                       </Button>
+
                   }
                 </div>
 
@@ -260,10 +292,28 @@ class NavBar extends Component {
                       </Button>
                   }
                 </div>
-
               </Toolbar>
             </AppBar>
           </div>
+
+          {isAuth ?
+              <BottomNavigation
+                  showLabels
+                  className={classes.MobileNav}>
+                <BottomNavigationAction label="Home" component={RouterLink} to='/' icon={<HomeIcon/>}/>
+                <BottomNavigationAction label="Discover"  component={RouterLink} to='/projects' icon={<View/>}/>
+                <BottomNavigationAction label="Create a Project" component={RouterLink} to='/project-registration' icon={<AddIcon/>}/>
+                <BottomNavigationAction label={this.props.auth.email} icon={<PersonIcon/>}/>
+              </BottomNavigation>
+              :
+              <BottomNavigation
+                  showLabels
+                  className={classes.MobileNav}>
+                <BottomNavigationAction label="Home"   component={RouterLink} to='/' icon={<HomeIcon/>}/>
+                <BottomNavigationAction label="Sign Up" component={RouterLink} to='/register' icon={<PersonAddIcon/>}/>
+                <BottomNavigationAction label="Sign In" component={RouterLink} to='/login' icon={<PersonIcon/>}/>
+              </BottomNavigation>
+          }
         </MuiThemeProvider>
     );
   }
