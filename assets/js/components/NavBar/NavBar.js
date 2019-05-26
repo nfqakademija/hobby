@@ -119,7 +119,7 @@ class NavBar extends Component {
 
   render() {
     const {classes, location} = this.props;
-    const {isAuth} = this.props.auth;
+    const {isAuth, role} = this.props.auth;
     const {showMenu} = this.state;
     return (
         <MuiThemeProvider theme={theme}>
@@ -238,6 +238,10 @@ class NavBar extends Component {
 
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
+                  {role === 1 ?
+                      < Button className={classes.button} component={RouterLink} to='/admin'>
+                        Admin
+                      </Button> : null}
                   {isAuth ?
                       < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
                         Logout
@@ -250,6 +254,10 @@ class NavBar extends Component {
                 </div>
 
                 <div className={classes.sectionMobile}>
+                  {role === 1 ?
+                      < Button className={classes.button} component={RouterLink} to='/admin'>
+                        Admin
+                      </Button> : null}
                   {isAuth ?
                       < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
                         Logout

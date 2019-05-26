@@ -3,6 +3,7 @@ import * as types from '../actions/types';
 const initialState = {
     email: '',
     amount: 0,
+    role: null,
     isAuth: false
 }
 
@@ -13,6 +14,7 @@ export default (state = initialState, action) => {
                 ...state,
                 email: action.user.email,
                 amount: action.user.budget,
+                role: action.user.role,
                 isAuth: true
             }
         case types.LOG_OUT:
@@ -20,6 +22,7 @@ export default (state = initialState, action) => {
                 ...state,
                 email: '',
                 amount: 0,
+                role: null,
                 isAuth: false
             };
         case types.VOTE_USER:
