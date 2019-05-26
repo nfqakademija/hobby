@@ -32,11 +32,9 @@ class HobbyRepository extends ServiceEntityRepository
                 'hobby',
                 'votes'
             )
-            ->innerJoin(
+            ->leftJoin(
                 'hobby.votes',
-                'votes',
-                Join::WITH,
-                $qb->expr()->eq('votes.hobby', 'hobby.id')
+                'votes'
             )
         ;
 
