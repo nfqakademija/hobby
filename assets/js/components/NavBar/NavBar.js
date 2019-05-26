@@ -8,6 +8,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import {onLogOut as Logout} from '../../thunks/logoutThunk';
 import Button from '@material-ui/core/Button';
+import Link from '@material-ui/core/Link';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -56,6 +57,17 @@ const styles = {
     margin: 'auto',
     paddingLeft: 20,
     paddingRight: 20,
+    textDecoration: 'none'
+  },
+  link: {
+    color: '#A4A4A4',
+    '&:hover': {
+      color: '#ffffff',
+    },
+    margin: 'auto',
+    padding: '6px 20px',
+    textDecoration: 'none',
+    textTransform: 'uppercase'
   },
   MobileButton: {
     display: 'block',
@@ -239,9 +251,12 @@ class NavBar extends Component {
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
                   {role === 1 ?
-                      < Button className={classes.button} component={RouterLink} to='/admin'>
+                      <Link
+                          href={'/admin'}
+                          underline={'none'}
+                          className={classes.link}>
                         Admin
-                      </Button> : null}
+                      </Link> : null }
                   {isAuth ?
                       < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
                         Logout
@@ -255,9 +270,12 @@ class NavBar extends Component {
 
                 <div className={classes.sectionMobile}>
                   {role === 1 ?
-                      < Button className={classes.button} component={RouterLink} to='/admin'>
+                      <Link
+                          href={'/admin'}
+                          underline={'none'}
+                          className={classes.button}>
                         Admin
-                      </Button> : null}
+                      </Link> : null }
                   {isAuth ?
                       < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
                         Logout
