@@ -46,7 +46,7 @@ const styles = {
     bottom: 0,
     left: 0,
     zIndex: 1000,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
@@ -114,20 +114,6 @@ const styles = {
   titleMobile: {
     color: '#ffffff',
   },
-  IconMobile: {
-    color: "#ffffff",
-  },
-  MobileMenu: {
-    position: 'fixed',
-    top: '56px',
-    right: 0,
-    paddingTop: '20px',
-    zIndex: 1000,
-    width: '100%',
-    height: '100vh',
-    backgroundColor: 'rgba(0,0,0, 0.75)',
-
-  },
 };
 
 class NavBar extends Component {
@@ -157,6 +143,8 @@ class NavBar extends Component {
           <div className={classes.root}>
             <AppBar className={classes.menubar}>
               <Toolbar>
+
+
                 <Button
                     className={classes.title}
                     color="secondary"
@@ -165,56 +153,11 @@ class NavBar extends Component {
                 </Button>
 
                 <div className={classes.sectionMobile}>
-                  <IconButton className={classes.IconMobile}>
-                    <MenuIcon onClick={this.onMenuShow}/>
-                  </IconButton>
-                  {showMenu ? <div onClick={this.onMenuShow} className={classes.MobileMenu}>
-                    {isAuth ?
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            exact
-                            to='/projects'>
-                          Discover Projects
-                        </Button>
-                        :
-                        < Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            exact
-                            to='/'>
-                          Discover
-                        </Button>
-                    }
-                    {isAuth ?
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to='/project-registration'>Create
-                          a Project</Button>
-                        :
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to='/register'>Sign
-                          Up With Email</Button>
-                    }
-                    {isAuth ?
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
-                        :
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to="/about">
-                          About Us
-                        </Button>
-                    }
-
-                  </div> : null}
+                  <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
+                    HobbyCraft
+                  </Button>
                 </div>
+
 
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
@@ -261,11 +204,7 @@ class NavBar extends Component {
                       </Button>
                   }
                 </div>
-                <div className={classes.sectionMobile}>
-                  <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
-                    HobbyCraft
-                  </Button>
-                </div>
+
 
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
@@ -277,21 +216,15 @@ class NavBar extends Component {
                       < Button className={classes.button} component={RouterLink} to='/login'>
                         Sign In
                       </Button>
-
                   }
                 </div>
 
                 <div className={classes.sectionMobile}>
-                  {isAuth ?
-                      < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
-                        Logout
-                      </Button>
-                      :
-                      < Button className={classes.button} component={RouterLink} to='/login'>
-                        Sign In
-                      </Button>
-                  }
+                  <Button color='secondary' className={classes.titleMobile} onClick={this.onLogOutToggle} to='/logout'>
+                    Logout
+                  </Button>
                 </div>
+
               </Toolbar>
             </AppBar>
           </div>
@@ -303,7 +236,7 @@ class NavBar extends Component {
                 <BottomNavigationAction label="Home" component={RouterLink} to='/' icon={<HomeIcon/>}/>
                 <BottomNavigationAction label="Discover"  component={RouterLink} to='/projects' icon={<View/>}/>
                 <BottomNavigationAction label="Create a Project" component={RouterLink} to='/project-registration' icon={<AddIcon/>}/>
-                <BottomNavigationAction label={this.props.auth.email} icon={<PersonIcon/>}/>
+                <BottomNavigationAction label={this.props.auth.email} component={RouterLink} to='/user' icon={<PersonIcon/>}/>
               </BottomNavigation>
               :
               <BottomNavigation
