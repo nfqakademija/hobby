@@ -30,6 +30,7 @@ class User implements UserInterface, \Serializable
      * @var string|null
      * @ORM\Column(name="email", type="string", unique=true, nullable=true)
      * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -39,16 +40,10 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @var string|null
-     * @ORM\Column(name="username", type="string", unique=true, nullable=true)
+     * @var array
+     * @ORM\Column(name="roles", type="array")
      */
-    private $username;
-
-    /**
-     * @var string|null
-     * @ORM\Column(name="role", type="string", nullable=true)
-     */
-    private $role;
+    private $roles;
 
     /**
      * @var int|null
@@ -56,10 +51,25 @@ class User implements UserInterface, \Serializable
      */
     private $budget;
 
+    /**
+     * @var Company
+     * @ORM\ManyToOne(targetEntity="Company", inversedBy="id", cascade={"persist"})
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
+     */
+    private $company;
+
     public function __construct()
     {
         $this->setBudget(30);
-        $this->setRole('ROLE_USER');
+        $this->roles = ['ROLE_USER'];
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getUsername();
     }
 
     /**
@@ -75,7 +85,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setId(?int $id): User
+    public function setId(?int $id): self
     {
         $this->id = $id;
 
@@ -95,11 +105,21 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setEmail(?string $email): User
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * @param string|null
+     *
+     * @return User
+     */
+    public function getUsername(): ?string
+    {
+        return $this->email;
     }
 
     /**
@@ -123,41 +143,21 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return string|null
+     * @return mixed
      */
-    public function getUsername(): ?string
+    public function getRoles()
     {
-        return $this->username;
+        return $this->roles;
     }
 
     /**
-     * @param string|null $username
+     * @param array $roles
      *
      * @return User
      */
-    public function setUsername(?string $username): User
+    public function setRoles(array $roles): User
     {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param string|null $role
-     *
-     * @return User
-     */
-    public function setRole(?string $role): User
-    {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
@@ -175,9 +175,29 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setBudget(?int $budget): User
+    public function setBudget(?int $budget): self
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return Company|null
+     */
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company|null $company
+     *
+     * @return User
+     */
+    public function setCompany(?Company $company): User
+    {
+        $this->company = $company;
 
         return $this;
     }
@@ -189,7 +209,7 @@ class User implements UserInterface, \Serializable
     {
         return serialize([
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
         ]);
     }
@@ -201,19 +221,9 @@ class User implements UserInterface, \Serializable
     {
         list (
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
             ) = unserialize($serialized);
-    }
-
-    /**
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        return [
-            'ROLE_USER'
-        ];
     }
 
     /**

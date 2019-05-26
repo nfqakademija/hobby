@@ -1,40 +1,72 @@
 .ProjectsList {
-  margin: 8% auto 0;
-  height: auto;
-  //overflow: scroll;
-
-  p {
-    text-align: center;
-  }
-
-  .Project-item {
-    background-color: #bbbbbb;
-    border-radius: 4px;
-    display: block;
-    margin: 10px auto;
-    width: 40%;
-    padding: 10px;
-
-    h4 {
-      text-align: center;
-      margin-top: 0;
-    }
-
-    .Project-item__span {
-      display: block;
-    }
-
-    .Info {
-      display: block;
-      margin-top: 10px;
-    }
-  }
+  width: 100%;
+  overflow-y: scroll;
 }
 
-@media (max-width: 650px) {
-  .ProjectsList {
-    .Project-item {
-      width: 80%;
-    }
+.main {
+  position: relative;
+  display: inline-block;
+  width: calc(33.3333% - 40px);
+  margin:  20px;
+  cursor: pointer;
+  @media only screen and (max-width: 960px) {
+    position: relative;
+    display: block;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
+}
+.Card{
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 50px 40px 50px;
+  text-decoration: none;
+  color: inherit;
+}
+.Card-title{
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+.Card-description{
+  margin: 10px 0px 10px 0px;
+  font-size: 15px;
+  text-align: center;
+}
+.Card-progress{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Card-progress-bar{
+  width: 80%;
+}
+.VoteButtons{
+  text-align: center;
+}
+
+.ReadMoreButton{
+  border-radius: 25px;
+  text-align: center;
+}
+
+.btn {
+  border-radius: 50%;
+}
+
+.Loader-container {
+  margin: 50px auto;
+}
+
+.SearchBar {
+  width: 50%;
+  margin: auto;
+  padding: 15px;
+}
+.searchValue{
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
 }

@@ -24,8 +24,8 @@ export const onFormSubmit = (user, history) => (dispatch) => {
         history.push('/')
       })
       .catch(err => {
-        dispatch(actions.onLoginFormError('Server error. Please try again later.'))
-
-          }
+          dispatch(actions.onLoginFormError(err.response.data.error ? err.response.data.error :
+          'Server Error. Please try again later'))
+        }
       )
 }

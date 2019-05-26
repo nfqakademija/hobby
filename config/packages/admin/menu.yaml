@@ -1,0 +1,8 @@
+easy_admin:
+    design:
+        menu:
+            - label: 'Company'
+              icon:  'building'
+              children:
+                  - {entity: 'Company', icon:  'newspaper-o', label: 'Team'}
+                  - {entity: 'User', icon:  'users', label: 'Users'}

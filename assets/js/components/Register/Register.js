@@ -11,7 +11,14 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import ErrorIcon from '@material-ui/icons/Error';
+import Tooltip from '@material-ui/core/Tooltip';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Avatar from '@material-ui/core/Avatar';
+import Account from '@material-ui/icons/AccountCircle';
 
 const theme = createMuiTheme({
   palette: {
@@ -21,26 +28,76 @@ const theme = createMuiTheme({
     secondary: {
       main: '#0044ff',
     },
+    error: {
+      main: '#ffffff',
+    },
   },
 });
 
 const styles = theme => ({
-  container: {
+  main: {
+    width: 'auto',
+    display: 'block',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      width: 400,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
     display: 'flex',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing.unit,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    height: 50,
   },
-  button: {
+  submit: {
+    marginTop: theme.spacing.unit * 3,
+    height: 50,
+  },
+  root: {
+    background: theme.palette.error.dark,
+  },
+  icon: {
+    fontSize:20,
+    marginRight: 10,
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  avatar: {
     margin: theme.spacing.unit,
-    justify: theme.center,
+    backgroundColor: '#EA7925',
   },
 });
 
 
 class Register extends Component {
+  state = {
+    open: false,
+  };
+
+  handleClick = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false });
+  };
+
   onFormSubmit = (e) => {
     e.preventDefault();
     this.props.onFormSubmit(this.props.register, this.props.history);
@@ -53,16 +110,47 @@ class Register extends Component {
     const { classes } = this.props;
     return (
           <MuiThemeProvider theme={theme} >
-            <Paper elevation={8} className='Register'>
+            <main className={classes.main}>
+              <Paper className={classes.paper}>
+                <CssBaseline/>
+                  <Avatar className={classes.avatar} >
+                    <Account/>
+                  </Avatar>
               <Typography
                   variant="h5"
                   gutterBottom
                   align="center">Sign Up
               </Typography>
-              {error ? <p style={{
-                color: 'red',
-                textAlign: 'center'
-              }}>{error}</p> : null}
+              {error ? <Snackbar
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }}
+                  open={this.state.open}
+                  autoHideDuration={3000}
+                  onClose={this.handleClose}
+                  ContentProps={{
+                    'aria-describedby': 'message-id',
+                      classes: {
+                          root: classes.root
+                      },
+                  }}
+                  message={<span className={classes.message}>
+                    <ErrorIcon className={classes.icon}/>
+                    {error}
+                  </span>}
+                  action={[
+                    <Tooltip title="Close">
+                      <IconButton aria-label="Close"
+                                  key="close"
+                                  color="inherit"
+                                  className={classes.close}
+                                  onClick={this.handleClose}>
+                        <CloseIcon />
+                      </IconButton>
+                    </Tooltip>
+                  ]}
+              /> : null}
               <form onSubmit={this.onFormSubmit}  className={classes.container}  noValidate autoComplete="off">
                 <TextField
                       type="text"
@@ -117,27 +205,28 @@ class Register extends Component {
                 <Button
                     variant="contained"
                     color="primary"
-                    className={classes.button}
+                    textColor="secondary"
+                    className={classes.submit}
                     margin="normal"
                     fullWidth
                     gutterBottom
+                    onClick={this.handleClick}
                     type="submit">
-                  {loading ? <Loader color={'#fff'} h={15} /> : 'Sign Up'}
+                  {loading ? <Loader color={'#fff'} h={15} /> :
+                      <Typography color="error" >Sign up</Typography> }
                 </Button>
               </form>
-            </Paper>,
-            <Typography
-                variant="caption"
-                gutterBottom
-                align="center" >
-              Already have an account?{' '}
-              <Link
-                  component={RouterLink}
-                  color={'secondary'}
-                  to='/login'>
-                Sign In
-              </Link>
-            </Typography>
+            </Paper>
+              <div className={"subheading"}>
+                Already have an account?{' '}
+                <Link
+                    component={RouterLink}
+                    color={'secondary'}
+                    to='/login'>
+                  Sign In
+                </Link>
+              </div>
+            </main>
           </MuiThemeProvider>
     );
   }
