@@ -35,8 +35,7 @@ class HobbyRepository extends ServiceEntityRepository
             ->leftJoin(
                 'hobby.votes',
                 'votes'
-            )
-        ;
+            );
 
         return $qb->getQuery()->getArrayResult();
     }

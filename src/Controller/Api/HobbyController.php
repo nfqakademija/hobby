@@ -22,7 +22,6 @@ class HobbyController extends AbstractFOSRestController
     public function showHobbiesAction(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hobby::class);
-        //TODO: fix this if no votes it doesnt return
         $hobbies = $repository->getHobbies();
 
         return $this->handleView($this->view($hobbies));
