@@ -35,6 +35,14 @@ class ContributionToUser
     private $userBudget;
 
     /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getUser();
+    }
+
+    /**
      * @return int|null
      */
     public function getId(): ?int

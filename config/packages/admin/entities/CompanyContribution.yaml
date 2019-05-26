@@ -1,0 +1,9 @@
+easy_admin:
+    entities:
+        CompanyContribution:
+            class: App\Entity\CompanyContribution
+            controller: App\Controller\Admin\CompanyContributionAdminController
+            list:
+                actions:
+                    - {name: 'edit', icon: 'pencil', label: false, css-class: 'btn btn-secondary'}
+                    - {name: 'delete', icon: 'trash', label: false, css-class: 'btn btn-delete'}
