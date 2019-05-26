@@ -2,3 +2,85 @@
   width: 100%;
   overflow-y: auto;
 }
+.root{
+     width: 100%,
+}
+ .grow{
+   flex-grow: 1;
+ }
+.title {
+  color: #ffffff;
+  display: block;
+  @media (max-width: 960px){
+    display: none;
+  }
+}
+.sectionDesktop {
+  display: block;
+  @media (max-width: 960px){
+    display: none;
+  }
+}
+
+.sectionMobile {
+  display: none;
+  @media (max-width: 960px){
+    display: flex;
+  }
+}
+
+.menubar{
+  position: static;
+  background: #181818 !important;
+}
+
+ .button{
+   color: #A4A4A4;
+   margin: auto;
+   padding-Left: 20px;
+   padding-Right: 20px;
+   &:hover{
+     color: #ffffff
+   }
+ }
+ .MobileButton {
+   display: block;
+   color: #ffffff;
+   &:hover {
+     color: #A4A4A4;
+   }
+   margin: auto;
+   padding-Left: 20px;
+   padding-Right: 20px;
+   font-size: 20px;
+   text-align: center;
+ }
+
+ .buttonSingUp {
+   color: #ffffff;
+   background-color: #EA7925;
+   border-radius: 25px;
+   font-weight: 600;
+   &:hover {
+     background-color: #A15421;
+   }
+ }
+
+ .titleMobile {
+   color: #ffffff;
+ }
+ .IconMobile {
+   color: #ffffff;
+ }
+
+
+ .MobileMenu {
+   position: fixed;
+   top: 56px;
+   right: 0;
+   padding-Top: 20px;
+   z-index: 1000;
+   width: 100%;
+   height: 100vh;
+   background-color: rgba(0,0,0, 0.75);
+ }
