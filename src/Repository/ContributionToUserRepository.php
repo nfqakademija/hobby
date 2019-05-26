@@ -20,25 +20,4 @@ class ContributionToUserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, ContributionToUser::class);
     }
-
-    /**
-     * @param Company $company
-     *
-     * @return array
-     */
-    public function getUserByCompany(Company $company): array
-    {
-        $qb = $this->createQueryBuilder('contributionToUser');
-
-        $qb
-            ->innerJoin(
-                'contributionToUser.user',
-                'user',
-                Join::WITH,
-                $qb->expr()->eq('user.company', ':company')
-            )
-            ->setParameter('company', $company);
-
-        return $qb->getQuery()->getArrayResult();
-    }
 }

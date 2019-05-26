@@ -87,21 +87,6 @@ class ContributionToUser
      */
     public function getUserBudget(): ?int
     {
-//        if (false === empty($this->companyContribution)) {
-            //TODO:fix budget
-//            /** @var CompanyContribution $companyContribution */
-//            $companyContribution = $this->companyContribution;
-//            $companyContribution->getBudget();
-//
-//            dd($companyContribution->getCompany());
-
-
-//            /** @var ContributionToUser $contributionToUser */
-//            foreach ($this->contributionToUsers as $contributionToUser) {
-//                $this->budget += $contributionToUser->getUserBudget();
-//            }
-//        }
-
         return $this->userBudget;
     }
 

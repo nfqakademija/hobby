@@ -180,15 +180,6 @@ class User implements UserInterface, \Serializable
      */
     public function getBudget(): ?int
     {
-        //TODO: fix this
-//        dd($this->contributionToUsers);
-        if (false === empty($this->contributionToUsers)) {
-            /** @var ContributionToUser $contributionToUser */
-            foreach ($this->contributionToUsers as $contributionToUser) {
-                $this->budget += $contributionToUser->getUserBudget();
-            }
-        }
-
         return $this->budget;
     }
 

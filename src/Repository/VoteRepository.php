@@ -25,7 +25,7 @@ class VoteRepository extends ServiceEntityRepository
      * @param User $user
      * @return array
      */
-    public function getByUser(User $user): array
+    public function getVotesByUser(User $user): array
     {
         $qb = $this->createQueryBuilder('vote');
 
