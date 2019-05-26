@@ -45,7 +45,7 @@ class VoteController extends AbstractFOSRestController
         }
 
     }
-  
+
     /**
      * @Rest\Delete("/vote/{id}", name="remove_vote")
      * @ParamConverter("vote", class="App\Entity\Vote")

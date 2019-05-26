@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimestampTrait;
+use App\Utils\DateTimeUtils;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VoteRepository")
  */
 class Vote
 {
+    use TimestampTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -17,30 +22,27 @@ class Vote
     private $id;
 
     /**
-     * @var Hobby
+     * @var Hobby|null
      * @ORM\ManyToOne(targetEntity="App\Entity\Hobby", inversedBy="votes")
+     * @JoinColumn(name="hobby", referencedColumnName="id")
      */
     private $hobby;
 
     /**
-     * @var User
+     * @var User|null
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="votes")
      */
     private $user;
 
     /**
+     * @var integer
      * @ORM\Column(type="integer")
      */
     private $amount;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = DateTimeUtils::create();
     }
 
     /**
@@ -52,19 +54,19 @@ class Vote
     }
 
     /**
-     * @return Hobby
+     * @return Hobby|null
      */
-    public function getHobby(): Hobby
+    public function getHobby(): ?Hobby
     {
         return $this->hobby;
     }
 
     /**
-     * @param Hobby $hobby
+     * @param Hobby|null $hobby
      *
      * @return Vote
      */
-    public function setHobby(Hobby $hobby): self
+    public function setHobby(?Hobby $hobby): self
     {
         $this->hobby = $hobby;
 
@@ -72,19 +74,19 @@ class Vote
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      *
      * @return Vote
      */
-    public function setUser(User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
@@ -92,41 +94,21 @@ class Vote
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return $this->amount;
     }
 
     /**
-     * @param mixed $amount
+     * @param int $amount
      *
      * @return Vote
      */
-    public function setAmount($amount)
+    public function setAmount(int $amount): Vote
     {
         $this->amount = $amount;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTimeInterface|null
-     */
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTimeInterface $createdAt
-     *
-     * @return Vote
-     */
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }

@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\HobbyRepository")
  * @ORM\Table(name="hobby")
  */
 class Hobby
@@ -40,27 +40,20 @@ class Hobby
     private $amount;
 
     /**
-     * @var int|null
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $budget = 0;
-
-    /**
      * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
-     * @var Vote
      * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="hobby")
      */
     private $votes;
 
     public function __construct()
     {
-        $this->votes = new ArrayCollection();
         $this->setAmount(0);
+        $this->votes = new ArrayCollection();
     }
 
     /**
@@ -148,19 +141,16 @@ class Hobby
      */
     public function getBudget(): ?int
     {
-        return $this->budget;
-    }
+        $budget = 0;
 
-    /**
-     * @param int|null $budget
-     *
-     * @return Hobby
-     */
-    public function setBudget(?int $budget): self
-    {
-        $this->budget = $budget;
+        if (false === empty($this->votes)) {
+            /** @var Vote $vote */
+            foreach ($this->votes as $vote) {
+                $budget += $vote->getAmount();
+            }
+        }
 
-        return $this;
+        return $budget;
     }
 
     /**
@@ -189,5 +179,28 @@ class Hobby
     public function getVotes(): Collection
     {
         return $this->votes;
+    }
+
+    public function addVote(Vote $vote): self
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes[] = $vote;
+            $vote->setHobby($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Vote $vote): self
+    {
+        if ($this->votes->contains($vote)) {
+            $this->votes->removeElement($vote);
+            // set the owning side to null (unless already changed)
+            if ($vote->getHobby() === $this) {
+                $vote->setHobby(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -22,7 +22,9 @@ class HobbyController extends AbstractFOSRestController
     public function showHobbiesAction(): Response
     {
         $repository = $this->getDoctrine()->getRepository(Hobby::class);
-        $hobbies = $repository->findall();
+        //TODO: fix this if no votes it doesnt return
+        $hobbies = $repository->getHobbies();
+
         return $this->handleView($this->view($hobbies));
     }
 
@@ -46,6 +48,7 @@ class HobbyController extends AbstractFOSRestController
 
             return $this->handleView($this->view([], Response::HTTP_CREATED));
         }
+
         return $this->handleView($this->view($form->getErrors()));
     }
 }

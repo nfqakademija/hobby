@@ -6,10 +6,12 @@ namespace App\DataFixtures;
 
 use App\Entity\Company;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class CompanyFixtures extends Fixture
 {
+    public const COMPANY = 'company';
 
     /**
      * @param ObjectManager $manager
@@ -17,12 +19,15 @@ class CompanyFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
+        /** @var Company $company */
         $company = new Company();
+
         $company
-            ->setName('CompanyB')
-            ->setBudget(1500);
+            ->setName('CompanyA');
 
         $manager->persist($company);
         $manager->flush();
+
+        $this->addReference(self::COMPANY, $company);
     }
 }

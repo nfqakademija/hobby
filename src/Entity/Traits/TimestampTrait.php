@@ -4,20 +4,26 @@ declare(strict_types=1);
 
 namespace App\Entity\Traits;
 
-class TimestampTrait
+use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\Exclude;
+
+trait TimestampTrait
 {
     /**
      * @var \DateTimeInterface
-     * @ORM\Column(name="created_at", type="datetime")
+     * @Exclude()
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    protected $created_at;
+    protected $createdAt;
 
     /**
      * @return \DateTimeInterface
      */
     public function getCreatedAt(): \DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -25,6 +31,6 @@ class TimestampTrait
      */
     public function setCreatedAt(\DateTimeInterface $created_at): void
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $created_at;
     }
 }
