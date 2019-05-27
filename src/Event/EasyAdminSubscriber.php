@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Event;
 
 use App\Entity\CompanyContribution;
+use App\Entity\Contribution;
 use App\Entity\User;
 use App\Service\UserBudget;
 use Doctrine\ORM\EntityManager;
@@ -35,13 +36,14 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     /**
      * @param GenericEvent $event
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function onPrePersist(GenericEvent $event)
     {
         $entity = $event->getSubject();
-        if ($entity instanceof CompanyContribution) {
-            $this->service->userBudget($entity->getId(), $entity->getCompany(), $entity->getBudget());
-
+        if ($entity instanceof Contribution) {
+            $this->service->userBudget($entity, $entity->getCompany(), $entity->getAmount());
         }
     }
 }

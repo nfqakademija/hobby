@@ -3,18 +3,18 @@
 namespace App\Repository;
 
 use App\Entity\Company;
-use App\Entity\CompanyContribution;
+use App\Entity\Contribution;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method CompanyContribution|null find($id, $lockMode = null, $lockVersion = null)
- * @method CompanyContribution|null findOneBy(array $criteria, array $orderBy = null)
- * @method CompanyContribution[]    findAll()
- * @method CompanyContribution[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Contribution|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Contribution|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Contribution[]    findAll()
+ * @method Contribution[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompanyContributionRepository extends ServiceEntityRepository
+class ContributionRepository extends ServiceEntityRepository
 {
     /**
      * CompanyContributionRepository constructor.
@@ -22,22 +22,22 @@ class CompanyContributionRepository extends ServiceEntityRepository
      */
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, CompanyContribution::class);
+        parent::__construct($registry, Contribution::class);
     }
 
     /**
-     * @param int $companyContributionId
+     * @param int $contribution
      * @param Company $company
      * @return int
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getUserCountByCompany(int $companyContributionId, Company $company): int
+    public function getUserCountByCompany(int $contribution, Company $company): int
     {
-        $qb = $this->createQueryBuilder('companyContribution');
+        $qb = $this->createQueryBuilder('contribution');
 
         $qb
             ->leftJoin(
-                'companyContribution.company',
+                'contribution.company',
                 'company',
                 Join::WITH,
                 $qb->expr()->eq('company', ':company')
@@ -46,12 +46,12 @@ class CompanyContributionRepository extends ServiceEntityRepository
                 'company.users',
                 'users'
             )
-            ->where($qb->expr()->eq('companyContribution.id', ':companyContributionId'))
+            ->where($qb->expr()->eq('contribution.id', ':contributionId'))
             ->select('COUNT(users) as userCount')
             ->setParameters(
                 [
                     'company' => $company,
-                    'companyContributionId' => $companyContributionId
+                    'contributionId' => $contribution
                 ]
             );
 

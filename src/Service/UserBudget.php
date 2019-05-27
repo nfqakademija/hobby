@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\Company;
-use App\Entity\CompanyContribution;
+use App\Entity\Contribution;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 
@@ -23,22 +23,28 @@ class UserBudget
     }
 
     /**
-     * @param int $companyContributionId
+     * @param Contribution $contribution
      * @param Company $company
      * @param int $budget
      * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function userBudget(int $companyContributionId, Company $company, int $budget): void
+    public function userBudget(Contribution $contribution, Company $company, int $budget): void
     {
-        $userCount = $this->em->getRepository(CompanyContribution::class)->getUserCountByCompany(
-            $companyContributionId,
+        $userCount = $this->em->getRepository(Contribution::class)->getUserCountByCompany(
+            $contribution->getId(),
             $company
         );
 
+        $amount = $budget / $userCount;
+
         /** @var User $user */
         foreach ($company->getUsers() as $user) {
-            dd($user);
+            $contribution->addUser($user);
+            $user->setBudget($user->getBudget() + $amount);
         }
 
+        $this->em->flush();
     }
 }

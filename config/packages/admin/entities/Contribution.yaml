@@ -1,8 +1,8 @@
 easy_admin:
     entities:
         CompanyContribution:
-            class: App\Entity\CompanyContribution
-            controller: App\Controller\Admin\CompanyContributionAdminController
+            class: App\Entity\Contribution
+            controller: App\Controller\Admin\ContributionAdminController
             list:
                 actions:
                     - {name: 'edit', icon: 'pencil', label: false, css-class: 'btn btn-secondary'}
