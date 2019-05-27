@@ -146,9 +146,11 @@ class NavBar extends Component {
                 </Button>
 
                 <div className={classes.sectionMobile}>
+                  {isAuth ?
                   <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
                     HobbyCraft
-                  </Button>
+                  </Button> : null
+                  }
                 </div>
 
 
@@ -196,7 +198,15 @@ class NavBar extends Component {
                         About Us
                       </Button>
                   }
+
                 </div>
+                {isAuth ?
+                    null: <div className={classes.sectionMobile}>
+                      <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
+                        HobbyCraft
+                      </Button>
+                    </div>
+                }
 
 
                 <div className={classes.grow}/>
