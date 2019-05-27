@@ -9,13 +9,17 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder as DoctrineQueryBuilder;
 
-class UserAdminController extends BaseAdminController
+class ContributionAdminController extends BaseAdminController
 {
     /**
      * {@inheritDoc}
      */
-    public function createListQueryBuilder($entityConfig, $sortField = null, $sortDirection = null, $dqlFilter = null)
-    {
+    protected function createListQueryBuilder(
+        $entityConfig,
+        $sortField = null,
+        $sortDirection = null,
+        $dqlFilter = null
+    ) {
         /** @var User $user */
         $user = $this->get('security.token_storage')->getToken()->getUser();
 

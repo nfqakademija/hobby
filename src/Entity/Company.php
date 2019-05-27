@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TimestampTrait;
+use App\Utils\DateTimeUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +18,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Company
 {
+    use TimestampTrait;
+
     /**
      * @var int
      * @ORM\Id()
@@ -37,13 +41,17 @@ class Company
     protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CompanyContribution", mappedBy="company")
+     * @ORM\OneToMany(targetEntity="App\Entity\Contribution", mappedBy="company")
      */
-    private $companyContributions;
+    private $contributions;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct()
     {
-        $this->companyContributions = new ArrayCollection();
+        $this->contributions = new ArrayCollection();
+        $this->createdAt = DateTimeUtils::create();
     }
 
     /**
@@ -72,22 +80,6 @@ class Company
         $this->id = $id;
 
         return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getBudget(): int
-    {
-        $budget = 0;
-        if (false === empty($this->companyContributions)) {
-            /** @var CompanyContribution $companyContribution */
-            foreach ($this->companyContributions as $companyContribution) {
-                $budget += $companyContribution->getBudget();
-            }
-        }
-
-        return $budget;
     }
 
     /**
@@ -120,6 +112,7 @@ class Company
 
     /**
      * @param User $user
+     *
      * @return Company
      */
     public function addUser(User $user)
@@ -130,44 +123,43 @@ class Company
     }
 
     /**
-     * @return Collection|CompanyContribution[]
+     * @return Collection|Contribution[]
      */
-    public function getCompanyContributions(): Collection
+    public function getContributions(): Collection
     {
-        return $this->companyContributions;
+        return $this->contributions;
     }
 
     /**
-     * @param CompanyContribution $companyContribution
+     * @param Contribution $contribution
      *
      * @return Company
      */
-    public function addCompanyContribution(CompanyContribution $companyContribution): self
+    public function addContribution(Contribution $contribution): self
     {
-        if (!$this->companyContributions->contains($companyContribution)) {
-            $this->companyContributions[] = $companyContribution;
-            $companyContribution->setCompany($this);
+        if (!$this->contributions->contains($contribution)) {
+            $this->contributions[] = $contribution;
+            $contribution->setCompany($this);
         }
 
         return $this;
     }
 
     /**
-     * @param CompanyContribution $companyContribution
+     * @param Contribution $contribution
      *
      * @return Company
      */
-    public function removeCompanyContribution(CompanyContribution $companyContribution): self
+    public function removeContribution(Contribution $contribution): self
     {
-        if ($this->companyContributions->contains($companyContribution)) {
-            $this->companyContributions->removeElement($companyContribution);
+        if ($this->contributions->contains($contribution)) {
+            $this->contributions->removeElement($contribution);
             // set the owning side to null (unless already changed)
-            if ($companyContribution->getCompany() === $this) {
-                $companyContribution->setCompany(null);
+            if ($contribution->getCompany() === $this) {
+                $contribution->setCompany(null);
             }
         }
 
         return $this;
     }
-
 }

@@ -1,8 +1,14 @@
 easy_admin:
     design:
+        brand_color: '#81b9ba'
+        assets:
+            css: ['css/custom_backend.css']
+            js:
+                - 'https://unpkg.com/snarkdown@1.2.2/dist/snarkdown.umd.js'
+                - 'js/custom_backend.js'
         menu:
-            - label: 'Company'
-              icon:  'building'
-              children:
-                  - {entity: 'Company', icon:  'newspaper-o', label: 'Team'}
-                  - {entity: 'User', icon:  'users', label: 'Users'}
+            -   label: 'Company'
+            -   {entity: 'Company', icon:  'newspaper-o', label: 'Team'}
+            -   {entity: 'CompanyContribution', icon:  'wallet', label: 'Contribution'}
+            -   {entity: 'User', icon:  'users', label: 'Users'}
+
