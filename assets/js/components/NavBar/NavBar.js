@@ -8,7 +8,6 @@ import {withStyles} from '@material-ui/core/styles';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import {onLogOut as Logout} from '../../thunks/logoutThunk';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
@@ -138,7 +137,6 @@ class NavBar extends Component {
   render() {
     const {classes, location} = this.props;
     const {isAuth, role} = this.props.auth;
-    const {showMenu} = this.state;
     return (
         <MuiThemeProvider theme={theme}>
           <div className={classes.root}>
@@ -203,7 +201,14 @@ class NavBar extends Component {
                         About Us
                       </Button>
                   }
+
+                  {role === 1 ?
+                      <Button href={'/admin'} className={classes.button} >Admin</Button>
+                      : null
+                  }
+
                 </div>
+
                 {isAuth ?
                     null: <div className={classes.sectionMobile}>
                       <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
@@ -226,14 +231,6 @@ class NavBar extends Component {
                   }
                 </div>
                   <div className={classes.sectionMobile}>
-                      {role === 1 ?
-                          <Link
-                              href={'/admin'}
-                              underline={'none'}
-                              className={classes.button}>
-                              Admin
-                          </Link> : null }
-
                   {isAuth ?
                       <div className={classes.sectionMobile}>
                           <Button color='secondary' className={classes.titleMobile} onClick={this.onLogOutToggle}
@@ -254,7 +251,9 @@ class NavBar extends Component {
                 <BottomNavigationAction label="Home" component={RouterLink} to='/' icon={<HomeIcon/>}/>
                 <BottomNavigationAction label="Discover"  component={RouterLink} to='/projects' icon={<View/>}/>
                 <BottomNavigationAction label="Create" component={RouterLink} to='/project-registration' icon={<AddIcon/>}/>
-                <BottomNavigationAction label={this.props.auth.email} component={RouterLink} to='/user' icon={<PersonIcon/>}/>
+                {role === 1 ? <BottomNavigationAction label="Admin" href={'/admin'} icon={<PersonIcon/>} /> :
+                              <BottomNavigationAction label={this.props.auth.email} component={RouterLink} to='/user' icon={<PersonIcon/>}/>
+                }
               </BottomNavigation>
               :
               <BottomNavigation
