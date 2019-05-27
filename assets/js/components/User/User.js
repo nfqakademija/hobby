@@ -67,9 +67,11 @@ class User extends Component {
       )
     })
       return (
+
               <div className='User'>
                   {votes.length > 0 ? votesArray : loader}
               </div>
+
       );
   }
 }

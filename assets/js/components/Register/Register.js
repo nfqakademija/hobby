@@ -157,18 +157,6 @@ class Register extends Component {
               /> : null}
               <form onSubmit={this.onFormSubmit}  className={classes.container}  noValidate autoComplete="off">
                 <TextField
-                      type="text"
-                      name='username'
-                      value={username}
-                      onChange={onInputChange}
-                      fullWidth
-                      required
-                      label="Please enter your name"
-                      margin="normal"
-                      variant="outlined"
-                      className={classes.textField}
-                  />
-                <TextField
                     type="text"
                     name='email'
                     value={email}
