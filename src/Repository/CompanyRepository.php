@@ -14,13 +14,12 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CompanyRepository extends ServiceEntityRepository
 {
+    /**
+     * CompanyRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Company::class);
-    }
-
-    public function getHobbies()
-    {
-
     }
 }

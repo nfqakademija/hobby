@@ -19,7 +19,7 @@ class UserController extends AbstractFOSRestController
     public function userVoteAction(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $userVotes = $em->getRepository(Vote::class)->getByUser($this->getUser());
+        $userVotes = $em->getRepository(Vote::class)->getVotesByUser($this->getUser());
 
         return $this->handleView($this->view($userVotes));
     }

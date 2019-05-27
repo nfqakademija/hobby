@@ -16,6 +16,10 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class VoteRepository extends ServiceEntityRepository
 {
+    /**
+     * VoteRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Vote::class);
@@ -25,7 +29,7 @@ class VoteRepository extends ServiceEntityRepository
      * @param User $user
      * @return array
      */
-    public function getByUser(User $user): array
+    public function getVotesByUser(User $user): array
     {
         $qb = $this->createQueryBuilder('vote');
 

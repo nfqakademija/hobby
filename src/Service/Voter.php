@@ -19,6 +19,9 @@ class Voter
     /** @var EntityManager */
     private $em;
 
+    /**
+     * @param EntityManager $em
+     */
     public function __construct(EntityManager $em)
     {
         $this->em = $em;

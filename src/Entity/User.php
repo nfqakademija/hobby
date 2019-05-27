@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user")
  * @UniqueEntity(
  *     fields={"email"}
@@ -61,20 +61,20 @@ class User implements UserInterface, \Serializable
     private $company;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ContributionToUser", mappedBy="user")
-     */
-    private $contributionToUsers;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Vote", mappedBy="user")
      */
     private $votes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Contribution", mappedBy="user")
+     */
+    private $contributions;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
-        $this->contributionToUsers = new ArrayCollection();
         $this->votes = new ArrayCollection();
+        $this->contributions = new ArrayCollection();
     }
 
     /**
@@ -180,15 +180,6 @@ class User implements UserInterface, \Serializable
      */
     public function getBudget(): ?int
     {
-        //TODO: fix this
-//        dd($this->contributionToUsers);
-        if (false === empty($this->contributionToUsers)) {
-            /** @var ContributionToUser $contributionToUser */
-            foreach ($this->contributionToUsers as $contributionToUser) {
-                $this->budget += $contributionToUser->getUserBudget();
-            }
-        }
-
         return $this->budget;
     }
 
@@ -253,43 +244,13 @@ class User implements UserInterface, \Serializable
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
-    }
-
-    public function eraseCredentials()
-    {
-        // TODO: Implement eraseCredentials() method.
     }
 
     /**
-     * @return Collection|ContributionToUser[]
+     * @return void
      */
-    public function getContributionToUsers(): Collection
+    public function eraseCredentials(): void
     {
-        return $this->contributionToUsers;
-    }
-
-    public function addContributionToUser(ContributionToUser $contributionToUser): self
-    {
-        if (!$this->contributionToUsers->contains($contributionToUser)) {
-            $this->contributionToUsers[] = $contributionToUser;
-            $contributionToUser->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContributionToUser(ContributionToUser $contributionToUser): self
-    {
-        if ($this->contributionToUsers->contains($contributionToUser)) {
-            $this->contributionToUsers->removeElement($contributionToUser);
-            // set the owning side to null (unless already changed)
-            if ($contributionToUser->getUser() === $this) {
-                $contributionToUser->setUser(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
@@ -300,6 +261,11 @@ class User implements UserInterface, \Serializable
         return $this->votes;
     }
 
+    /**
+     * @param Vote $vote
+     *
+     * @return User
+     */
     public function addVote(Vote $vote): self
     {
         if (!$this->votes->contains($vote)) {
@@ -310,6 +276,11 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param Vote $vote
+     *
+     * @return User
+     */
     public function removeVote(Vote $vote): self
     {
         if ($this->votes->contains($vote)) {
@@ -318,6 +289,44 @@ class User implements UserInterface, \Serializable
             if ($vote->getUser() === $this) {
                 $vote->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Contribution[]
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    /**
+     * @param Contribution $contribution
+     *
+     * @return User
+     */
+    public function addContribution(Contribution $contribution): self
+    {
+        if (!$this->contributions->contains($contribution)) {
+            $this->contributions[] = $contribution;
+            $contribution->addUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Contribution $contribution
+     *
+     * @return User
+     */
+    public function removeContribution(Contribution $contribution): self
+    {
+        if ($this->contributions->contains($contribution)) {
+            $this->contributions->removeElement($contribution);
+            $contribution->removeUser($this);
         }
 
         return $this;
