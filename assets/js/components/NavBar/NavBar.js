@@ -211,13 +211,14 @@ class NavBar extends Component {
                       </Button>
                   }
                 </div>
-
-                <div className={classes.sectionMobile}>
-                  <Button color='secondary' className={classes.titleMobile} onClick={this.onLogOutToggle} to='/logout'>
-                    Logout
-                  </Button>
-                </div>
-
+                {isAuth ?
+                    <div className={classes.sectionMobile}>
+                      <Button color='secondary' className={classes.titleMobile} onClick={this.onLogOutToggle}
+                              to='/logout'>
+                        Logout
+                      </Button>
+                    </div> : null
+                }
               </Toolbar>
             </AppBar>
           </div>
