@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Company;
 use App\Entity\Contribution;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -29,7 +30,7 @@ class ContributionRepository extends ServiceEntityRepository
      * @param int $contribution
      * @param Company $company
      * @return int
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function getUserCountByCompany(int $contribution, Company $company): int
     {

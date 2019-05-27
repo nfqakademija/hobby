@@ -8,6 +8,9 @@ use App\Entity\Company;
 use App\Entity\Contribution;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 class UserBudget
 {
@@ -26,9 +29,9 @@ class UserBudget
      * @param Contribution $contribution
      * @param Company $company
      * @param int $budget
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function userBudget(Contribution $contribution, Company $company, int $budget): void
     {
