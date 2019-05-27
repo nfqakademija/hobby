@@ -6,7 +6,6 @@ namespace App\Factory\Entity;
 
 use App\Entity\Company;
 use App\Entity\User;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFactory

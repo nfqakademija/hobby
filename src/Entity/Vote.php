@@ -40,6 +40,9 @@ class Vote
      */
     private $amount;
 
+    /**
+     * @throws \Exception
+     */
     public function __construct()
     {
         $this->createdAt = DateTimeUtils::create();

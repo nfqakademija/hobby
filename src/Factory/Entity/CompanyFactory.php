@@ -8,12 +8,16 @@ use App\Entity\Company;
 
 class CompanyFactory
 {
-    public static function create(int $budget, string $name): Company
+    /**
+     * @param string $name
+     * @return Company
+     * @throws \Exception
+     */
+    public static function create(string $name): Company
     {
         $company = new Company();
-        $company
-            ->setBudget($budget)
-            ->setName($name);
+
+        $company->setName($name);
 
         return $company;
     }
