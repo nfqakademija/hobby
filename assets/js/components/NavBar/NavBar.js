@@ -8,11 +8,6 @@ import {withStyles} from '@material-ui/core/styles';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import {onLogOut as Logout} from '../../thunks/logoutThunk';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-
-
-
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeIcon from '@material-ui/icons/Home';
@@ -128,12 +123,10 @@ class NavBar extends Component {
 
   onLogOutToggle = () => this.props.onLogoutClick(this.props.history)
 
-  onMenuShow = () => this.setState({showMenu: !this.state.showMenu})
 
   render() {
     const {classes, location} = this.props;
     const {isAuth} = this.props.auth;
-    const {showMenu} = this.state;
 
 
 
@@ -235,7 +228,7 @@ class NavBar extends Component {
                   className={classes.MobileNav}>
                 <BottomNavigationAction label="Home" component={RouterLink} to='/' icon={<HomeIcon/>}/>
                 <BottomNavigationAction label="Discover"  component={RouterLink} to='/projects' icon={<View/>}/>
-                <BottomNavigationAction label="Create a Project" component={RouterLink} to='/project-registration' icon={<AddIcon/>}/>
+                <BottomNavigationAction label="Create" component={RouterLink} to='/project-registration' icon={<AddIcon/>}/>
                 <BottomNavigationAction label={this.props.auth.email} component={RouterLink} to='/user' icon={<PersonIcon/>}/>
               </BottomNavigation>
               :
