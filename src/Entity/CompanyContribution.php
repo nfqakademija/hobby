@@ -38,6 +38,14 @@ class CompanyContribution
      */
     private $contributionToUsers;
 
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getCompany();
+    }
+
 
     public function __construct()
     {

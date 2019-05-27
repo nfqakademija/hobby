@@ -2,10 +2,8 @@
 
 namespace App\Repository;
 
-use App\Entity\Company;
 use App\Entity\ContributionToUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -16,6 +14,10 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ContributionToUserRepository extends ServiceEntityRepository
 {
+    /**
+     * ContributionToUserRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, ContributionToUser::class);
