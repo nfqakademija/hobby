@@ -9,8 +9,16 @@ import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import {onLogOut as Logout} from '../../thunks/logoutThunk';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import HomeIcon from '@material-ui/icons/Home';
+import View from '@material-ui/icons/ViewModule';
+import AddIcon from '@material-ui/icons/LibraryAdd';
+import PersonIcon from '@material-ui/icons/Person';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
+
+
 
 const theme = createMuiTheme({
   palette: {
@@ -27,8 +35,21 @@ const styles = {
   root: {
     width: '100%',
   },
+
+  MobileNav:{
+    width: '100%',
+    position: 'fixed',
+    bottom: 0,
+    left: 0,
+    zIndex: 1000,
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+
+
   menubar: {
-    position: "static",
+    position: 'static',
     background: "#181818",
 
   },
@@ -99,20 +120,6 @@ const styles = {
   titleMobile: {
     color: '#ffffff',
   },
-  IconMobile: {
-    color: "#ffffff",
-  },
-  MobileMenu: {
-    position: 'fixed',
-    top: '56px',
-    right: 0,
-    paddingTop: '20px',
-    zIndex: 1000,
-    width: '100%',
-    height: '100vh',
-    backgroundColor: 'rgba(0,0,0, 0.75)',
-
-  }
 };
 
 class NavBar extends Component {
@@ -127,7 +134,6 @@ class NavBar extends Component {
 
   onLogOutToggle = () => this.props.onLogoutClick(this.props.history)
 
-  onMenuShow = () => this.setState({showMenu: !this.state.showMenu})
 
   render() {
     const {classes, location} = this.props;
@@ -146,55 +152,11 @@ class NavBar extends Component {
                 </Button>
 
                 <div className={classes.sectionMobile}>
-                  <IconButton className={classes.IconMobile}>
-                    <MenuIcon onClick={this.onMenuShow}/>
-                  </IconButton>
-                  {showMenu ? <div onClick={this.onMenuShow} className={classes.MobileMenu}>
-                    {isAuth ?
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            exact
-                            to='/projects'>
-                          Discover Projects
-                        </Button>
-                        :
-                        < Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            exact
-                            to='/'>
-                          Discover
-                        </Button>
-                    }
-                    {isAuth ?
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to='/project-registration'>Create
-                          a Project</Button>
-                        :
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to='/register'>Sign
-                          Up With Email</Button>
-                    }
-                    {isAuth ?
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
-                        :
-                        <Button
-                            className={classes.MobileButton}
-                            component={RouterLinkNav}
-                            to="/about">
-                          About Us
-                        </Button>
-                    }
-
-                  </div> : null}
+                  {isAuth ?
+                  <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
+                    HobbyCraft
+                  </Button> : null
+                  }
                 </div>
 
                 <div className={classes.grow}/>
@@ -242,21 +204,17 @@ class NavBar extends Component {
                       </Button>
                   }
                 </div>
-                <div className={classes.sectionMobile}>
-                  <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
-                    HobbyCraft
-                  </Button>
-                </div>
+                {isAuth ?
+                    null: <div className={classes.sectionMobile}>
+                      <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
+                        HobbyCraft
+                      </Button>
+                    </div>
+                }
+
 
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
-                  {role === 1 ?
-                      <Link
-                          href={'/admin'}
-                          underline={'none'}
-                          className={classes.link}>
-                        Admin
-                      </Link> : null }
                   {isAuth ?
                       < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
                         Logout
@@ -267,29 +225,46 @@ class NavBar extends Component {
                       </Button>
                   }
                 </div>
+                  <div className={classes.sectionMobile}>
+                      {role === 1 ?
+                          <Link
+                              href={'/admin'}
+                              underline={'none'}
+                              className={classes.button}>
+                              Admin
+                          </Link> : null }
 
-                <div className={classes.sectionMobile}>
-                  {role === 1 ?
-                      <Link
-                          href={'/admin'}
-                          underline={'none'}
-                          className={classes.button}>
-                        Admin
-                      </Link> : null }
                   {isAuth ?
-                      < Button className={classes.button} onClick={this.onLogOutToggle} to='/logout'>
-                        Logout
-                      </Button>
-                      :
-                      < Button className={classes.button} component={RouterLink} to='/login'>
-                        Sign In
-                      </Button>
+                      <div className={classes.sectionMobile}>
+                          <Button color='secondary' className={classes.titleMobile} onClick={this.onLogOutToggle}
+                                  to='/logout'>
+                              Logout
+                          </Button>
+                      </div> : null
                   }
-                </div>
-
+                  </div>
               </Toolbar>
             </AppBar>
           </div>
+
+          {isAuth ?
+              <BottomNavigation
+                  showLabels
+                  className={classes.MobileNav}>
+                <BottomNavigationAction label="Home" component={RouterLink} to='/' icon={<HomeIcon/>}/>
+                <BottomNavigationAction label="Discover"  component={RouterLink} to='/projects' icon={<View/>}/>
+                <BottomNavigationAction label="Create" component={RouterLink} to='/project-registration' icon={<AddIcon/>}/>
+                <BottomNavigationAction label={this.props.auth.email} component={RouterLink} to='/user' icon={<PersonIcon/>}/>
+              </BottomNavigation>
+              :
+              <BottomNavigation
+                  showLabels
+                  className={classes.MobileNav}>
+                <BottomNavigationAction label="Home"   component={RouterLink} to='/' icon={<HomeIcon/>}/>
+                <BottomNavigationAction label="Sign Up" component={RouterLink} to='/register' icon={<PersonAddIcon/>}/>
+                <BottomNavigationAction label="Sign In" component={RouterLink} to='/login' icon={<PersonIcon/>}/>
+              </BottomNavigation>
+          }
         </MuiThemeProvider>
     );
   }

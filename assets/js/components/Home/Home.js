@@ -18,35 +18,37 @@ const theme = createMuiTheme({
 
 const Home = ( ) => {
   return (
-      <MuiThemeProvider theme={theme}>
+
         <div className='Home'>
-            <div className='Home-floatLeft'>
-                <Typography
-                    variant="h3"
-                    gutterBottom
-                    align="Left"
-                >A New and Better way to engange<br/>
-                and retain employees
-                </Typography>
-            <Typography
-                variant="subheading"
-                gutterBottom
-                align="Left"
-            >Companies use HobbyCraft to organize their<br/>
-                employees hobby budget, its a perfect<br/>
-                internal croud funding system for you !
-            </Typography>
-        </div>
-          <Button
-              className='button'
-              component={RouterLink}
-              variant="contained"
-              color="primary"
-              size="large"
-              to='/login'
-          ><Typography color="secondary" >Get Started</Typography></Button>
-            </div>
+              <div className='Container'>
+                  <div className='Title'>
+                    <Typography
+                    variant={"h3"}
+                    >A New and Better way to engange and retain employees
+                    </Typography>
+                  </div>
+                <div className='Subheading'>
+                    <Typography variant="subheading" >Companies use HobbyCraft to organize their
+                        employees hobby budget, its a perfect
+                        internal croud funding system for you !
+                    </Typography>
+                </div>
+            <MuiThemeProvider theme={theme}>
+                <div className="Button">
+                  <Button
+                      className='button'
+                      component={RouterLink}
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      to='/login'
+                  ><Typography color="secondary" >Get Started</Typography></Button>
+                </div>
       </MuiThemeProvider>
+
+
+              </div>
+        </div>
   );
 };
 

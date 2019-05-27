@@ -2,27 +2,36 @@
 
 
 .Home {
-  margin: 8% 150px 50px;
+  margin-top: 8%;
   background-size: cover;
+}
+
+.Container{
+  text-align: left;
+  margin-left: 100px;
+  width: calc(30% - 40px );
+
   @media only screen and (max-width: 960px) {
-    position: relative;
-    display: block;
-    width: 400px;
-    margin-left: auto;
+    width: calc(80% - 40px );
+    text-align: center;
     margin-right: auto;
+    margin-left: auto;
   }
-}
-* {
-  box-sizing: border-box;
-}
 
+  .Title{
+    margin-bottom: 20px;
+  }
+  .Subheading{
+    width: 60%;
+    margin-bottom: 20px;
+    @media only screen and (max-width: 960px) {
+      width: 90%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+  .Button{
+    margin-bottom: 10px;
 
-.Home-floatLeft{
-   margin: 0 0 50px;
- }
-.subheading{
-  font-size: 30px;
-}
-.button{
-  font-size: 20px;
+  }
 }
