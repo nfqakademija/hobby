@@ -48,12 +48,16 @@ const styles = theme => ({
         },
     },
     paper: {
-        marginTop: theme.spacing.unit * 8,
+        marginTop: theme.spacing.unit,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+        [theme.breakpoints.up('sm')]: {
+            marginTop: theme.spacing.unit *8,
+        },
     },
+
     avatar: {
         margin: theme.spacing.unit,
         backgroundColor: '#EA7925',
@@ -80,6 +84,7 @@ const styles = theme => ({
         display: 'flex',
         alignItems: 'center',
     },
+
 });
 
 class Login extends Component {
