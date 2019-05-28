@@ -83,7 +83,6 @@ class ProjectRegistration extends Component {
 
   render() {
     const {
-      username,
       hobbyName,
       description,
       amount,
@@ -92,7 +91,6 @@ class ProjectRegistration extends Component {
     } =this.props.projectRegister;
     const {onInputChange} = this.props;
     const { classes } = this.props;
-    const { email } =this.props.auth
     return (
         <MuiThemeProvider theme={theme}>
           <main className={classes.main}>
@@ -126,19 +124,6 @@ class ProjectRegistration extends Component {
                     variant="outlined"
                     className={classes.textField}
                 />
-                <TextField
-                    type="email"
-                    name='email'
-                    value={email}
-                    onChange={onInputChange}
-                    fullWidth
-                    required
-                    label="Please enter your email"
-                    margin="normal"
-                    variant="outlined"
-                    className={classes.textField}
-                />
-
                 <TextField
                     name='description'
                     value={description}
