@@ -10,12 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from '../Snackbar/snackbar';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import ErrorIcon from '@material-ui/icons/Error';
-import Tooltip from '@material-ui/core/Tooltip';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -73,18 +69,6 @@ const styles = theme => ({
         marginTop: theme.spacing.unit * 3,
         height: 50,
     },
-    root: {
-        background: theme.palette.error.dark,
-    },
-    icon: {
-        fontSize:20,
-        marginRight: 10,
-    },
-    message: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-
 });
 
 class Login extends Component {
@@ -96,19 +80,14 @@ class Login extends Component {
         this.setState({ open: true });
     };
 
-    handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    handleClose = () => {
         this.setState({ open: false });
     };
-
 
     onFormSubmit = (e) => {
         e.preventDefault();
         this.props.onFormSubmit(this.props.login, this.props.history)
     }
-
 
     render() {
         const { email, password, error, loading } = this.props.login
@@ -126,36 +105,13 @@ class Login extends Component {
                             component="h1" variant="h5">
                             Sign In
                         </Typography>
+
                         {error ? <Snackbar
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'center',
-                            }}
+                            error={error}
                             open={this.state.open}
-                            autoHideDuration={3000}
                             onClose={this.handleClose}
-                            ContentProps={{
-                                'aria-describedby': 'message-id',
-                                classes: {
-                                    root: classes.root
-                                },
-                            }}
-                            message={<span className={classes.message}>
-                    <ErrorIcon className={classes.icon}/>
-                                {error}
-                  </span>}
-                            action={[
-                                <Tooltip title="Close">
-                                    <IconButton aria-label="Close"
-                                                key="close"
-                                                color="inherit"
-                                                className={classes.close}
-                                                onClick={this.handleClose}>
-                                        <CloseIcon />
-                                    </IconButton>
-                                </Tooltip>,
-                            ]}
                         /> : null}
+
                         <form className={classes.form}
                               onSubmit={this.onFormSubmit}
                               noValidate autoComplete="off">

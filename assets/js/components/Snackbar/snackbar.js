@@ -6,10 +6,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-
-
-
-
 const styles = theme => ({
     root: {
         background: '#d32f2f',
@@ -37,6 +33,7 @@ const styles = theme => ({
 });
 
         const Snackbar  = (props) => {
+
         return (
                 <div>
                     <div className={props.classes.DesktopSnackbar}>
@@ -46,13 +43,11 @@ const styles = theme => ({
                             horizontal: 'center',
                         }}
                         open={props.open}
-                        onClose={props.onClose}
-                        autoHideDuration={3000}
+                        autoHideDuration={2000}
                         ContentProps={{
                             'aria-describedby': 'message-id',
                             classes: { root: props.classes.root},
                         }}
-
                         message={<span className={props.classes.message}>
                             <ErrorIcon className={props.classes.icon}/>
                             {props.error}

@@ -77,10 +77,7 @@ class Register extends Component {
 
   };
 
-  handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  handleClose = () => {
     this.setState({ open: false });
   };
 
