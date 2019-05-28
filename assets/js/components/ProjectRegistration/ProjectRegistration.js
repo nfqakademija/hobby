@@ -9,13 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import ErrorIcon from '@material-ui/icons/Error';
-import Tooltip from '@material-ui/core/Tooltip';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Snackbar from '../Snackbar/snackbar';
 
 
 const theme = createMuiTheme({
@@ -65,17 +61,6 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
     height: 50,
   },
-  root: {
-    background: theme.palette.error.dark,
-  },
-  icon: {
-    fontSize:20,
-    marginRight: 10,
-  },
-  message: {
-    display: 'flex',
-    alignItems: 'center',
-  },
 });
 
 class ProjectRegistration extends Component {
@@ -87,13 +72,9 @@ class ProjectRegistration extends Component {
     this.setState({ open: true });
   };
 
-  handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  handleClose = () => {
     this.setState({ open: false });
   };
-
 
   onFormSubmit = (e) => {
     e.preventDefault();
@@ -102,7 +83,6 @@ class ProjectRegistration extends Component {
 
   render() {
     const {
-      username,
       hobbyName,
       description,
       amount,
@@ -111,7 +91,6 @@ class ProjectRegistration extends Component {
     } =this.props.projectRegister;
     const {onInputChange} = this.props;
     const { classes } = this.props;
-    const { email } =this.props.auth
     return (
         <MuiThemeProvider theme={theme}>
           <main className={classes.main}>
@@ -122,38 +101,12 @@ class ProjectRegistration extends Component {
                   gutterBottom
                   align="center">Register Your Hobby
               </Typography>
-              {error ?
-                    <Snackbar
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                  }}
+
+              {error ? <Snackbar
+                  error={error}
                   open={this.state.open}
-                  autoHideDuration={6000}
                   onClose={this.handleClose}
-                  ContentProps={{
-                    'aria-describedby': 'message-id',
-                    classes: {
-                      root: classes.root
-                    },
-                  }}
-                  message={<span className={classes.message}>
-                      <ErrorIcon className={classes.icon}/>
-                    {error}
-                    </span>}
-                  action={[
-                    <Tooltip title="Close">
-                      <IconButton aria-label="Close"
-                                  key="close"
-                                  color="inherit"
-                                  className={classes.close}
-                                  onClick={this.handleClose}>
-                        <CloseIcon />
-                      </IconButton>
-                    </Tooltip>,
-                  ]}
-              />
-                    : null}
+              /> : null}
 
               <form
                   onSubmit={this.onFormSubmit}
@@ -171,19 +124,6 @@ class ProjectRegistration extends Component {
                     variant="outlined"
                     className={classes.textField}
                 />
-                <TextField
-                    type="email"
-                    name='email'
-                    value={email}
-                    onChange={onInputChange}
-                    fullWidth
-                    required
-                    label="Please enter your email"
-                    margin="normal"
-                    variant="outlined"
-                    className={classes.textField}
-                />
-
                 <TextField
                     name='description'
                     value={description}

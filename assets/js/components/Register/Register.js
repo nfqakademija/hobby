@@ -11,14 +11,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import ErrorIcon from '@material-ui/icons/Error';
-import Tooltip from '@material-ui/core/Tooltip';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import Account from '@material-ui/icons/AccountCircle';
+import Snackbar from '../Snackbar/snackbar';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -55,7 +52,6 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing.unit *8,
     },
-
   },
   form: {
     width: '100%',
@@ -68,17 +64,6 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
     height: 50,
   },
-  root: {
-    background: theme.palette.error.dark,
-  },
-  icon: {
-    fontSize:20,
-    marginRight: 10,
-  },
-  message: {
-    display: 'flex',
-    alignItems: 'center',
-  },
   avatar: {
     margin: theme.spacing.unit,
     backgroundColor: '#EA7925',
@@ -89,18 +74,18 @@ const styles = theme => ({
 class Register extends Component {
   state = {
     open: false,
+
   };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
 
   handleClick = () => {
     this.setState({ open: true });
   };
 
-  handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    this.setState({ open: false });
-  };
 
   onFormSubmit = (e) => {
     e.preventDefault();
@@ -109,53 +94,30 @@ class Register extends Component {
 
 
   render() {
-    const {username, email, password, password2, error, loading,} = this.props.register;
+    const { email, password, password2, error, loading,} = this.props.register;
     const {onInputChange} = this.props;
     const { classes } = this.props;
     return (
-          <MuiThemeProvider theme={theme} >
-            <main className={classes.main}>
-              <Paper className={classes.paper}>
-                <CssBaseline/>
-                  <Avatar className={classes.avatar} >
-                    <Account/>
-                  </Avatar>
+        <MuiThemeProvider theme={theme} >
+          <main className={classes.main}>
+            <Paper className={classes.paper}>
+              <CssBaseline/>
+              <Avatar className={classes.avatar} >
+                <Account/>
+              </Avatar>
               <Typography
                   variant="h5"
                   gutterBottom
                   align="center">Sign Up
               </Typography>
+
               {error ? <Snackbar
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                  }}
+                  error={error}
                   open={this.state.open}
-                  autoHideDuration={3000}
                   onClose={this.handleClose}
-                  ContentProps={{
-                    'aria-describedby': 'message-id',
-                      classes: {
-                          root: classes.root
-                      },
-                  }}
-                  message={<span className={classes.message}>
-                    <ErrorIcon className={classes.icon}/>
-                    {error}
-                  </span>}
-                  action={[
-                    <Tooltip title="Close">
-                      <IconButton aria-label="Close"
-                                  key="close"
-                                  color="inherit"
-                                  className={classes.close}
-                                  onClick={this.handleClose}>
-                        <CloseIcon />
-                      </IconButton>
-                    </Tooltip>
-                  ]}
               /> : null}
               <form onSubmit={this.onFormSubmit}  className={classes.container}  noValidate autoComplete="off">
+
                 <TextField
                     type="text"
                     name='email'
@@ -209,17 +171,17 @@ class Register extends Component {
                 </Button>
               </form>
             </Paper>
-              <div className={"subheading"}>
-                Already have an account?{' '}
-                <Link
-                    component={RouterLink}
-                    color={'secondary'}
-                    to='/login'>
-                  Sign In
-                </Link>
-              </div>
-            </main>
-          </MuiThemeProvider>
+            <div className={"subheading"}>
+              Already have an account?{' '}
+              <Link
+                  component={RouterLink}
+                  color={'secondary'}
+                  to='/login'>
+                Sign In
+              </Link>
+            </div>
+          </main>
+        </MuiThemeProvider>
     );
   }
 }

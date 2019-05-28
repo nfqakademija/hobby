@@ -5,7 +5,7 @@ import {authUser} from "../actions/authActions";
 
 export const onRegisterFormSubmit = (user, history) => (dispatch) => {
   dispatch(actions.onFormLoading());
-  if(user.username === '' || user.email === '' || user.password === '' || user.password2 === '') {
+  if(user.email === '' || user.password === '' || user.password2 === '') {
     return dispatch(actions.onRegisterFormError('Please fill fields'));
   }
   if(user.password !== user.password2) {
