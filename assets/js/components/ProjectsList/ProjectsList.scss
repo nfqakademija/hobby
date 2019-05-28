@@ -24,6 +24,11 @@
   padding: 40px 50px 40px 50px;
   text-decoration: none;
   color: inherit;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0px 0px 7px 4px rgba(0,0,0,0.2);
+  }
 }
 .Card-title{
   font-size: 22px;
@@ -56,10 +61,12 @@
   border-radius: 50%;
 }
 
-.Loader-container {
-  margin: 50px auto;
+.Loader-container-list {
+  position: absolute;
+  left: 50%;
+  top:40%;
+  transform: translate(-50%,-50%);
 }
-
 .SearchBar {
   width: 50%;
   margin: auto;

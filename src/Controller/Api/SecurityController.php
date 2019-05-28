@@ -17,10 +17,18 @@ class SecurityController extends AbstractFOSRestController
     {
         /** @var User $user */
         $user = $this->getUser();
+        $role = null;
+
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            $role = 1;
+        } elseif (in_array('ROLE_USER', $user->getRoles())) {
+            $role = 2;
+        }
 
         $view = [
             'email' => $user->getEmail(),
-            'budget' => $user->getBudget()
+            'budget' => $user->getBudget(),
+            'role' => $role
         ];
 
         return JsonResponse::create($view);

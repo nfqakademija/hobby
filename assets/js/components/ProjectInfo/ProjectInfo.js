@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/es/Typography/Typography";
 import Paper from "@material-ui/core/es/Paper/Paper";
+import {onVote} from "../../thunks/voteThunk";
 
 
 const theme = createMuiTheme({
@@ -23,12 +24,22 @@ const theme = createMuiTheme({
 
 
 const ProjectInfo = (props) => {
-  const projectInfo = props.projects.filter(project => {
+  const {amount} = props.auth;
+  const {projects, onVoteClick} = props;
+  const projectInfo = projects.filter(project => {
     if(project.id.toString() === props.match.params.id) {
       return project;
     }
     return null;
   }).map((project, i) => {
+    project.budget = 0;
+    if (project.votes.length > 1) {
+      project.budget = project.votes.reduce((total, vote)=> {
+        return total + vote.amount;
+      }, 0)
+    } else if(project.votes.length === 1) {
+      project.budget = project.votes[0].amount;
+    }
     return (
           <div className='Project' key={i}>
             <div className='Title'>{project.title}</div>
@@ -40,9 +51,21 @@ const ProjectInfo = (props) => {
                   <div>{project.amount} €</div>
               </div>
               <div className='VoteButtons'>
-                  <Button variant="outlined" >5€</Button>
-                  <Button variant="outlined" >15€</Button>
-                  <Button variant="outlined" >30€</Button>
+                  <Button
+                      variant="outlined"
+                      onClick={() => onVoteClick(project.id, 5)}
+                      disabled={amount < 5}
+                  >5€</Button>
+                  <Button
+                      variant="outlined"
+                      onClick={() => onVoteClick(project.id, 15)}
+                      disabled={amount < 15}
+                  >15€</Button>
+                  <Button
+                      variant="outlined"
+                      onClick={() => onVoteClick(project.id, 30)}
+                      disabled={amount < 30}
+                  >30€</Button>
               </div>
 
               <div className='wrapper'>
@@ -81,8 +104,14 @@ const ProjectInfo = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    projects: state.projects.projects
+    projects: state.projects.projects,
+    auth: state.auth
   }
 }
 
-export default connect(mapStateToProps)(ProjectInfo);
+const mapDispatchToProps = (dispatch) => ({
+  onVoteClick: (projectId, amount) => dispatch(onVote(projectId, amount))
+
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProjectInfo);

@@ -52,7 +52,6 @@ const styles = {
     background: "#181818",
 
   },
-
   grow: {
     flexGrow: 1,
     align: 'center',
@@ -78,6 +77,17 @@ const styles = {
     margin: 'auto',
     paddingLeft: 20,
     paddingRight: 20,
+    textDecoration: 'none'
+  },
+  link: {
+    color: '#A4A4A4',
+    '&:hover': {
+      color: '#ffffff',
+    },
+    margin: 'auto',
+    padding: '6px 20px',
+    textDecoration: 'none',
+    textTransform: 'uppercase'
   },
   MobileButton: {
     display: 'block',
@@ -126,18 +136,12 @@ class NavBar extends Component {
 
   render() {
     const {classes, location} = this.props;
-    const {isAuth} = this.props.auth;
-
-
-
-
+    const {isAuth, role} = this.props.auth;
     return (
         <MuiThemeProvider theme={theme}>
           <div className={classes.root}>
             <AppBar className={classes.menubar}>
               <Toolbar>
-
-
                 <Button
                     className={classes.title}
                     color="secondary"
@@ -152,7 +156,6 @@ class NavBar extends Component {
                   </Button> : null
                   }
                 </div>
-
 
                 <div className={classes.grow}/>
                 <div className={classes.sectionDesktop}>
@@ -199,7 +202,13 @@ class NavBar extends Component {
                       </Button>
                   }
 
+                  {role === 1 ?
+                      <Button href={'/admin'} className={classes.button} >Admin</Button>
+                      : null
+                  }
+
                 </div>
+
                 {isAuth ?
                     null: <div className={classes.sectionMobile}>
                       <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
@@ -221,14 +230,16 @@ class NavBar extends Component {
                       </Button>
                   }
                 </div>
-                {isAuth ?
-                    <div className={classes.sectionMobile}>
-                      <Button color='secondary' className={classes.titleMobile} onClick={this.onLogOutToggle}
-                              to='/logout'>
-                        Logout
-                      </Button>
-                    </div> : null
-                }
+                  <div className={classes.sectionMobile}>
+                  {isAuth ?
+                      <div className={classes.sectionMobile}>
+                          <Button color='secondary' className={classes.titleMobile} onClick={this.onLogOutToggle}
+                                  to='/logout'>
+                              Logout
+                          </Button>
+                      </div> : null
+                  }
+                  </div>
               </Toolbar>
             </AppBar>
           </div>
@@ -240,7 +251,9 @@ class NavBar extends Component {
                 <BottomNavigationAction label="Home" component={RouterLink} to='/' icon={<HomeIcon/>}/>
                 <BottomNavigationAction label="Discover"  component={RouterLink} to='/projects' icon={<View/>}/>
                 <BottomNavigationAction label="Create" component={RouterLink} to='/project-registration' icon={<AddIcon/>}/>
-                <BottomNavigationAction label={this.props.auth.email} component={RouterLink} to='/user' icon={<PersonIcon/>}/>
+                {role === 1 ? <BottomNavigationAction label="Admin" href={'/admin'} icon={<PersonIcon/>} /> :
+                              <BottomNavigationAction label={this.props.auth.email} component={RouterLink} to='/user' icon={<PersonIcon/>}/>
+                }
               </BottomNavigation>
               :
               <BottomNavigation

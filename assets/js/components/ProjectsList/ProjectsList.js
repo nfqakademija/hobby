@@ -8,11 +8,11 @@ import {onVote} from '../../thunks/voteThunk';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid"
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Loader from '../Loader/Loader';
 import TextField from '@material-ui/core/TextField';
+import Typography from "@material-ui/core/es/Typography/Typography";
 
 const theme = createMuiTheme({
   palette: {
@@ -88,7 +88,7 @@ class ProjectsList extends Component {
         )
       })
     } else {
-      projectsList = <div className='Loader-container'>
+      projectsList = <div className='Loader-container-list'>
         <Loader color={'#EA7925'} h={100}/>
       </div>
     }
@@ -107,14 +107,6 @@ class ProjectsList extends Component {
             </div>
             <div className={'searchValue'}>{this.state.searchValue}</div>
             {projectsList}
-            <Typography
-                variant="h6"
-                gutterBottom
-                align="center"
-            >If you have a project, please{' '}
-              <Link component={RouterLink} color={'secondary'} to='/project-registration'>Register</Link>
-              {' '}your project(hobby).
-            </Typography>
           </div>
         </MuiThemeProvider>
     );
