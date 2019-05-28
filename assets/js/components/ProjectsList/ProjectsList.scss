@@ -61,10 +61,12 @@
   border-radius: 50%;
 }
 
-.Loader-container {
-  margin: 50px auto;
+.Loader-container-list {
+  position: absolute;
+  left: 50%;
+  top:40%;
+  transform: translate(-50%,-50%);
 }
-
 .SearchBar {
   width: 50%;
   margin: auto;
