@@ -48,6 +48,8 @@ const styles = {
 
 
   menubar: {
+    paddingLeft: "3%",
+    paddingRight: "3%",
     position: 'static',
     background: "#181818",
 
