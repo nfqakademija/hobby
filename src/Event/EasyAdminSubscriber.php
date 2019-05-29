@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Event;
 
 use App\Entity\Contribution;
+use App\Entity\User;
 use App\Service\UserBudget;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -13,14 +14,14 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
     /** @var UserBudget */
-    private $service;
+    private $userBudget;
 
     /**
-     * @param UserBudget $service
+     * @param UserBudget $userBudget
      */
-    public function __construct(UserBudget $service)
+    public function __construct(UserBudget $userBudget)
     {
-        $this->service = $service;
+        $this->userBudget = $userBudget;
     }
 
     /**
@@ -39,11 +40,15 @@ class EasyAdminSubscriber implements EventSubscriberInterface
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function onPrePersist(GenericEvent $event)
+    public function onPrePersist(GenericEvent $event): void
     {
         $entity = $event->getSubject();
         if ($entity instanceof Contribution) {
-            $this->service->userBudget($entity, $entity->getCompany(), $entity->getAmount());
+            $this->userBudget->userBudget($entity, $entity->getCompany(), $entity->getAmount());
+        }
+
+        if ($entity instanceof User) {
+//            $this->
         }
     }
 }
