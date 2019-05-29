@@ -19,3 +19,10 @@ export function voteUser(amount) {
         amount
     }
 }
+
+export function unVoteUser(amount) {
+    return {
+        type: types.UNVOTE_USER,
+        amount
+    }
+}
