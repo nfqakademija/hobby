@@ -60,13 +60,14 @@ class User extends Component {
                       <Button
                           color="primary"
                           variant="outlined"
-                          onClick={() => onUnVote(vote.id)}>UnVote</Button>
+                          onClick={() => onUnVote(vote.id, vote.amount)}>UnVote</Button>
                   </Paper>
               </Grid>
           </MuiThemeProvider>
       )
     })
       return (
+
 
               <div className='User'>
                   {votes.length > 0 ? votesArray : loader}
@@ -84,7 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onGetVotes: () => dispatch(votes()),
-  onUnVote: (id) => dispatch(unVote(id))
+  onUnVote: (id, amount) => dispatch(unVote(id,amount))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(User);
