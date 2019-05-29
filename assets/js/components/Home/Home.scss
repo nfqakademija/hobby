@@ -1,37 +1,35 @@
 @import "../../index";
 
 
-.Home {
-  margin-top: 8%;
-  background-size: cover;
+.Home{
+  width: 100%;
 }
-
 .Container{
-  text-align: left;
-  margin-left: 100px;
-  width: calc(30% - 40px );
-
-  @media only screen and (max-width: 960px) {
-    width: calc(80% - 40px );
-    text-align: center;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .Title{
-    margin-bottom: 20px;
-  }
-  .Subheading{
-    width: 60%;
-    margin-bottom: 20px;
-    @media only screen and (max-width: 960px) {
-      width: 90%;
-      margin-right: auto;
-      margin-left: auto;
-    }
-  }
-  .Button{
-    margin-bottom: 10px;
-
-  }
+  margin: 6% 100px 0 100px;
+  display: flex;
 }
+.Message-box{
+  position: absolute;
+  width: 35%;
+  left: 10%;
+  top:25%;
+}
+.Message-Title{
+  font-weight: 550;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+.Message-Subheading{
+  font-weight: lighter;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.Img{
+  position: absolute;
+  width: 50%;
+  left: 70%;
+  top:50%;
+  transform: translate(-50%,-50%);
+
+}
+

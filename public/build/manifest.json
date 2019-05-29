@@ -3,5 +3,7 @@
   "build/index.js": "/build/index.js",
   "build/runtime.js": "/build/runtime.js",
   "build/vendors~index.css": "/build/vendors~index.css",
-  "build/vendors~index.js": "/build/vendors~index.js"
+  "build/vendors~index.js": "/build/vendors~index.js",
+  "build/images/hang.png": "/build/images/hang.a41f7065.png",
+  "build/images/friends.png": "/build/images/friends.36431729.png"
 }

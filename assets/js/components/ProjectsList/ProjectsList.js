@@ -3,7 +3,6 @@ import {Link as RouterLink} from 'react-router-dom';
 import './ProjectsList.scss';
 import {setProjectList} from '../../thunks/getProjects';
 import {connect} from "react-redux";
-import Link from "@material-ui/core/Link";
 import {onVote} from '../../thunks/voteThunk';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -12,7 +11,7 @@ import Grid from "@material-ui/core/Grid"
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Loader from '../Loader/Loader';
 import TextField from '@material-ui/core/TextField';
-import Typography from "@material-ui/core/es/Typography/Typography";
+
 
 const theme = createMuiTheme({
   palette: {
@@ -105,8 +104,7 @@ class ProjectsList extends Component {
                   onChange={this.onSearchBarChange}
               />
             </div>
-            <div className={'searchValue'}>{this.state.searchValue}</div>
-            {projectsList}
+              {projectsList}
           </div>
         </MuiThemeProvider>
     );

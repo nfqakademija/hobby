@@ -13,7 +13,6 @@ import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/st
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Snackbar from '../Snackbar/snackbar';
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
