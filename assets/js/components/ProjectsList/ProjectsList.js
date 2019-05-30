@@ -12,6 +12,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Loader from '../Loader/Loader';
 import TextField from '@material-ui/core/TextField';
 
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -61,7 +62,7 @@ class ProjectsList extends Component {
           .map((project, i) => {
         return (
             <MuiThemeProvider theme={theme} key={i}>
-              <Grid className={'main'}>
+              <Grid className={'main-card'}>
                 <Paper className={'Card'} component={RouterLink} to={`/project/${project.id}`}>
                   <div className={'Card-title'}>{project.title}</div>
                   <div className={'Card-description'}>{project.description}</div>
@@ -112,8 +113,7 @@ class ProjectsList extends Component {
                   onChange={this.onSearchBarChange}
               />
             </div>
-            <div className={'searchValue'}>{this.state.searchValue}</div>
-            {projectsList}
+              {projectsList}
           </div>
         </MuiThemeProvider>
     );
