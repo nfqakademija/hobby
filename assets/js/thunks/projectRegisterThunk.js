@@ -23,7 +23,6 @@ export const onProjectRegisterFormSubmit = (projectInfo, history, email) => (dis
     })
     .catch(error => {
       dispatch(actions.onProjectRegisterFormError('Server error. Please try again later.'))
-      console.log(error)
     })
 
 }

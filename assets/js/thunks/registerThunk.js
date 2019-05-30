@@ -19,7 +19,6 @@ export const onRegisterFormSubmit = (user, history,token) => (dispatch) => {
     password: user.password,
     registrationToken: token
   };
-  console.log(registerJson)
   axios.post('/api/security/register', registerJson)
       .then(res =>{
         setUserToLS(res.data)
