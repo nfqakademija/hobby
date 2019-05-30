@@ -9,6 +9,8 @@ import TeamImage from "../Images/team.png";
 import ColleagueImage from "../Images/colleague.png";
 import Paper from "@material-ui/core/es/Paper/Paper";
 import ArrowIcon from '@material-ui/icons/ArrowRightAlt';
+import Link from "@material-ui/core/es/Link/Link";
+
 
 const theme = createMuiTheme({
     palette: {
@@ -65,7 +67,7 @@ const Home = ( ) => {
                               Companies use HobbyCraft to organize their
                               employees hobby budget
                           </div>
-                          <div className="link">Read More <ArrowIcon className="arrow--LeftMargin"/> </div>
+                          <RouterLink  className="link" >Read More <ArrowIcon className="arrow--LeftMargin"/> </RouterLink>
                       </Paper>
 
                       <Paper className={"Card"} >
@@ -77,19 +79,45 @@ const Home = ( ) => {
                               Companies use HobbyCraft to organize their
                               employees hobby budget
                           </div>
-                          <div className="link">Read More <ArrowIcon className="arrow--LeftMargin"/> </div>
+                             <RouterLink  className="link" >Read More <ArrowIcon className="arrow--LeftMargin"/> </RouterLink>
                       </Paper>
                       </div>
                   </div>
 
+
                   <div className="Container">
                       <div className={"Container--Bottom"}>
-                          <div className="Navigation" >HobbyCraft</div>
-                          <div className="Navigation" >Navigation</div>
-                          <div className="Navigation" >Legal</div>
-                          <div className="Navigation" >Contact Us</div>
+                          <div  className="Navigation">
+                              <div className="Bottom-Title">
+                                  HobbyCraft
+                              </div>
+                          </div>
+                          <div className="Navigation" >
+                              <div className="Bottom-Title">
+                                  Navigation
+                              </div>
+
+                              <div className="Sub-Title">
+                                  <RouterLink to={'/'}>Home</RouterLink>
+                                  <RouterLink to={'/register'}>Sign Up</RouterLink>
+                                  <RouterLink to={'/about'}>About</RouterLink>
+                                  <RouterLink to={'/login'}>Sign In</RouterLink>
+                              </div>
+                          </div>
+                          <div  className="Navigation">
+                              <div className="Bottom-Title">
+                                  Legal
+                              </div>
+                          </div>
+                          <div  className="Navigation">
+                              <div className="Bottom-Title">
+                                  Contact Us
+                              </div>
+                          </div>
                       </div>
                   </div>
+
+
 
               </div>
   );

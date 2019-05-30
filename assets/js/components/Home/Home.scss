@@ -115,10 +115,11 @@
 .link{
   display: inline-flex;
   color: #0044ff;
+  text-decoration: none;
 }
-.arrow--LeftMargin{
-  margin-left: 5px;
-}
+//.arrow--LeftMargin{
+//  margin-bottom: 5px;
+//}
 
 .Container--Bottom{
   width: 81%;
@@ -131,7 +132,15 @@
   transform: translate(-50%,-50%);
 }
 .Navigation{
-  font-weight: 500;
-  font-size: 20px;
   margin: 40px;
+}
+.Bottom-Title{
+  font-weight: 600;
+  font-size: 20px;
+}
+.Sub-Title{
+  font-weight: 500;
+  text-decoration: none;
+  color: #A4A4A4;
+  font-size: 20px;
 }
