@@ -64,3 +64,8 @@ services:
             - '%kernel.environment%'
             - '@doctrine.orm.default_entity_manager'
 
+    App\Service\Registration:
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@security.user_password_encoder.generic'
+

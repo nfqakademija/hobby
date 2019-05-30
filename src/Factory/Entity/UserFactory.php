@@ -33,7 +33,9 @@ class UserFactory
             ->setCompany($company)
             ->setEmail($email)
             ->setBudget($budget)
-            ->setRoles($role);
+            ->setRoles($role)
+            ->setActive(true)
+            ->setRegistrationToken('');
 
         $user->setPassword(
             $encoder->encodePassword(

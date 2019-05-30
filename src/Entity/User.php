@@ -54,6 +54,18 @@ class User implements UserInterface, \Serializable
     private $budget;
 
     /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $registrationToken;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
+    /**
      * @var Company
      * @ORM\ManyToOne(targetEntity="Company", inversedBy="id", cascade={"persist"})
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
@@ -70,16 +82,12 @@ class User implements UserInterface, \Serializable
      */
     private $contributions;
 
-    /**
-     * @var string
-     */
-    private $registrationToken;
-
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
         $this->votes = new ArrayCollection();
         $this->contributions = new ArrayCollection();
+        $this->active = false;
     }
 
     /**
@@ -196,6 +204,56 @@ class User implements UserInterface, \Serializable
     public function setBudget(?int $budget): self
     {
         $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRegistrationToken(): ?string
+    {
+        return $this->registrationToken;
+    }
+
+    /**
+     * @param string|null $registrationToken
+     *
+     * @return User
+     */
+    public function setRegistrationToken(?string $registrationToken): self
+    {
+        $this->registrationToken = $registrationToken;
+
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function removeRegistrationToken(): self
+    {
+        $this->registrationToken = null;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     *
+     * @return User
+     */
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
@@ -333,26 +391,6 @@ class User implements UserInterface, \Serializable
             $this->contributions->removeElement($contribution);
             $contribution->removeUser($this);
         }
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRegistrationToken(): string
-    {
-        return $this->registrationToken;
-    }
-
-    /**
-     * @param string $registrationToken
-     *
-     * @return User
-     */
-    public function setRegistrationToken(string $registrationToken): self
-    {
-        $this->registrationToken = $registrationToken;
 
         return $this;
     }
