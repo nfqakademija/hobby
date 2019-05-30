@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public const USER1 = 'user1';
-
     public const USER = 'user';
 
     /** @var UserPasswordEncoderInterface $userPasswordEncoder */

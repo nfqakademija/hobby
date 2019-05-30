@@ -31,7 +31,6 @@ class HobbyFixtures extends Fixture
     public const HOBBY18 = 'hobby18';
     public const HOBBY19 = 'hobby19';
 
-
     /**
      * @dataProvider getData
      * @param ObjectManager $manager

@@ -7,6 +7,7 @@ namespace App\Factory\Entity;
 use App\Entity\Hobby;
 use App\Entity\User;
 use App\Entity\Vote;
+use Doctrine\ORM\ORMException;
 
 class VoteFactory
 {
@@ -15,18 +16,22 @@ class VoteFactory
      * @param Hobby $hobby
      * @param User $user
      * @return Vote
-     * @throws \Exception
+     * @throws ORMException
      */
     public static function create(int $budget, Hobby $hobby, User $user): Vote
     {
-        /** @var Vote $vote */
-        $vote = new Vote();
+        try {
+            /** @var Vote $vote */
+            $vote = new Vote();
 
-        $vote
-            ->setAmount($budget)
-            ->setHobby($hobby)
-            ->setUser($user);
+            $vote
+                ->setAmount($budget)
+                ->setHobby($hobby)
+                ->setUser($user);
 
-        return $vote;
+            return $vote;
+        } catch (\Throwable $exception) {
+            throw new ORMException($exception);
+        }
     }
 }

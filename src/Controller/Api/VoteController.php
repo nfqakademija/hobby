@@ -20,9 +20,17 @@ class VoteController extends AbstractFOSRestController
     /** @var FormErrorSerializer */
     private $formErrorSerializer;
 
-    public function __construct(FormErrorSerializer $formErrorSerializer)
+    /** @var Voter */
+    private $voter;
+
+    /**
+     * @param FormErrorSerializer $formErrorSerializer
+     * @param Voter $voter
+     */
+    public function __construct(FormErrorSerializer $formErrorSerializer, Voter $voter)
     {
         $this->formErrorSerializer = $formErrorSerializer;
+        $this->voter = $voter;
     }
 
     /**
@@ -35,9 +43,7 @@ class VoteController extends AbstractFOSRestController
         $data = json_decode($request->getContent(), true);
 
         try {
-//            $this->container->get('service.voter')->vote($data['hobby'], $data['amount'], $this->getUser());
-            $voter = new Voter($this->getDoctrine()->getManager());
-            $voter->vote($data['hobby'], $data['amount'], $this->getUser());
+            $this->voter->vote($data['hobby'], $data['amount'], $this->getUser());
 
             return JsonResponse::create([], Response::HTTP_OK);
         } catch (\Throwable $exception) {

@@ -49,6 +49,15 @@ class Vote
     }
 
     /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->getId();
+    }
+
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
