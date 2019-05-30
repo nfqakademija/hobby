@@ -100,11 +100,12 @@ class CompanyCreateCommand extends Command
 
     /**
      * @param string $companyName
-     * @return Company|string
+     * @return Company|null
+     * @throws \Exception
      */
     private function createCompany(string $companyName): ?Company
     {
-        $company = CompanyFactory::create(self::COMPANY_BUDGET, $companyName);
+        $company = CompanyFactory::create($companyName);
 
         $this->validate($company);
 
@@ -144,7 +145,7 @@ class CompanyCreateCommand extends Command
         if (count($errors) > 0) {
             /** @var ConstraintViolation $error */
             foreach ($errors as $error) {
-                throw new Exception('Propert: ' . $error->getPropertyPath() . '. ' . $error->getMessage());
+                throw new Exception('Property: ' . $error->getPropertyPath() . '. ' . $error->getMessage());
             }
         }
     }
