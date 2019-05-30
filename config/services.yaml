@@ -57,3 +57,15 @@ services:
         public: true
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    App\Service\UserRegisterByEmail:
+        public: true
+        arguments:
+            - '%kernel.environment%'
+            - '@doctrine.orm.default_entity_manager'
+
+    App\Service\Registration:
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@security.user_password_encoder.generic'
+

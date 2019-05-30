@@ -38,7 +38,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     /**
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $usersData = $this->getData();
 
@@ -52,6 +52,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 )
                 ->setEmail($userData['email'])
                 ->setRoles($userData['role'])
+                ->setRegistrationToken($userData['token'])
+                ->setActive(true)
                 ->setBudget(0); // todo add create_at
 
             $manager->persist($user);
@@ -71,22 +73,30 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             [
                 'email' => 'istanynaite@nfq.lt',
                 'role' => ['ROLE_USER', 'ROLE_ADMIN'],
+                'token' => 'zfypnCDEh9ZhHZPX',
                 'password' => 'sargis',
+                'active' => true
             ],
             [
                 'email' => 'vkarcikovas@gmail.com',
                 'role' => ['ROLE_USER'],
-                'password' => 'manosargis'
+                'token' => '',
+                'password' => 'manosargis',
+                'active' => true
             ],
             [
                 'email' => 'mpetkevic@gmail.com',
                 'role' => ['ROLE_USER'],
-                'password' => 'mpetkevic'
+                'token' => 'cHdazvsQ5VpbWfzZ',
+                'password' => 'mpetkevic',
+                'active' => true
             ],
             [
                 'email' => 'a@a.com',
                 'role' => ['ROLE_USER'],
-                'password' => 'viktoras'
+                'token' => '5ge25Gj7uESpKM4d',
+                'password' => 'viktoras',
+                'active' => false
             ],
         ];
     }
