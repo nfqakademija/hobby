@@ -14,6 +14,10 @@ use Doctrine\ORM\ORMException;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Security\Core\Security;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
@@ -23,15 +27,22 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     /** @var UserRegisterByEmail */
     private $userRegisterByEmail;
 
+    /** @var Security */
+    private $security;
+
     /**
-     * EasyAdminSubscriber constructor.
      * @param UserBudget $userBudget
      * @param UserRegisterByEmail $userRegisterByEmail
+     * @param Security $security
      */
-    public function __construct(UserBudget $userBudget, UserRegisterByEmail $userRegisterByEmail)
-    {
+    public function __construct(
+        UserBudget $userBudget,
+        UserRegisterByEmail $userRegisterByEmail,
+        Security $security
+    ) {
         $this->userBudget = $userBudget;
         $this->userRegisterByEmail = $userRegisterByEmail;
+        $this->security = $security;
     }
 
     /**
@@ -49,7 +60,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
      * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
-     * @throws \Throwable
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
      */
     public function onPrePersist(GenericEvent $event): void
     {
@@ -59,7 +72,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         }
 
         if ($entity instanceof User) {
-            $this->userRegisterByEmail->sendRegistrationToEmail($entity);
+            /** @var User $companyAdministrator */
+            $companyAdministrator = $this->security->getUser();
+            $this->userRegisterByEmail->sendRegistrationToEmail($entity, $companyAdministrator);
         }
     }
 }
