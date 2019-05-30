@@ -5,7 +5,7 @@
   width: 100%;
 }
 .Container{
-  margin: 6% 5% 0 5%;
+  margin: 6% 12% 0 12%;
   display: flex;
   @media only screen and (max-width: 600px) {
     margin: 0;
@@ -86,7 +86,7 @@
     width: 80%;
   }
 }
-.Cards--inline{
+.Container--inline{
   position: absolute;
   display: inline-flex;
   justify-content: space-between;
@@ -101,6 +101,24 @@
   height: 500px;
 }
 .Img-card{
-  align-items: flex-start;
   width: 400px;
+}
+.link{
+  color: #0044ff;
+}
+
+.Container--Bottom{
+  width: 81%;
+  line-height: 40px;
+  position: absolute;
+  display: inline-flex;
+  justify-content: space-between;
+  left: 50%;
+  top: 200%;
+  transform: translate(-50%,-50%);
+}
+.Navigation{
+  font-weight: 500;
+  font-size: 20px;
+  margin: 40px;
 }

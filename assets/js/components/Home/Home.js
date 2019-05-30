@@ -8,7 +8,6 @@ import logo from '../Images/Friends.png';
 import TeamImage from "../Images/team.png";
 import ColleagueImage from "../Images/colleague.png";
 import Paper from "@material-ui/core/es/Paper/Paper";
-import Link from "@material-ui/core/es/Link/Link";
 
 const theme = createMuiTheme({
     palette: {
@@ -55,8 +54,7 @@ const Home = ( ) => {
                   </div>
 
                   <div className={"Container"}>
-                      <div className="Cards--inline">
-
+                      <div className="Container--inline">
                       <Paper className={"Card"}>
                           <img className="Img-card" src={TeamImage} />
                           <div className='Message-Title'>
@@ -66,7 +64,7 @@ const Home = ( ) => {
                               Companies use HobbyCraft to organize their
                               employees hobby budget
                           </div>
-                          <Link>Read More</Link>
+                          <div className="link">Read More</div>
                       </Paper>
 
                       <Paper className={"Card"} >
@@ -78,12 +76,19 @@ const Home = ( ) => {
                               Companies use HobbyCraft to organize their
                               employees hobby budget
                           </div>
-                          <Link>Read More</Link>
+                          <div className="link">Read More</div>
                       </Paper>
-
                       </div>
                   </div>
 
+                  <div className="Container">
+                      <div className={"Container--Bottom"}>
+                          <div className="Navigation" >HobbyCraft</div>
+                          <div className="Navigation" >Navigation</div>
+                          <div className="Navigation" >Legal</div>
+                          <div className="Navigation" >Contact Us</div>
+                      </div>
+                  </div>
 
               </div>
   );
