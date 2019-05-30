@@ -8,6 +8,7 @@ import logo from '../Images/Friends.png';
 import TeamImage from "../Images/team.png";
 import ColleagueImage from "../Images/colleague.png";
 import Paper from "@material-ui/core/es/Paper/Paper";
+import ArrowIcon from '@material-ui/icons/ArrowRightAlt';
 
 const theme = createMuiTheme({
     palette: {
@@ -64,11 +65,11 @@ const Home = ( ) => {
                               Companies use HobbyCraft to organize their
                               employees hobby budget
                           </div>
-                          <div className="link">Read More</div>
+                          <div className="link">Read More <ArrowIcon className="arrow--LeftMargin"/> </div>
                       </Paper>
 
                       <Paper className={"Card"} >
-                          <img className="Img-card" src={ColleagueImage} />
+                          <img className="Img-card--bottom-5px" src={ColleagueImage} />
                           <div className='Message-Title'>
                               A New and Better way to engange
                           </div>
@@ -76,7 +77,7 @@ const Home = ( ) => {
                               Companies use HobbyCraft to organize their
                               employees hobby budget
                           </div>
-                          <div className="link">Read More</div>
+                          <div className="link">Read More <ArrowIcon className="arrow--LeftMargin"/> </div>
                       </Paper>
                       </div>
                   </div>

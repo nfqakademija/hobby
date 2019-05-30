@@ -63,7 +63,7 @@
   }
 }
 .button{
-  border-radius: 50px;
+
   height: 40px;
 }
 .Img{
@@ -96,20 +96,28 @@
 }
 
 .Card{
+  z-index: 4;
   margin: 50px;
   width: 400px;
   height: 500px;
   color: inherit;
   transition: all 0.2s;
   &:hover {
-    box-shadow: 0px 0px 7px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 0 7px 4px rgba(0,0,0,0.2);
   }
 }
 .Img-card{
   width: 400px;
 }
+.Img-card--bottom{
+  width: 400px;
+}
 .link{
+  display: inline-flex;
   color: #0044ff;
+}
+.arrow--LeftMargin{
+  margin-left: 5px;
 }
 
 .Container--Bottom{
