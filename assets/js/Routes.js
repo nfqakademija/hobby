@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {getUserFromLS} from './storage/storage';
 import {authUser} from './actions/authActions';
 import {setProjectList} from './thunks/getProjects';
+import {amountUpdate} from './thunks/amountUpdateThunk'
 import Home from './components/Home/Home';
 import NavBar from './components/NavBar/NavBar';
 import ProjectsList from  './components/ProjectsList/ProjectsList';
@@ -21,6 +22,7 @@ class Routes extends Component {
     const user = getUserFromLS();
     user ? this.props.onLoadAuth(user) : null
     user ? this.props.onLoadProjects() : null
+    user ? this.props.onUpdateWallet() : null
   }
 
   render() {
@@ -56,7 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadAuth: (user) => dispatch(authUser(user)),
-  onLoadProjects: () => dispatch(setProjectList())
+  onLoadProjects: () => dispatch(setProjectList()),
+  onUpdateWallet: () => dispatch(amountUpdate())
 });
 
 export default connect(mapStateToProps,mapDispatchToProps)(Routes);

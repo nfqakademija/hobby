@@ -26,3 +26,10 @@ export function unVoteUser(amount) {
         amount
     }
 }
+
+export function userAmountUpdate(amount) {
+    return {
+        type: types.AMOUNT_UPDATE,
+        amount
+    }
+}

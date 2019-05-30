@@ -30,6 +30,7 @@ export const AUTH_USER = 'AUTH_USER';
 export const LOG_OUT = 'LOG_OUT';
 export const UNVOTE_USER = 'UNVOTE_USER';
 export const VOTE_USER = 'VOTE_USER';
+export const AMOUNT_UPDATE = "AMOUNT_UPDATE";
 
 // Vote types
 
