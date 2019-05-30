@@ -1,14 +1,189 @@
+<style type="text/css">
+    /* Take care of image borders and formatting */
+
+    img { max-width: 600px; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}
+    a img { border: none; }
+    table { border-collapse: collapse !important; }
+    #outlook a { padding:0; }
+    .ReadMsgBody { width: 100%; }
+    .ExternalClass {width:100%;}
+    .backgroundTable {margin:0 auto; padding:0; width:100%;!important;}
+    table td {border-collapse: collapse;}
+    .ExternalClass * {line-height: 115%;}
+
+    /* General styling */
+    td {
+        font-family: Arial, sans-serif;
+        color: #5e5e5e;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    body {
+        -webkit-font-smoothing:antialiased;
+        -webkit-text-size-adjust:none;
+        width: 100%;
+        height: 100%;
+        color: #5e5e5e;
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    h1 {
+        margin: 10px 0;
+    }
+
+    a {
+        color: #2b934f;
+        text-decoration: none;
+    }
+
+    .body-padding {
+        padding: 0 75px;
+    }
+
+
+    .force-full-width {
+        width: 100% !important;
+    }
+
+    .icons {
+        text-align: right;
+        padding-right: 30px;
+    }
+
+    .logo {
+        text-align: left;
+        padding-left: 30px;
+    }
+
+    .computer-image {
+        padding-left: 30px;
+    }
+
+    .header-text {
+        text-align: left;
+        padding-right: 30px;
+        padding-left: 20px;
+    }
+
+    .header {
+        color: #232925;
+        font-size: 24px;
+    }
+
+
+
+</style>
+
+<style type="text/css" media="screen">
+    @media screen {
+        @import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
+        /* Thanks Outlook 2013! */
+        * {
+            font-family: 'PT Sans', 'Helvetica Neue', 'Arial', 'sans-serif' !important;
+        }
+    }
+</style>
+
+<style type="text/css" media="only screen and (max-width: 599px)">
+    /* Mobile styles */
+    @media only screen and (max-width: 599px) {
+
+        table[class*="w320"] {
+            width: 320px !important;
+        }
+
+        td[class*="icons"] {
+            display: block !important;
+            text-align: center !important;
+            padding: 0 !important;
+        }
+
+        td[class*="logo"] {
+            display: block !important;
+            text-align: center !important;
+            padding: 0 !important;
+        }
+
+        td[class*="computer-image"] {
+            display: block !important;
+            width: 230px !important;
+            padding: 0 45px !important;
+            border-bottom: 1px solid #e3e3e3 !important;
+        }
+
+
+        td[class*="header-text"] {
+            display: block !important;
+            text-align: center !important;
+            padding: 0 25px!important;
+            padding-bottom: 25px !important;
+        }
+
+        *[class*="mobile-hide"] {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            line-height: 0 !important;
+            font-size: 0 !important;
+        }
+
+
+    }
+</style>
+
 {% block body_text %}
     {% autoescape false %}
-        <p>Hi, this is your activation link:</p>
-        <br>
-        <p>{{ authenticationLink }}</p>
-        <br>
-        <p>With this link you can register in the HobbyCraft page.</p>
-        <br>
-        <p>Help your colleagues complete their hobbies or place yours.</p>
-        <br>
-        Greetings,
-        the Hobby team
+        <table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%">
+            <tr>
+                <td align="center" valign="top" style="background-color:#ffffff" width="100%">
+
+                    <center>
+                        <table cellspacing="0" cellpadding="0" width="600" class="w320">
+                            <tr>
+                                <td align="center" valign="top">
+
+                                    <table class="force-full-width" cellspacing="0" cellpadding="30" bgcolor="#ebebeb">
+                                        <tr>
+                                            <td>
+                                                <table cellspacing="0" cellpadding="0" class="force-full-width">
+                                                    <tr>
+                                                        <td>
+                                                            Dear customer,
+                                                            <br><br>
+                                                            Welcome to HobbyCraft! Have a great time and fun adventures with your colleagues
+                                                            - we will just make it easier for you to choose the activity.
+                                                            <br><br>
+                                                            <div><!--[if mso]>
+                                                                <v:rect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://" style="height:40px;v-text-anchor:middle;width:150px;" stroke="f" fillcolor="#2b934f">
+                                                                    <w:anchorlock/>
+                                                                    <center>
+                                                                <![endif]-->
+                                                                <a href="{{ authenticationLink }}"
+                                                                   style="background-color:#2b934f;color:#ffffff;display:inline-block;font-family:Helvetcia, sans-serif;font-size:16px;font-weight:light;line-height:40px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;">Click to Register</a>
+                                                                <!--[if mso]>
+                                                                </center>
+                                                                </v:rect>
+                                                                <![endif]-->
+                                                            </div>
+                                                            <br><br>
+                                                            Best wishes,<br>
+                                                            HobbyCraft Customer Service
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </center>
+                </td>
+            </tr>
+        </table>
     {% endautoescape %}
 {% endblock %}
