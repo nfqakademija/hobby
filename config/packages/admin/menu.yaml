@@ -11,4 +11,5 @@ easy_admin:
             -   {entity: 'Company', icon:  'newspaper-o', label: 'Team'}
             -   {entity: 'CompanyContribution', icon:  'wallet', label: 'Contribution'}
             -   {entity: 'User', icon:  'users', label: 'Users'}
+            -   {entity: 'Hobby', icon:  'dice', label: 'Hobbies'}
 
