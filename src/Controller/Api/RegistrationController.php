@@ -66,7 +66,12 @@ class RegistrationController extends AbstractFOSRestController
             return JsonResponse::create($view);
         }
 
-        return JsonResponse::create(['errors' => $this->formErrorSerializer->convertFormToArray($form)], Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS);
+        return JsonResponse::create(
+            [
+                'errors' => $this->formErrorSerializer->convertFormToArray($form)
+            ],
+            Response::HTTP_UNAVAILABLE_FOR_LEGAL_REASONS
+        );
     }
 
     /**

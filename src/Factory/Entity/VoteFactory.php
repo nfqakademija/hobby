@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace App\Factory\Entity;
-
 
 use App\Entity\Hobby;
 use App\Entity\User;
@@ -17,6 +15,7 @@ class VoteFactory
      * @param Hobby $hobby
      * @param User $user
      * @return Vote
+     * @throws \Exception
      */
     public static function create(int $budget, Hobby $hobby, User $user): Vote
     {

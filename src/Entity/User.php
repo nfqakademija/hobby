@@ -70,6 +70,11 @@ class User implements UserInterface, \Serializable
      */
     private $contributions;
 
+    /**
+     * @var string
+     */
+    private $registrationToken;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
@@ -328,6 +333,26 @@ class User implements UserInterface, \Serializable
             $this->contributions->removeElement($contribution);
             $contribution->removeUser($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegistrationToken(): string
+    {
+        return $this->registrationToken;
+    }
+
+    /**
+     * @param string $registrationToken
+     *
+     * @return User
+     */
+    public function setRegistrationToken(string $registrationToken): self
+    {
+        $this->registrationToken = $registrationToken;
 
         return $this;
     }

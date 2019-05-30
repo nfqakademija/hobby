@@ -8,13 +8,21 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class FormErrorSerializer
 {
+    /** @var TranslatorInterface  */
     private $translator;
 
-    public function  __construct(TranslatorInterface $translator)
+    /**
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
+    /**
+     * @param FormInterface $data
+     * @return array
+     */
     public function convertFormToArray(FormInterface $data)
     {
         $form = $errors = [];
@@ -41,6 +49,10 @@ class FormErrorSerializer
         return $form;
     }
 
+    /**
+     * @param FormError $error
+     * @return string
+     */
     private function getErrorMessage(FormError $error)
     {
         if (null !== $error->getMessagePluralization()) {

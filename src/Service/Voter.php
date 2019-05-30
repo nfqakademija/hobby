@@ -6,10 +6,8 @@ namespace App\Service;
 
 use App\Entity\Hobby;
 use App\Entity\User;
-use App\Entity\Vote;
 use App\Factory\Entity\VoteFactory;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -29,9 +27,8 @@ class Voter
 
     /**
      * @param int $hobbyId
-     * @param User $user
      * @param int $amount
-     * @return void
+     * @param User $user
      * @throws ORMException
      * @throws OptimisticLockException
      */
@@ -79,21 +76,4 @@ class Voter
 
         return true;
     }
-
-//    /**
-//     * @param Hobby $hobby
-//     * @param int $amount
-//     * @return bool
-//     * @throws ORMException
-//     * @throws OptimisticLockException
-//     */
-//    private function updateHobbyAmount(Hobby $hobby, int $amount): bool
-//    {
-//        $hobby->setBudget($hobby->getBudget() + $amount);
-//
-//        $this->em->persist($hobby);
-//        $this->em->flush();
-//
-//        return true;
-//    }
 }

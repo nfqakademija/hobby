@@ -43,7 +43,6 @@ class VoteController extends AbstractFOSRestController
         } catch (\Throwable $exception) {
             return JsonResponse::create(['error' => $exception->getMessage()], Response::HTTP_SERVICE_UNAVAILABLE);
         }
-
     }
 
     /**
@@ -69,7 +68,6 @@ class VoteController extends AbstractFOSRestController
 
             $em->remove($voteRepository);
             $em->flush();
-
         } catch (\Throwable $exception) {
             throw new NotFoundHttpException('Vote does not exist.');
         }
