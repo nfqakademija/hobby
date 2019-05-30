@@ -71,23 +71,6 @@ class UserRegisterByEmail
 
     /**
      * @param User $user
-     * @return string
-     * @throws \Exception
-     */
-    private function createUserRegistrationToken(User $user): string
-    {
-        $randomBytes = random_bytes(20);
-        $randomToken = bin2hex($randomBytes);
-
-        $user->setRegistrationToken($randomToken);
-
-        $this->em->flush();
-
-        return $randomToken;
-    }
-
-    /**'
-     * @param User $user
      * @return array
      * @throws \Exception
      */
@@ -102,5 +85,22 @@ class UserRegisterByEmail
         }
 
         return ['sentTo' => $sentTo, 'authenticationLink' => $authenticationLink];
+    }
+
+    /**
+     * @param User $user
+     * @return string
+     * @throws \Exception
+     */
+    private function createUserRegistrationToken(User $user): string
+    {
+        $randomBytes = random_bytes(20);
+        $randomToken = bin2hex($randomBytes);
+
+        $user->setRegistrationToken($randomToken);
+
+        $this->em->flush();
+
+        return $randomToken;
     }
 }
