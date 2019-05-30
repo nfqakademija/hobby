@@ -23,7 +23,7 @@ class Vote
 
     /**
      * @var Hobby|null
-     * @ORM\ManyToOne(targetEntity="App\Entity\Hobby", inversedBy="votes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Hobby", inversedBy="votes", cascade={"persist"})
      * @JoinColumn(name="hobby", referencedColumnName="id")
      */
     private $hobby;

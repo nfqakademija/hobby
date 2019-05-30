@@ -45,17 +45,12 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $usersData = $this->getData();
 
         foreach ($usersData as $userData) {
-            $companyFixture = CompanyFixtures::COMPANY1;
             $userFixture = self::USER;
-            if ($userData['email'] === 'istanynaite@nfq.lt') {
-                $companyFixture = CompanyFixtures::COMPANY;
-                $userFixture = self::USER1;
-            }
 
             /** @var User $user */
             $user = new User();
             $user
-                ->setCompany($this->getReference($companyFixture))
+                ->setCompany($this->getReference($userData['company']))
                 ->setPassword(
                     $this->userPasswordEncoder->encodePassword($user, $userData['password'])
                 )
@@ -63,7 +58,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setRoles($userData['role'])
                 ->setRegistrationToken($userData['token'])
                 ->setActive(true)
-                ->setBudget(0); // todo add create_at
+                ->setBudget(100); // todo add create_at
 
             $manager->persist($user);
         }
@@ -84,6 +79,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'role' => ['ROLE_USER', 'ROLE_ADMIN'],
                 'token' => 'zfypnCDEh9ZhHZPX',
                 'password' => 'sargis',
+                'company' =>  CompanyFixtures::COMPANY,
                 'active' => true
             ],
             [
@@ -91,6 +87,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'role' => ['ROLE_USER'],
                 'token' => '',
                 'password' => 'manosargis',
+                'company' =>  CompanyFixtures::COMPANY,
                 'active' => true
             ],
             [
@@ -98,15 +95,66 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'role' => ['ROLE_USER', 'ROLE_ADMIN'],
                 'token' => 'cHdazvsQ5VpbWfzZ',
                 'password' => 'mpetkevic',
+                'company' =>  CompanyFixtures::COMPANY1,
                 'active' => true
             ],
             [
-                'email' => 'a@a.com',
+                'email' => 'justas@mikelevicius.com',
                 'role' => ['ROLE_USER'],
                 'token' => '5ge25Gj7uESpKM4d',
-                'password' => 'viktoras',
+                'password' => 'justas',
+                'company' =>  CompanyFixtures::COMPANY,
                 'active' => false
             ],
+            [
+                'email' => 'arturas@paulauskas.com',
+                'role' => ['ROLE_USER'],
+                'token' => '5ge25Gj7uESpKM4d',
+                'password' => 'Agne123',
+                'company' =>  CompanyFixtures::COMPANY,
+                'active' => false
+            ],
+            [
+                'email' => 'Britney@Spears.com',
+                'role' => ['ROLE_USER'],
+                'token' => '5ge25Gj7uESpKM4d',
+                'password' => 'Eminem',
+                'company' =>  CompanyFixtures::COMPANY,
+                'active' => false
+            ],
+            [
+                'email' => 'lukas@zmogenas.com',
+                'role' => ['ROLE_USER'],
+                'token' => '5ge25Gj7uESpKM4d',
+                'password' => 'zmogus',
+                'company' =>  CompanyFixtures::COMPANY1,
+                'active' => false
+            ],
+            [
+                'email' => 'Dalia@Grybauskaite.com',
+                'role' => ['ROLE_USER'],
+                'token' => '5ge25Gj7uESpKM4d',
+                'password' => 'Lietuva2019',
+                'company' =>  CompanyFixtures::COMPANY1,
+                'active' => false
+            ],
+            [
+                'email' => 'Gitanas@Nauseda.com',
+                'role' => ['ROLE_USER'],
+                'token' => '5ge25Gj7uESpKM4d',
+                'password' => 'ImBack',
+                'company' =>  CompanyFixtures::COMPANY1,
+                'active' => false
+            ],
+            [
+                'email' => 'Saulius@svarkelis.com',
+                'role' => ['ROLE_USER'],
+                'token' => '5ge25Gj7uESpKM4d',
+                'password' => 'Policija',
+                'company' =>  CompanyFixtures::COMPANY1,
+                'active' => false
+            ],
+
         ];
     }
 }

@@ -69,7 +69,7 @@ class ProjectsList extends Component {
                   <div className={"Card-progress"}>
                     <div>{project.budget}$</div>
                     <div className={"Card-progress-bar"}>
-                      <LinearProgress variant={'buffer'} value={(project.budget / project.amount) * 100}/>
+                      <LinearProgress variant={'buffer'} value={(project.amount / project.budget) * 100}/>
                     </div>
                     <div>{project.amount}$</div>
                   </div>

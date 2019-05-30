@@ -1927,7 +1927,7 @@ function (_Component) {
             className: "Card-progress-bar"
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_LinearProgress__WEBPACK_IMPORTED_MODULE_10___default.a, {
             variant: 'buffer',
-            value: project.budget / project.amount * 100
+            value: project.amount / project.budget * 100
           })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, project.amount, "$")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: 'VoteButtons'
           }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7___default.a, {
