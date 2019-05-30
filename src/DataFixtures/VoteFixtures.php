@@ -11,11 +11,14 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class VoteFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function getDependencies()
+    /**
+     * @return array|void
+     */
+    public function getDependencies():array
     {
-        return array(
-            UserFixtures::class,
-        );
+        return [
+            UserFixtures::class
+        ];
     }
 
     /**
@@ -32,7 +35,9 @@ class VoteFixtures extends Fixture implements DependentFixtureInterface
             $vote->setAmount($votedata['amount']);
             $vote->setHobby($this->getReference($votedata['hobby']));
             $manager->persist($vote);
+
             $manager->flush();
+
             $manager->clear();
         }
     }

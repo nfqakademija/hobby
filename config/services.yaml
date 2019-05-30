@@ -37,7 +37,6 @@ services:
         public: true
 
     App\Service\Voter:
-        public: true
         arguments:
             - '@doctrine.orm.entity_manager'
 

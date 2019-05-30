@@ -31,7 +31,6 @@ class HobbyFixtures extends Fixture
     public const HOBBY18 = 'hobby18';
     public const HOBBY19 = 'hobby19';
 
-
     /**
      * @dataProvider getData
      * @param ObjectManager $manager
@@ -47,8 +46,11 @@ class HobbyFixtures extends Fixture
             $hobby->setEmail($hobbyData['email']);
             $hobby->setAmount($hobbyData['needToCollect']);
             $manager->persist($hobby);
+
             $manager->flush();
+
             $manager->clear();
+
             $this->addReference($hobbyData['hobby'], $hobby);
         }
     }

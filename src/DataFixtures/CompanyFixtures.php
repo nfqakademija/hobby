@@ -11,7 +11,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 class CompanyFixtures extends Fixture
 {
     public const COMPANY = 'company';
-
     public const COMPANY1 = 'company1';
 
     /**
