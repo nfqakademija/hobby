@@ -52,6 +52,8 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 )
                 ->setEmail($userData['email'])
                 ->setRoles($userData['role'])
+                ->setRegistrationToken($userData['token'])
+                ->setActive(true)
                 ->setBudget(0); // todo add create_at
 
             $manager->persist($user);
@@ -71,21 +73,25 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             [
                 'email' => 'istanynaite@nfq.lt',
                 'role' => ['ROLE_USER', 'ROLE_ADMIN'],
-                'password' => 'sargis',
+                'token' => 'zfypnCDEh9ZhHZPX',
+                'password' => 'sargis'
             ],
             [
                 'email' => 'vkarcikovas@gmail.com',
                 'role' => ['ROLE_USER'],
+                'token' => 'DPukVx9BVuUqLVh3',
                 'password' => 'manosargis'
             ],
             [
                 'email' => 'mpetkevic@gmail.com',
                 'role' => ['ROLE_USER'],
+                'token' => 'cHdazvsQ5VpbWfzZ',
                 'password' => 'mpetkevic'
             ],
             [
                 'email' => 'a@a.com',
                 'role' => ['ROLE_USER'],
+                'token' => '5ge25Gj7uESpKM4d',
                 'password' => 'viktoras'
             ],
         ];

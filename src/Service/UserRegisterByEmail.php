@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Constants\BaseConstants;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Twig\Environment;
 
 class UserRegisterByEmail
 {
-    private const ACTIVATION = 'Account activation';
-    private const MAILER_FROM = 'support@hobby.nfqproject.lt';
-    private const PRD_ENVIRONMENT = 'prd';
+    private const ACTIVATION = 'Hobby | Account activation';
     private const PRD_VALIDATION_LINK = 'http://hobby.projektai.nfqakademija.lt/register/';
     private const DEV_EMAIL = 'Enter your email here';
     private const DEV_VALIDATION_LINK = 'Enter your address here';
@@ -60,7 +59,7 @@ class UserRegisterByEmail
 
         $message
             ->setSubject(self::ACTIVATION)
-            ->setFrom(self::MAILER_FROM)
+            ->setFrom(BaseConstants::MAILER_FROM)
             ->setTo($sendData['sentTo'])
             ->setBody(
                 $renderTemplate,
@@ -94,7 +93,7 @@ class UserRegisterByEmail
      */
     private function checkEnvironment(User $user): array
     {
-        if (self::PRD_ENVIRONMENT === $this->env) {
+        if (BaseConstants::PRD_ENVIRONMENT === $this->env) {
             $sentTo = $user->getEmail();
             $authenticationLink = self::PRD_VALIDATION_LINK . $this->createUserRegistrationToken($user);
         } else {
