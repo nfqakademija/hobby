@@ -19,6 +19,7 @@ export const onRegisterFormSubmit = (user, history,token) => (dispatch) => {
     password: user.password,
     registrationToken: token
   };
+  console.log(registerJson);
   axios.post('/api/security/register', registerJson)
       .then(res =>{
         setUserToLS(res.data)
@@ -27,8 +28,8 @@ export const onRegisterFormSubmit = (user, history,token) => (dispatch) => {
         history.push('/')
       })
       .catch(err => {
-            dispatch(actions.onRegisterFormError(err.response.data.errors.children.email.errors ?
-                err.response.data.errors.children.email.errors
+            dispatch(actions.onRegisterFormError(err.response.data.errors ?
+                err.response.data.errors
                 : 'Server error. Please try again later.'))
           }
       )
