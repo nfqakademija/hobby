@@ -20,3 +20,9 @@ export function removeUserFromLS() {
   return;
 }
 
+export function updateUserAmountInLs(amount) {
+  const user = JSON.parse(localStorage.getItem('hobbyCraft-user'))
+  user.budget = amount;
+  localStorage.setItem('hobbyCraft-user', JSON.stringify(user))
+  return;
+}

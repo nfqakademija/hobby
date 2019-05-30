@@ -35,6 +35,11 @@ export default (state = initialState, action) => {
         ...state,
         amount: state.amount + action.amount
       }
+    case types.AMOUNT_UPDATE:
+      return {
+        ...state,
+        amount: action.amount
+      }
     default:
       return state;
   }
