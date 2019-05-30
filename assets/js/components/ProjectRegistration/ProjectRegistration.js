@@ -54,7 +54,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
   },
   textField: {
-    height: 50,
+    height: 'auto',
   },
   submit: {
     marginTop: theme.spacing.unit * 3,
@@ -129,7 +129,7 @@ class ProjectRegistration extends Component {
                     onChange={onInputChange}
                     multiline
                     fullWidth
-                    rowsMax="1"
+                    rowsMax="10"
                     className={classes.textField}
                     label="Please describe it"
                     margin="normal"

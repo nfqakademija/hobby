@@ -20,7 +20,7 @@ class Routes extends Component {
   componentDidMount() {
     const user = getUserFromLS();
     user ? this.props.onLoadAuth(user) : null
-    user ? this.props.onLoadProjects : null
+    user ? this.props.onLoadProjects() : null
   }
 
   render() {
@@ -34,7 +34,7 @@ class Routes extends Component {
             <Route path='/about' component={About}/>
             <Route path='/projects' component={ProjectsList}/>
             <Route path='/login' component={Login}/>
-            <Route path='/register' component={Register}/>
+            <Route path='/register/:token' component={Register}/>
             <Route path='/user' component={User} />
             {/*<Route path='/admin' />*/}
             <Route path='/project/:id' component={ProjectInfo}/>

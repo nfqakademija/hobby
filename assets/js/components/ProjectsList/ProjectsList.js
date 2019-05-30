@@ -62,8 +62,8 @@ class ProjectsList extends Component {
           .map((project, i) => {
         return (
             <MuiThemeProvider theme={theme} key={i}>
-              <Grid className={'main-card'}>
-                <Paper className={'Card'} component={RouterLink} to={`/project/${project.id}`}>
+              <Grid className='main-card'>
+                <Paper className='Card-Project' component={RouterLink} to={`/project/${project.id}`}>
                   <div className={'Card-title'}>{project.title}</div>
                   <div className={'Card-description'}>{project.description}</div>
                   <div className={"Card-progress"}>

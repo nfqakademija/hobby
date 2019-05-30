@@ -3,7 +3,7 @@ import axios from "axios";
 import {setUserToLS} from "../storage/storage";
 import {authUser} from "../actions/authActions";
 
-export const onRegisterFormSubmit = (user, history) => (dispatch) => {
+export const onRegisterFormSubmit = (user, history,token) => (dispatch) => {
   dispatch(actions.onFormLoading());
   if(user.email === '' || user.password === '' || user.password2 === '') {
     return dispatch(actions.onRegisterFormError('Please fill fields'));
@@ -17,8 +17,8 @@ export const onRegisterFormSubmit = (user, history) => (dispatch) => {
   const registerJson = {
     email: user.email,
     password: user.password,
+    registrationToken: token
   };
-
   axios.post('/api/security/register', registerJson)
       .then(res =>{
         setUserToLS(res.data)
