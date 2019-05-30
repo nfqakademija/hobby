@@ -4,11 +4,7 @@
   "build/runtime.js": "/build/runtime.js",
   "build/vendors~index.css": "/build/vendors~index.css",
   "build/vendors~index.js": "/build/vendors~index.js",
-  "build/images/hang.png": "/build/images/hang.a41f7065.png",
-  "build/images/friends.png": "/build/images/friends.36431729.png",
-  "build/images/apple-touch-icon.png": "/build/images/apple-touch-icon.b0fd909c.png",
   "build/images/Friends.png": "/build/images/Friends.36431729.png",
-  "build/images/manageTeam.png": "/build/images/manageTeam.566c1556.png",
-  "build/images/team.png": "/build/images/team.aeccea8d.png",
-  "build/images/colleague.png": "/build/images/colleague.e009a69a.png"
+  "build/images/colleague.png": "/build/images/colleague.e009a69a.png",
+  "build/images/team.png": "/build/images/team.aeccea8d.png"
 }

@@ -18,7 +18,6 @@ export const onFormSubmit = (user, history) => (dispatch) => {
   }
   axios.post('/api/security/login', loginJson)
       .then(res =>{
-        console.log(res.data)
         setUserToLS(res.data)
         dispatch(authUser(res.data))
         dispatch(actions.onLoginFormSuccess(user))
