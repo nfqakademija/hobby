@@ -38,9 +38,9 @@ class HobbyFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
-        $hobby = new Hobby();
-
         foreach ($this->getData() as $hobbyData) {
+            $hobby = new Hobby();
+
             $hobby->setTitle($hobbyData['title']);
             $hobby->setDescription($hobbyData['description']);
             $hobby->setEmail($hobbyData['email']);
