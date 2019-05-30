@@ -47,4 +47,22 @@ class UserRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    /**
+     * @param string $email
+     * @return array
+     * @throws NonUniqueResultException
+     */
+    public function findBudgetByUser(string $email): array
+    {
+        $qb = $this->createQueryBuilder('user');
+
+        $qb
+            ->select('user.budget')
+            ->where($qb->expr()->eq('user.email', ':email'))
+            ->setParameter('email', $email)
+            ->getMaxResults();
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }
