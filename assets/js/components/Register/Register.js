@@ -89,7 +89,7 @@ class Register extends Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
-    this.props.onFormSubmit(this.props.register, this.props.history);
+    this.props.onFormSubmit(this.props.register, this.props.history, this.props.match.params.token);
   }
 
 
@@ -194,6 +194,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onInputChange: (e) => dispatch(actions.onInputChange(e)),
-  onFormSubmit: (user, history) => dispatch(onRegisterFormSubmit(user, history))
+  onFormSubmit: (user, history, token) => dispatch(onRegisterFormSubmit(user, history, token))
 });
 export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Register));
