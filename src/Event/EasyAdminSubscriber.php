@@ -7,6 +7,10 @@ namespace App\Event;
 use App\Entity\Contribution;
 use App\Entity\User;
 use App\Service\UserBudget;
+use App\Service\UserRegisterByEmail;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -16,12 +20,18 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     /** @var UserBudget */
     private $userBudget;
 
+    /** @var UserRegisterByEmail */
+    private $userRegisterByEmail;
+
     /**
+     * EasyAdminSubscriber constructor.
      * @param UserBudget $userBudget
+     * @param UserRegisterByEmail $userRegisterByEmail
      */
-    public function __construct(UserBudget $userBudget)
+    public function __construct(UserBudget $userBudget, UserRegisterByEmail $userRegisterByEmail)
     {
         $this->userBudget = $userBudget;
+        $this->userRegisterByEmail = $userRegisterByEmail;
     }
 
     /**
@@ -36,9 +46,10 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     /**
      * @param GenericEvent $event
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws \Throwable
      */
     public function onPrePersist(GenericEvent $event): void
     {
@@ -48,7 +59,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         }
 
         if ($entity instanceof User) {
-//            $this->
+            $this->userRegisterByEmail->sendRegistrationToEmail($entity);
         }
     }
 }
