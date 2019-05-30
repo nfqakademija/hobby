@@ -18,7 +18,6 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -48,6 +47,8 @@ const styles = {
 
 
   menubar: {
+    paddingLeft: "10%",
+    paddingRight: "10%",
     position: 'static',
     background: "#181818",
 
@@ -148,7 +149,6 @@ class NavBar extends Component {
                     component={RouterLinkNav} to='/' >
                   HobbyCraft
                 </Button>
-
                 <div className={classes.sectionMobile}>
                   {isAuth ?
                   <Button color='secondary' className={classes.titleMobile} component={RouterLinkNav} to='/'>
