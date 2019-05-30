@@ -11,6 +11,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class Registration
 {
+    private const STARTER_PACK = 0;
+
     /** @var EntityManager */
     private $em;
 
@@ -43,6 +45,7 @@ class Registration
             );
 
             $user->setActive(true);
+            $user->setBudget(self::STARTER_PACK);
             $user->removeRegistrationToken();
 
             $this->em->persist($user);
