@@ -74,25 +74,29 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 'email' => 'istanynaite@nfq.lt',
                 'role' => ['ROLE_USER', 'ROLE_ADMIN'],
                 'token' => 'zfypnCDEh9ZhHZPX',
-                'password' => 'sargis'
+                'password' => 'sargis',
+                'active' => true
             ],
             [
                 'email' => 'vkarcikovas@gmail.com',
                 'role' => ['ROLE_USER'],
-                'token' => 'DPukVx9BVuUqLVh3',
-                'password' => 'manosargis'
+                'token' => '',
+                'password' => 'manosargis',
+                'active' => true
             ],
             [
                 'email' => 'mpetkevic@gmail.com',
                 'role' => ['ROLE_USER'],
                 'token' => 'cHdazvsQ5VpbWfzZ',
-                'password' => 'mpetkevic'
+                'password' => 'mpetkevic',
+                'active' => true
             ],
             [
                 'email' => 'a@a.com',
                 'role' => ['ROLE_USER'],
                 'token' => '5ge25Gj7uESpKM4d',
-                'password' => 'viktoras'
+                'password' => 'viktoras',
+                'active' => false
             ],
         ];
     }
