@@ -91,12 +91,16 @@
   display: inline-flex;
   justify-content: space-between;
   left: 50%;
-  top: 150%;
+  top: 140%;
   transform: translate(-50%,-50%);
 }
 
 .Card{
   margin: 50px;
-  width: 350px;
+  width: 400px;
   height: 500px;
+}
+.Img-card{
+  align-items: flex-start;
+  width: 400px;
 }

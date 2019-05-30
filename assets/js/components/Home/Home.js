@@ -4,8 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import './Home.scss';
 import Button from "@material-ui/core/Button";
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
-import logo from '../../friends.png';
+import logo from '../Images/Friends.png';
+import TeamImage from "../Images/team.png";
+import ColleagueImage from "../Images/colleague.png";
 import Paper from "@material-ui/core/es/Paper/Paper";
+import Link from "@material-ui/core/es/Link/Link";
 
 const theme = createMuiTheme({
     palette: {
@@ -53,13 +56,31 @@ const Home = ( ) => {
 
                   <div className={"Container"}>
                       <div className="Cards--inline">
+
                       <Paper className={"Card"}>
-                          <p>Tai testas</p>
+                          <img className="Img-card" src={TeamImage} />
+                          <div className='Message-Title'>
+                              A New and Better way to engange
+                          </div>
+                          <div className='Message-Subheading'>
+                              Companies use HobbyCraft to organize their
+                              employees hobby budget
+                          </div>
+                          <Link>Read More</Link>
                       </Paper>
 
                       <Paper className={"Card"} >
-                          <p>Tai testas 3</p>
+                          <img className="Img-card" src={ColleagueImage} />
+                          <div className='Message-Title'>
+                              A New and Better way to engange
+                          </div>
+                          <div className='Message-Subheading'>
+                              Companies use HobbyCraft to organize their
+                              employees hobby budget
+                          </div>
+                          <Link>Read More</Link>
                       </Paper>
+
                       </div>
                   </div>
 
