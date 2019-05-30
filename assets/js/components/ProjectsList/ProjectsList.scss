@@ -9,6 +9,7 @@
   width: calc(33.3333% - 40px);
   margin:  20px;
   cursor: pointer;
+  height: auto;
   @media only screen and (max-width: 960px) {
     position: relative;
     display: block;
@@ -17,7 +18,7 @@
     margin-right: auto;
   }
 }
-.Card{
+.Card-Project{
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
