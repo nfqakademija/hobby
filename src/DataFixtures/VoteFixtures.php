@@ -35,7 +35,9 @@ class VoteFixtures extends Fixture implements DependentFixtureInterface
             $vote->setAmount($votedata['amount']);
             $vote->setHobby($this->getReference($votedata['hobby']));
             $manager->persist($vote);
+
             $manager->flush();
+
             $manager->clear();
         }
     }

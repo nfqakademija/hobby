@@ -46,8 +46,11 @@ class HobbyFixtures extends Fixture
             $hobby->setEmail($hobbyData['email']);
             $hobby->setAmount($hobbyData['needToCollect']);
             $manager->persist($hobby);
+
             $manager->flush();
+
             $manager->clear();
+
             $this->addReference($hobbyData['hobby'], $hobby);
         }
     }
