@@ -6,12 +6,13 @@ namespace App\DataFixtures;
 
 use App\Entity\Company;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class CompanyFixtures extends Fixture
 {
     public const COMPANY = 'company';
+
+    public const COMPANY1 = 'company1';
 
     /**
      * @param ObjectManager $manager
@@ -19,15 +20,23 @@ class CompanyFixtures extends Fixture
      */
     public function load(ObjectManager $manager): void
     {
-        /** @var Company $company */
-        $company = new Company();
+        $companyFixtures = [
+            ["IT Sprendimai", self::COMPANY],
+            ["TECH Sprendimai", self::COMPANY1]
+        ];
 
-        $company
-            ->setName('CompanyA');
+        foreach ($companyFixtures as $companyFixture) {
+            /** @var Company $company */
+            $company = new Company();
 
-        $manager->persist($company);
-        $manager->flush();
+            $company
+                ->setName($companyFixture[0]);
 
-        $this->addReference(self::COMPANY, $company);
+            $manager->persist($company);
+            $manager->flush();
+
+            $this->addReference($companyFixture[1], $company);
+        }
     }
+
 }

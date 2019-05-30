@@ -6,4 +6,5 @@ easy_admin:
             list:
                 actions:
                     - {name: 'edit', icon: 'pencil', label: false, css-class: 'btn btn-secondary'}
-                    - {name: 'delete', icon: 'trash', label: false, css-class: 'btn btn-delete'}
+                    - {name: '-delete'}
+                    - {name: '-new'}

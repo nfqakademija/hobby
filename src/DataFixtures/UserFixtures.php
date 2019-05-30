@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const USER1 = 'user1';
+
     public const USER = 'user';
 
     /** @var UserPasswordEncoderInterface $userPasswordEncoder */
@@ -43,10 +45,17 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $usersData = $this->getData();
 
         foreach ($usersData as $userData) {
+            $companyFixture = CompanyFixtures::COMPANY1;
+            $userFixture = self::USER;
+            if ($userData['email'] === 'istanynaite@nfq.lt') {
+                $companyFixture = CompanyFixtures::COMPANY;
+                $userFixture = self::USER1;
+            }
+
             /** @var User $user */
             $user = new User();
             $user
-                ->setCompany($this->getReference(CompanyFixtures::COMPANY))
+                ->setCompany($this->getReference($companyFixture))
                 ->setPassword(
                     $this->userPasswordEncoder->encodePassword($user, $userData['password'])
                 )
@@ -61,7 +70,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
 
-        $this->addReference(self::USER, $user);
+        $this->addReference($userFixture, $user);
     }
 
     /**
@@ -86,7 +95,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ],
             [
                 'email' => 'mpetkevic@gmail.com',
-                'role' => ['ROLE_USER'],
+                'role' => ['ROLE_USER', 'ROLE_ADMIN'],
                 'token' => 'cHdazvsQ5VpbWfzZ',
                 'password' => 'mpetkevic',
                 'active' => true
