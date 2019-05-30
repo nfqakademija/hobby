@@ -15,7 +15,7 @@
   margin: auto;
   position: absolute;
   width: 35%;
-  top:30%;
+  top:25%;
   @media only screen and (max-width: 1280px) {
     width: 60%;
     left: 50%;
@@ -86,4 +86,17 @@
     width: 80%;
   }
 }
+.Cards--inline{
+  position: absolute;
+  display: inline-flex;
+  justify-content: space-between;
+  left: 50%;
+  top: 150%;
+  transform: translate(-50%,-50%);
+}
 
+.Card{
+  margin: 50px;
+  width: 350px;
+  height: 500px;
+}

@@ -5,6 +5,7 @@ import './Home.scss';
 import Button from "@material-ui/core/Button";
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import logo from '../../friends.png';
+import Paper from "@material-ui/core/es/Paper/Paper";
 
 const theme = createMuiTheme({
     palette: {
@@ -16,6 +17,9 @@ const theme = createMuiTheme({
         },
     },
 });
+
+
+
 
 const Home = ( ) => {
   return (
@@ -33,6 +37,7 @@ const Home = ( ) => {
                       <MuiThemeProvider theme={theme}>
                           <div className="Button">
                               <Button
+                                  radius={"25px"}
                                   className='button'
                                   component={RouterLink}
                                   variant="contained"
@@ -45,6 +50,20 @@ const Home = ( ) => {
                         </div>
                       <img className="Img" src={logo} />
                   </div>
+
+                  <div className={"Container"}>
+                      <div className="Cards--inline">
+                      <Paper className={"Card"}>
+                          <p>Tai testas</p>
+                      </Paper>
+
+                      <Paper className={"Card"} >
+                          <p>Tai testas 3</p>
+                      </Paper>
+                      </div>
+                  </div>
+
+
               </div>
   );
 };
