@@ -28,9 +28,9 @@ class VoteFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager): void
     {
-        $vote = new Vote();
-
         foreach ($this->getData() as $votedata) {
+            $vote = new Vote();
+
             $vote->setUser($this->getReference(UserFixtures::USER));
             $vote->setAmount($votedata['amount']);
             $vote->setHobby($this->getReference($votedata['hobby']));
