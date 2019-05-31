@@ -14,6 +14,7 @@ use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -50,6 +51,12 @@ class RegistrationController extends AbstractFOSRestController
     public function register(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+
+        if (false === array_key_exists('registrationToken', $data)) {
+            throw new NotFoundHttpException(
+                'You do not have permissions to register. Please contact to your company administrator'
+            );
+        }
 
         $user = $this->getDoctrine()->getManager()->getRepository(User::class)->findUserByEmailAndToken(
             $data['email'],
