@@ -106,6 +106,14 @@ const styles = {
     color: '#ffffff',
     marginLeft: 20,
     marginRight: 20,
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: 10,
+      paddingRight: 10,
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: 5,
+      paddingRight: 5,
+    },
     backgroundColor: "#EA7925",
     fontWeight: 600,
     '&:hover': {
