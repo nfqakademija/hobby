@@ -104,8 +104,9 @@ const styles = {
   },
   buttonSingUp: {
     color: '#ffffff',
+    marginLeft: 20,
+    marginRight: 20,
     backgroundColor: "#EA7925",
-    borderRadius: 25,
     fontWeight: 600,
     '&:hover': {
       backgroundColor: "#A15421",
