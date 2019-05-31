@@ -104,8 +104,17 @@ const styles = {
   },
   buttonSingUp: {
     color: '#ffffff',
+    marginLeft: 20,
+    marginRight: 20,
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: 10,
+      paddingRight: 10,
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: 5,
+      paddingRight: 5,
+    },
     backgroundColor: "#EA7925",
-    borderRadius: 25,
     fontWeight: 600,
     '&:hover': {
       backgroundColor: "#A15421",
@@ -194,12 +203,7 @@ class NavBar extends Component {
                           component={RouterLinkNav}
                           to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
                       :
-                      <Button
-                          className={'/about' === location.pathname ? classes.buttonSingUp : classes.button}
-                          component={RouterLinkNav}
-                          to="/about">
-                        About Us
-                      </Button>
+                      null
                   }
 
                   {role === 1 ?

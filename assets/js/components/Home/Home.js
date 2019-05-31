@@ -53,40 +53,27 @@ const Home = ( ) => {
                       <img className="Img" src={logo} />
                   </div>
 
-                  <div className={"Container"}>
-                      <div className="Container--inline">
-                      <Paper className={"Card"}>
-                          <img className="Img-card" src={TeamImage} />
-                          <div className='Message-Title'>
-                              A New and Better way to engange
-                          </div>
-                          <div className='Message-Subheading'>
-                              Companies use HobbyCraft to organize their
-                              employees hobby budget
-                          </div>
-                          <div className="link">Read More</div>
-                      </Paper>
-
-                      <Paper className={"Card"} >
-                          <img className="Img-card" src={ColleagueImage} />
-                          <div className='Message-Title'>
-                              A New and Better way to engange
-                          </div>
-                          <div className='Message-Subheading'>
-                              Companies use HobbyCraft to organize their
-                              employees hobby budget
-                          </div>
-                          <div className="link">Read More</div>
-                      </Paper>
-                      </div>
-                  </div>
-
                   <div className="Container">
-                      <div className={"Container--Bottom"}>
-                          <div className="Navigation" >HobbyCraft</div>
-                          <div className="Navigation" >Navigation</div>
-                          <div className="Navigation" >Legal</div>
-                          <div className="Navigation" >Contact Us</div>
+                      <div className="Container--inline">
+                      <Paper className="Card-Home">
+                          <img className="Img-card" src={TeamImage} />
+                          <div className='Message-Title-Card'>
+                              Build employees up
+                          </div>
+                          <div className='Message-Subheading-Card'>
+                              Reward frequency is more important than size.Top employers create an environment using HobyCraft where employees feel connected to the organization.
+                          </div>
+                      </Paper>
+
+                      <Paper className="Card-Home" >
+                          <img className="Img-card-2" src={ColleagueImage} />
+                          <div className='Message-Title-Card'>
+                              Make work-life balance a priority
+                          </div>
+                          <div className='Message-Subheading-Card'>
+                              To engage the workforce and remain competitive, it's no longer sufficient to focus solely on benefits
+                          </div>
+                      </Paper>
                       </div>
                   </div>
 

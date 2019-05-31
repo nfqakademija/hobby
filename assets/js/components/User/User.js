@@ -53,10 +53,10 @@ class User extends Component {
     const votesArray = votes.map(vote => {
       return (
           <MuiThemeProvider theme={theme}>
-              <Grid className={'main'} >
-                  <Paper className={'Card'}  key={vote.id} >
-                      <div className={'Card-title'}>{vote.title}</div>
-                      <div className={'Card-MoneySpend'} >Voted Amount: {vote.amount}€</div>
+              <Grid className='main-user' >
+                  <Paper className='Card-User' key={vote.id} >
+                      <div className='Card-title'>{vote.title}</div>
+                      <div className='Card-MoneySpend'>Voted Amount: {vote.amount}€</div>
                       <Button
                           color="primary"
                           variant="outlined"
