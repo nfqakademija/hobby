@@ -13,7 +13,7 @@ import Register from './components/Register/Register';
 import ProjectRegistration from './components/ProjectRegistration/ProjectRegistration';
 import ProjectInfo from './components/ProjectInfo/ProjectInfo';
 import User from './components/User/User';
-import About from './components/About/about';
+// import About from './components/About/about';
 
 
 
@@ -33,13 +33,11 @@ class Routes extends Component {
           <NavBar/>
           <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/about' component={About}/>
             <Route path='/projects' component={ProjectsList}/>
             <Route path='/login' component={Login}/>
             <Route path='/register/:token' component={Register}/>
             <Route path='/register/' component={Register}/>
             <Route path='/user' component={User} />
-            {/*<Route path='/admin' />*/}
             <Route path='/project/:id' component={ProjectInfo}/>
             {isAuth ? <Route path='/project-registration' component={ProjectRegistration}/> : <Redirect to='/login'/>}
 

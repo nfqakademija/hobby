@@ -203,12 +203,7 @@ class NavBar extends Component {
                           component={RouterLinkNav}
                           to='/user'>{this.props.auth.email} {this.props.auth.amount}€</Button>
                       :
-                      <Button
-                          className={'/about' === location.pathname ? classes.buttonSingUp : classes.button}
-                          component={RouterLinkNav}
-                          to="/about">
-                        About Us
-                      </Button>
+                      null
                   }
 
                   {role === 1 ?

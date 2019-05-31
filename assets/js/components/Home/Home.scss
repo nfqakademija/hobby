@@ -91,11 +91,16 @@
   display: inline-flex;
   justify-content: space-between;
   left: 50%;
-  top: 140%;
+  top: 130%;
   transform: translate(-50%,-50%);
+  @media only screen and (max-width: 1280px) {
+    top: 190%;
+    position: absolute;
+    display: table-column;
+  }
 }
 
-.Card{
+.Card-Home{
   margin: 50px;
   width: 400px;
   height: 500px;
@@ -104,26 +109,52 @@
   &:hover {
     box-shadow: 0px 0px 7px 4px rgba(0,0,0,0.2);
   }
+  @media only screen and (max-width: 960px) {
+    width: 350px;
+    margin: 5px 0 5px 0;
+  }
 }
 .Img-card{
   width: 400px;
+  @media only screen and (max-width: 960px) {
+    width: 350px;
+  }
 }
+
+.Img-card-2{
+  margin-top: 15px;
+  width: 400px;
+  @media only screen and (max-width: 960px) {
+    width: 350px;
+  }
+}
+
 .link{
   color: #0044ff;
 }
 
-.Container--Bottom{
-  width: 81%;
+.Message-Title-Card{
+  text-align: center;
   line-height: 40px;
-  position: absolute;
-  display: inline-flex;
-  justify-content: space-between;
-  left: 50%;
-  top: 200%;
-  transform: translate(-50%,-50%);
+  width: 100%;
+  font-weight: 550;
+  font-size: 35px;
+  margin-bottom: 40px;
+    @media only screen and (max-width: 960px) {
+      width: 90%;
+      text-align: center;
+    }
+  }
+
+.Message-Subheading-Card{
+  text-align: center;
+  line-height: 30px;
+  width: 100%;
+  font-weight: lighter;
+  font-size: 18px;
+  @media only screen and (max-width: 960px) {
+    width: 90%;
+    text-align: center;
+  }
 }
-.Navigation{
-  font-weight: 500;
-  font-size: 20px;
-  margin: 40px;
-}
+
