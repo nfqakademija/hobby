@@ -27,9 +27,9 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * @return array|void
+     * @return array
      */
-    public function getDependencies():array
+    public function getDependencies(): array
     {
         return [
             CompanyFixtures::class
@@ -60,11 +60,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setBudget(100); // todo add create_at
 
             $manager->persist($user);
+            $this->setReference($userFixture, $user);
         }
 
         $manager->flush();
-
-        $this->addReference($userFixture, $user);
     }
 
     /**

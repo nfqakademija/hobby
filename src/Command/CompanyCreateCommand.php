@@ -17,6 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CompanyCreateCommand extends Command
@@ -27,7 +28,7 @@ class CompanyCreateCommand extends Command
     private const ADMINISTRATOR_ROLE = 'ROLE_ADMIN';
 
     /** @var EntityManager */
-    private $em;
+    private $entityManager;
 
     /** @var UserPasswordEncoderInterface */
     private $encoder;
@@ -36,13 +37,13 @@ class CompanyCreateCommand extends Command
     private $validator;
 
     /**
-     * @param EntityManager $em
+     * @param EntityManager $entityManager
      * @param UserPasswordEncoderInterface $encoder
      * @param ValidatorInterface $validator
      */
-    public function __construct(EntityManager $em, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator)
+    public function __construct(EntityManager $entityManager, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator)
     {
-        $this->em = $em;
+        $this->entityManager = $entityManager;
         $this->encoder = $encoder;
         $this->validator = $validator;
 
@@ -87,9 +88,9 @@ class CompanyCreateCommand extends Command
         $company = $this->createCompany($companyName);
         $user = $this->createAdministrator($company, $userEmail, $randomPassword);
 
-        $this->em->persist($company);
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->entityManager->persist($company);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         $io->success(
             'Company created. Company name: ' . $companyName .
@@ -101,13 +102,14 @@ class CompanyCreateCommand extends Command
     /**
      * @param string $companyName
      * @return Company|null
-     * @throws \Exception
+     * @throws ORMException
      */
     private function createCompany(string $companyName): ?Company
     {
         $company = CompanyFactory::create($companyName);
 
-        $this->validate($company);
+        $companyErrors = $this->validator->validate($company);
+        $this->catchErrors($companyErrors);
 
         return $company;
     }
@@ -116,9 +118,9 @@ class CompanyCreateCommand extends Command
      * @param Company $company
      * @param string $userEmail
      * @param string $randomPassword
-     * @return User|string
+     * @return User
      */
-    private function createAdministrator(Company $company, string $userEmail, string $randomPassword): ?User
+    private function createAdministrator(Company $company, string $userEmail, string $randomPassword): User
     {
         $user = UserFactory::create(
             $this->encoder,
@@ -129,19 +131,17 @@ class CompanyCreateCommand extends Command
             $randomPassword
         );
 
-        $this->validate($user);
+        $userErrors = $this->validator->validate($user);
+        $this->catchErrors($userErrors);
 
         return $user;
     }
 
     /**
-     * @param $object
-     * @return void
+     * @param ConstraintViolationListInterface $errors
      */
-    private function validate($object): void
+    private function catchErrors(ConstraintViolationListInterface $errors): void
     {
-        $errors = $this->validator->validate($object);
-
         if (count($errors) > 0) {
             /** @var ConstraintViolation $error */
             foreach ($errors as $error) {

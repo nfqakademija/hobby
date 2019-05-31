@@ -49,10 +49,9 @@ class RegistrationController extends AbstractFOSRestController
      */
     public function register(Request $request): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
         $data = json_decode($request->getContent(), true);
 
-        $user = $entityManager->getRepository(User::class)->findUserByEmailAndToken(
+        $user = $this->getDoctrine()->getManager()->getRepository(User::class)->findUserByEmailAndToken(
             $data['email'],
             $data['registrationToken']
         );

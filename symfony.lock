@@ -231,6 +231,12 @@
     "pagerfanta/pagerfanta": {
         "version": "v2.1.2"
     },
+    "pdepend/pdepend": {
+        "version": "2.5.2"
+    },
+    "phpmd/phpmd": {
+        "version": "2.6.0"
+    },
     "phpstan/phpdoc-parser": {
         "version": "0.3.4"
     },
