@@ -181,13 +181,12 @@ class NavBar extends Component {
                           component={RouterLinkNav}
                           to='/project-registration'>Create
                         a Project</Button>
-                      :
-                      <Button
-                          className={'/register' === location.pathname ? classes.buttonSingUp : classes.button}
-                          component={RouterLinkNav}
-                          to='/register'>Sign
-                        Up With Email</Button>
-                  }
+                      : null }
+                      {/*<Button*/}
+                          {/*className={'/register' === location.pathname ? classes.buttonSingUp : classes.button}*/}
+                          {/*component={RouterLinkNav}*/}
+                          {/*to='/register'>Sign*/}
+                        {/*Up With Email</Button>*/}
                   {isAuth ?
                       <Button
                           className={'/user' === location.pathname ? classes.buttonSingUp : classes.button}
@@ -260,7 +259,7 @@ class NavBar extends Component {
                   showLabels
                   className={classes.MobileNav}>
                 <BottomNavigationAction label="Home"   component={RouterLink} to='/' icon={<HomeIcon/>}/>
-                <BottomNavigationAction label="Sign Up" component={RouterLink} to='/register' icon={<PersonAddIcon/>}/>
+                {/*<BottomNavigationAction label="Sign Up" component={RouterLink} to='/register' icon={<PersonAddIcon/>}/>*/}
                 <BottomNavigationAction label="Sign In" component={RouterLink} to='/login' icon={<PersonIcon/>}/>
               </BottomNavigation>
           }

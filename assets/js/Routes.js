@@ -37,7 +37,7 @@ class Routes extends Component {
             <Route path='/projects' component={ProjectsList}/>
             <Route path='/login' component={Login}/>
             <Route path='/register/:token' component={Register}/>
-            <Route path='/register/' component={Register}/>
+            {/*<Route path='/register/' component={Register}/>*/}
             <Route path='/user' component={User} />
             {/*<Route path='/admin' />*/}
             <Route path='/project/:id' component={ProjectInfo}/>
