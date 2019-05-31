@@ -3,7 +3,7 @@
   overflow-y: auto;
 }
 
-.main {
+.main-user {
   position: relative;
   display: inline-block;
   width: calc(33.3333% - 40px);
@@ -17,7 +17,7 @@
     margin-right: auto;
   }
 }
-.Card{
+.Card-User{
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
