@@ -6,13 +6,12 @@ namespace App\Controller\Admin;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BaseAdminController extends EasyAdminController
 {
     /**
      * {@inheritdoc}
-     *
-     * @throws MissingSearchAssociationException
      */
     protected function createSearchQueryBuilder(
         $entityClass,
@@ -35,14 +34,12 @@ class BaseAdminController extends EasyAdminController
         foreach ($this->entity['search']['fields'] as $name => $metadata) {
             if ('association' === $metadata['dataType']) {
                 if (false === array_key_exists('searchField', $metadata)) {
-                    throw new MissingSearchAssociationException($this->entity['name'], $name);
+                    throw new NotFoundHttpException($this->entity['name']);
                 }
 
-                // Join the associated entity and search on the given field
                 $searchFields = $metadata['searchField'];
                 $queryBuilder->join(sprintf('entity.%s', $name), $name);
 
-                // here is the change
                 if (!is_array($searchFields)) {
                     $searchFields = [$searchFields];
                 }

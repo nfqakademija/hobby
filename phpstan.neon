@@ -1,0 +1,5 @@
+parameters:
+    paths:
+        - src
+    excludes_analyse:
+        - %rootDir%/src/Migrations

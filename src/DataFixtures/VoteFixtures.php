@@ -12,9 +12,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 class VoteFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
-     * @return array|void
+     * @return array
      */
-    public function getDependencies():array
+    public function getDependencies(): array
     {
         return [
             UserFixtures::class

@@ -6,6 +6,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Hobby;
 use App\Form\Type\HobbyType;
+use App\Repository\HobbyRepository;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,7 @@ class HobbyController extends AbstractFOSRestController
      */
     public function showHobbiesAction(): Response
     {
+        /** @var HobbyRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Hobby::class);
         $hobbies = $repository->getHobbies();
 
