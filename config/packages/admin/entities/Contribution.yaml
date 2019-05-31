@@ -2,8 +2,17 @@ easy_admin:
     entities:
         CompanyContribution:
             class: App\Entity\Contribution
+            label: Company Contribution
             controller: App\Controller\Admin\ContributionAdminController
             list:
                 actions:
                     - {name: '-edit'}
                     - {name: '-delete'}
+            form:
+                fields:
+                    - amount
+                    - createdAt
+                    - user
+                    -
+                        property: company
+                        type_options: {disabled: true}
