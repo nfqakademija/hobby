@@ -1,10 +1,10 @@
 easy_admin:
-  entities:
-    Hobby:
-      class: App\Entity\Hobby
-      controller: App\Controller\Admin\HobbyAdminController
-      list:
-        actions:
-            - {name: '-edit'}
-            - {name: '-new'}
-            - {name: '-delete'}
+    entities:
+        Hobby:
+            class: App\Entity\Hobby
+            controller: App\Controller\Admin\HobbyAdminController
+            list:
+                actions:
+                    - {name: '-edit'}
+                    - {name: '-new'}
+                    - {name: '-delete'}

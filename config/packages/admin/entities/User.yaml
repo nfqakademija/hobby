@@ -3,9 +3,10 @@ easy_admin:
         User:
             class: App\Entity\User
             controller: App\Controller\Admin\UserAdminController
-#            templates:
-#                list: 'admin/Company/edit.html.twig'
             list:
                 actions:
                     - {name: 'edit', icon: 'pencil', label: false, css-class: 'btn btn-secondary'}
                     - {name: 'delete', icon: 'trash', label: false, css-class: 'btn btn-delete'}
+            form:
+                fields:
+                    - email

@@ -1,0 +1,7 @@
+{% extends '@!EasyAdmin/default/layout.html.twig' %}
+
+{% block header_logo %}
+    <a href="{{ path('home_FE', {entity: 'Company', action: 'list'}) }}">
+        {{- easyadmin_config('site_name') -}}
+    </a>
+{% endblock header_logo %}
